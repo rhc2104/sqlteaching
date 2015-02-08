@@ -46,7 +46,7 @@ $('#sql-link').click(function() {
   try {
     var results = db.exec($('#sql-input').val());
     $('#results').html(table_from_results(results));
-    show_is_correct(grade_results(results, correct_answer));
+    show_is_correct(grade_results(results, levels[current_level]['answer']));
   } catch (err) {
     $('#results').html('');
     show_is_correct(false);
@@ -54,11 +54,17 @@ $('#sql-link').click(function() {
   return false;
 });
 
-// This is the first "level".  We should change this to use some kind of framework.
-var correct_answer = {'columns': ['id', 'name', 'gender', 'species', 'age'],
-                      'values': [[1, 'Dave', 'Male', 'Human', 28],
-                                 [2, 'Mary', 'Female', 'Human', 27],
-                                 [3, 'Pickles', 'Male', 'Dog', 4]]};
+var current_level = 0;
+
+var levels = [{'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
+                          'values': [[1, 'Dave', 'Male', 'Human', 28],
+                                     [2, 'Mary', 'Female', 'Human', 27],
+                                     [3, 'Pickles', 'Male', 'Dog', 4]]},
+               'prompt': 'Let\'s start by grabbing all of the data.  We have a table called "family_members" that is shown below.  In order to grab all of that data, please run "SELECT * FROM family_members;".'},
+              {'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
+                          'values': [[3, 'Pickles', 'Male', 'Dog', 4]]},
+               'prompt': 'In order to select particular rows from this table, we use the "WHERE" keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type "SELECT * FROM family_members WHERE species = \'Human\';"  Note that the quotes have to be around the word Human.  Can you run a query that returns all of the rows that refer to dogs?'}]
+
 
 // Execute some sql
 var sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, age int);";
@@ -70,4 +76,4 @@ db.run(sqlstr);
 var res = db.exec("SELECT * FROM family_members;");
 $('#current-tables').html(table_from_results(res));
 
-$('#prompt').text('Please run "SELECT * FROM family_members;".');
+$('#prompt').text(levels[current_level]['prompt']);
