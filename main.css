@@ -1,0 +1,15 @@
+body {
+  padding: 20px;
+}
+
+th, td {
+  padding-right: 5px !important;
+}
+
+#lesson-name {
+  font-weight: bold;
+}
+
+#prompt {
+  width: 400px;
+}
