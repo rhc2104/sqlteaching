@@ -76,4 +76,5 @@ db.run(sqlstr);
 var res = db.exec("SELECT * FROM family_members;");
 $('#current-tables').html(table_from_results(res));
 
+$('#lesson-name').text("Lesson " + (current_level + 1));
 $('#prompt').text(levels[current_level]['prompt']);
