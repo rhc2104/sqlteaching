@@ -1,19 +1,25 @@
 Intro
     In SQL, data is usually organized in various tables. For example, a sports team database might have tables <i>teams</i>, <i>players</i>, and <i>games</i>. A wedding database might have tables guests, vendors, and music_playlist.
     <br/><br/>
-    Imagine we have a table that stores family members with each one's name, age, species, and gender.
+    Imagine we have a table that stores family members with each member's name, age, species, and gender.
 
 Select * all
     Let's start by grabbing all of the data.  We have a table called "family_members" that is shown below.  In order to grab all of that data, please run the following command: <br/><strong>SELECT * FROM family_members;</strong>
 
 Equality
-    In order to select particular rows from this table, we use the "WHERE" keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type "SELECT * FROM family_members WHERE species = 'Human';"  Note that the quotes have to be around the word Human.  Can you run a query that returns all of the rows that refer to dogs? (Note: the species type is all lower-cased.)
+    In order to select particular rows from this table, we use the "WHERE" keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type "SELECT * FROM family_members WHERE species = 'human';"  Note that the quotes have to be around the word Human.  Can you run a query that returns all of the rows that refer to dogs? (Note: the species type is all lower-cased.)
 
 Greater than
+    -- maybe make a really old grandma?
+    If we want to only select family members based on a numerical field, we can also use the "WHERE" keyword. For example, if we wanted to select family members younger than 10, we would type "SELECT * FROM family_members WHERE age < 10;". 
+    <br/>
+    Can you run a query that returns all rows of members with age greater than 20?
 
 Greater than or equal
+    SQL also accepts >= to mean "greater than or equal to" and <= . Can you run a query that returns all rows of members with age less than or equal to 27?
 
 IN
+    -- need a new table for this to be interesting
 
 Selecting particular columns
 
