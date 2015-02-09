@@ -1,0 +1,17 @@
+Select * all
+
+Let's start by grabbing all of the data.  We have a table called "family_members" that is shown below.  In order to grab all of that data, please run "SELECT * FROM family_members;".
+
+Equality
+
+In order to select particular rows from this table, we use the "WHERE" keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type "SELECT * FROM family_members WHERE species = 'Human';"  Note that the quotes have to be around the word Human.  Can you run a query that returns all of the rows that refer to dogs?
+
+Greater than
+
+Greater than or equal
+
+IN
+
+Selecting particular columns
+
+joining
