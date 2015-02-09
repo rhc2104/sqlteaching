@@ -11,19 +11,19 @@ Equality
 
 Greater than
     -- maybe make a really old grandma?
-    If we want to only select family members based on a numerical field, we can also use the "WHERE" keyword. For example, if we wanted to select family members younger than 10, we would type "SELECT * FROM family_members WHERE age < 10;". 
+    If we want to only select family members based on a numerical field, we can also use the "WHERE" keyword.  In SQL, > means "greater than", and < means "less than".  For example, if we wanted to select family members younger than 10, we would type "SELECT * FROM family_members WHERE age < 10;".
     <br/>
-    Can you run a query that returns all rows of members with age greater than 20?
+    Can you run a query that returns all rows of members with an age greater than 27?
 
 Greater than or equal
-    SQL also accepts >= to mean "greater than or equal to" and <= . Can you run a query that returns all rows of members with age less than or equal to 27?
+    SQL also accepts >= to mean "greater than or equal to" and <= to mean "less than or equal to". Can you run a query that returns all rows of members with an age less than or equal to 27?
 
 IN
     -- need a new table for this to be interesting
 
 Selecting particular columns
 
-    <strong>SELECT *</strong> grabs all fields (called columns) in a table. If WE only wanted to see the name and age columns, WE would type "SELECT name, age from family_members". 
+    <strong>SELECT *</strong> grabs all fields (called columns) in a table. If WE only wanted to see the name and age columns, WE would type "SELECT name, age from family_members".
     <br/>
     Can you run a query that returns just the name and species columns?
 

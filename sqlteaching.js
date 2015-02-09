@@ -73,7 +73,14 @@ var levels = [{'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                'prompt': 'In SQL, data is usually organized in various tables. For example, a sports team database might have the tables <i>teams</i>, <i>players</i>, and <i>games</i>. A wedding database might have tables <i>guests</i>, <i>vendors</i>, and <i>music_playlist</i>.<br/><br/>Imagine we have a table that stores family members with each member\'s name, age, species, and gender.<br/><br/>Let\'s start by grabbing all of the data.  We have a table called "family_members" that is shown below.  In order to grab all of that data, please run the following command: <br/><strong>SELECT * FROM family_members;</strong>'},
               {'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[3, 'Pickles', 'male', 'dog', 4]]},
-               'prompt': 'In order to select particular rows from this table, we use the "WHERE" keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type "SELECT * FROM family_members WHERE species = \'human\';"  Note that the quotes have to be around the word human.  Can you run a query that returns all of the rows that refer to dogs?'}]
+               'prompt': 'In order to select particular rows from this table, we use the "WHERE" keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type <strong>"SELECT * FROM family_members WHERE species = \'human\';"</strong>  Note that the quotes have to be around the word human.  Can you run a query that returns all of the rows that refer to dogs?'},
+              {'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
+                          'values': [[1, 'Dave', 'male', 'human', 28]]},
+               'prompt': 'If we want to only select family members based on a numerical field, we can also use the "WHERE" keyword.  In SQL, > means "greater than", and < means "less than".  For example, if we wanted to select family members younger than 10, we would type <strong>"SELECT * FROM family_members WHERE age < 10;".</strong><br/>  Can you run a query that returns all rows of members with age greater than 27?'},
+              {'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
+                          'values': [[2, 'Mary', 'female', 'human', 27],
+                                     [3, 'Pickles', 'male', 'dog', 4]]},
+               'prompt': 'SQL also accepts >= to mean "greater than or equal to" and <= to mean "less than or equal to". Can you run a query that returns all rows of members with an age less than or equal to 27?'}];
 
 
 // Create the SQL table
@@ -111,7 +118,7 @@ var load_level = function() {
   // Clear out old data
   $('#answer-correctness').hide();
   $('#sql-input').val('');
-  $('#results').val('');
+  $('#results').html('');
   $('.expected-results-container').hide();
 };
 load_level();
