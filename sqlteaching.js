@@ -125,4 +125,5 @@ load_level();
 
 $(window).bind('hashchange', function() {
   load_level();
+  ga('send', 'pageview', {'page': location.pathname + location.search  + location.hash});
 });
