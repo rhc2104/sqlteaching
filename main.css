@@ -17,6 +17,7 @@ th, td {
 #prompt {
   float: left;
   width: 400px;
+  padding-bottom: 20px;
 }
 
 #answer-correctness {
@@ -27,19 +28,29 @@ th, td {
 
 #sql-header {
   clear: left;
-  padding-top: 20px;
 }
 
 #sql-link {
   margin-bottom: 24px;
 }
 
-.results-container {
+.sql-input-container {
   float: left;
   width: 400px;
 }
 
-.current-tables-container {
+.results-container {
   float: left;
   padding-left: 20px;
+}
+
+.expected-results-container {
+  display: none;
+  float: left;
+  padding-left: 20px;
+}
+
+.current-tables-container {
+  float: left;
+  width: 400px;
 }

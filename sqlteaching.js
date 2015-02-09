@@ -37,7 +37,7 @@ var show_is_correct = function(is_correct) {
   if (is_correct) {
     $('#answer-correctness').text('Congrats!  That is correct!');
   } else {
-    $('#answer-correctness').text('Sorry, please try again.');
+    $('#answer-correctness').text('That was incorrect.  Please try again.');
   }
 };
 
@@ -54,7 +54,7 @@ $('#sql-link').click(function() {
   return false;
 });
 
-var current_level = 0;
+var current_level = parseInt(window.location.hash.substr(1), 10) || 0;
 
 var levels = [{'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[1, 'Dave', 'Male', 'Human', 28],

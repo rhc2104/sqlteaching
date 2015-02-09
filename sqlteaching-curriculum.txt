@@ -1,6 +1,6 @@
 Select * all
 
-Let's start by grabbing all of the data.  We have a table called "family_members" that is shown below.  In order to grab all of that data, please run "SELECT * FROM family_members;".
+Let's start by grabbing all of the data.  We have a table called "family_members" that is shown below.  In order to grab all of that data, please run the following command: <br/><strong>SELECT * FROM family_members;</strong>
 
 Equality
 
