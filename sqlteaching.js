@@ -36,7 +36,11 @@ var grade_results = function(results, correct_answer) {
 
 var show_is_correct = function(is_correct) {
   if (is_correct) {
-    $('#answer-correctness').text('Congrats!  That is correct!');
+    is_correct_html = 'Congrats!  That is correct!<br/>';
+    if (current_level < levels.length) {
+      is_correct_html += '<a href="#!' + current_level + '">Next Lesson</a>';
+    }
+    $('#answer-correctness').html(is_correct_html);
   } else {
     $('#answer-correctness').text('That was incorrect.  Please try again.');
   }
@@ -44,7 +48,7 @@ var show_is_correct = function(is_correct) {
 
 // Onclick handler for when you click "Run SQL"
 $('#sql-link').click(function() {
-  var answer = levels[current_level]['answer'];
+  var answer = levels[current_level - 1]['answer'];
   try {
     var results = db.exec($('#sql-input').val());
     $('#results').html(table_from_results(results));
@@ -82,9 +86,9 @@ $('#current-tables').html(table_from_results(res));
 var current_level;
 
 var load_level = function() {
-  current_level = parseInt(window.location.hash.substr(1), 10) || 0;
-  $('#lesson-name').text("Lesson " + (current_level + 1));
-  $('#prompt').html(levels[current_level]['prompt']);
+  current_level = parseInt(window.location.hash.substr(2), 10) || 1;
+  $('#lesson-name').text("Lesson " + current_level);
+  $('#prompt').html(levels[current_level-1]['prompt']);
 };
 load_level();
 
