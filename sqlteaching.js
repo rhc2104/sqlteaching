@@ -59,6 +59,7 @@ $('#sql-link').click(function() {
 
 var current_level = parseInt(window.location.hash.substr(1), 10) || 0;
 
+// Stores the prompts and answers for each level number
 var levels = [{'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[1, 'Dave', 'Male', 'Human', 28],
                                      [2, 'Mary', 'Female', 'Human', 27],
@@ -69,7 +70,7 @@ var levels = [{'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                'prompt': 'In order to select particular rows from this table, we use the "WHERE" keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type "SELECT * FROM family_members WHERE species = \'Human\';"  Note that the quotes have to be around the word Human.  Can you run a query that returns all of the rows that refer to dogs?'}]
 
 
-// Execute some sql
+// Create the SQL table
 var sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, age int);";
 sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'Male', 'Human', 28);"
 sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'Female', 'Human', 27);"
