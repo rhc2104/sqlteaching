@@ -43,14 +43,17 @@ var show_is_correct = function(is_correct) {
 
 // Onclick handler for when you click "Run SQL"
 $('#sql-link').click(function() {
+  var answer = levels[current_level]['answer'];
   try {
     var results = db.exec($('#sql-input').val());
     $('#results').html(table_from_results(results));
-    show_is_correct(grade_results(results, levels[current_level]['answer']));
+    show_is_correct(grade_results(results, answer));
   } catch (err) {
     $('#results').html('');
     show_is_correct(false);
   }
+  $('.expected-results-container').show();
+  $('#expected-results').html(table_from_results([answer]));
   return false;
 });
 
