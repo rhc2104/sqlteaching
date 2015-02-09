@@ -1,7 +1,7 @@
 body {
   margin: auto !important;
   padding: 20px;
-  width: 820px;
+  width: 840px;
 }
 
 th, td {
@@ -14,6 +14,14 @@ th, td {
   text-align: center;
 }
 
+#links-subheader {
+  text-align: center;
+}
+
+.pagination-link {
+  display: none;
+}
+
 #lesson-name {
   font-weight: bold;
 }
@@ -21,14 +29,15 @@ th, td {
 /* TODO: use bootstrap columns instead of hard coding 400px columns with 20px in between. */
 #prompt {
   float: left;
-  width: 400px;
   padding-bottom: 20px;
+  width: 400px;
 }
 
 #answer-correctness {
   float: left;
   font-weight: bold;
   padding-left: 20px;
+  width: 400px;
 }
 
 #sql-header {
@@ -39,6 +48,11 @@ th, td {
   margin-bottom: 24px;
 }
 
+/* I'm sure there is a better Bootstrap way of doing this */
+.layout-row {
+  clear: left;
+}
+
 .sql-input-container {
   float: left;
   width: 400px;
@@ -47,15 +61,18 @@ th, td {
 .results-container {
   float: left;
   padding-left: 20px;
+  width: 400px;
 }
 
 .expected-results-container {
   display: none;
   float: left;
   padding-left: 20px;
+  width: 400px;
 }
 
 .current-tables-container {
   float: left;
+  padding-bottom: 20px;
   width: 400px;
 }

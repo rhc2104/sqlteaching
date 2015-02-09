@@ -38,12 +38,15 @@ var show_is_correct = function(is_correct) {
   if (is_correct) {
     is_correct_html = 'Congrats!  That is correct!<br/>';
     if (current_level < levels.length) {
-      is_correct_html += '<a href="#!' + current_level + '">Next Lesson</a>';
+      is_correct_html += '<a href="#!' + (current_level+1) + '">Next Lesson</a>';
+    } else {
+      is_correct_html += 'That is currently the end of the tutorial.  Please check back later for more!';
     }
     $('#answer-correctness').html(is_correct_html);
   } else {
     $('#answer-correctness').text('That was incorrect.  Please try again.');
   }
+  $('#answer-correctness').show();
 };
 
 // Onclick handler for when you click "Run SQL"
@@ -67,7 +70,7 @@ var levels = [{'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[1, 'Dave', 'male', 'human', 28],
                                      [2, 'Mary', 'female', 'human', 27],
                                      [3, 'Pickles', 'male', 'dog', 4]]},
-               'prompt': 'Let\'s start by grabbing all of the data.  We have a table called "family_members" that is shown below.  In order to grab all of that data, please run the following command: <br/><strong>SELECT * FROM family_members;</strong>'},
+               'prompt': 'In SQL, data is usually organized in various tables. For example, a sports team database might have the tables <i>teams</i>, <i>players</i>, and <i>games</i>. A wedding database might have tables <i>guests</i>, <i>vendors</i>, and <i>music_playlist</i>.<br/><br/>Imagine we have a table that stores family members with each member\'s name, age, species, and gender.<br/><br/>Let\'s start by grabbing all of the data.  We have a table called "family_members" that is shown below.  In order to grab all of that data, please run the following command: <br/><strong>SELECT * FROM family_members;</strong>'},
               {'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[3, 'Pickles', 'male', 'dog', 4]]},
                'prompt': 'In order to select particular rows from this table, we use the "WHERE" keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type "SELECT * FROM family_members WHERE species = \'human\';"  Note that the quotes have to be around the word human.  Can you run a query that returns all of the rows that refer to dogs?'}]
@@ -87,8 +90,29 @@ var current_level;
 
 var load_level = function() {
   current_level = parseInt(window.location.hash.substr(2), 10) || 1;
+  // Set text for current level
   $('#lesson-name').text("Lesson " + current_level);
   $('#prompt').html(levels[current_level-1]['prompt']);
+
+  // Add "next" and "previous" links if it makes sense.
+  if (current_level > 1) {
+    $('#previous-link').attr('href', '#!' + (current_level - 1));
+    $('#previous-link').show();
+  } else {
+    $('#previous-link').hide();
+  }
+  if (current_level < levels.length) {
+    $('#next-link').attr('href', '#!' + (current_level + 1));
+    $('#next-link').show();
+  } else {
+    $('#next-link').hide();
+  }
+
+  // Clear out old data
+  $('#answer-correctness').hide();
+  $('#sql-input').val('');
+  $('#results').val('');
+  $('.expected-results-container').hide();
 };
 load_level();
 
