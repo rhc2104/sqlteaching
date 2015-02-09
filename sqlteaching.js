@@ -24,6 +24,7 @@ var table_from_results = function(res) {
   return table_string;
 };
 
+
 var grade_results = function(results, correct_answer) {
   if (!res) {
     return false;
@@ -57,8 +58,6 @@ $('#sql-link').click(function() {
   return false;
 });
 
-var current_level = parseInt(window.location.hash.substr(1), 10) || 0;
-
 // Stores the prompts and answers for each level number
 var levels = [{'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[1, 'Dave', 'Male', 'Human', 28],
@@ -80,5 +79,15 @@ db.run(sqlstr);
 var res = db.exec("SELECT * FROM family_members;");
 $('#current-tables').html(table_from_results(res));
 
-$('#lesson-name').text("Lesson " + (current_level + 1));
-$('#prompt').html(levels[current_level]['prompt']);
+var current_level;
+
+var load_level = function() {
+  current_level = parseInt(window.location.hash.substr(1), 10) || 0;
+  $('#lesson-name').text("Lesson " + (current_level + 1));
+  $('#prompt').html(levels[current_level]['prompt']);
+};
+load_level();
+
+$(window).bind('hashchange', function() {
+  load_level();
+});

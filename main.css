@@ -9,6 +9,11 @@ th, td {
   padding-right: 10px !important;
 }
 
+#title-header {
+  margin-top: 0;
+  text-align: center;
+}
+
 #lesson-name {
   font-weight: bold;
 }
