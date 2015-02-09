@@ -1,10 +1,13 @@
-Select * all
+Intro
+    In SQL, data is usually organized in various tables. For example, a sports team database might have tables <i>teams</i>, <i>players</i>, and <i>games</i>. A wedding database might have tables guests, vendors, and music_playlist.
+    <br/><br/>
+    Imagine we have a table that stores family members with each one's name, age, species, and gender.
 
-Let's start by grabbing all of the data.  We have a table called "family_members" that is shown below.  In order to grab all of that data, please run the following command: <br/><strong>SELECT * FROM family_members;</strong>
+Select * all
+    Let's start by grabbing all of the data.  We have a table called "family_members" that is shown below.  In order to grab all of that data, please run the following command: <br/><strong>SELECT * FROM family_members;</strong>
 
 Equality
-
-In order to select particular rows from this table, we use the "WHERE" keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type "SELECT * FROM family_members WHERE species = 'Human';"  Note that the quotes have to be around the word Human.  Can you run a query that returns all of the rows that refer to dogs?
+    In order to select particular rows from this table, we use the "WHERE" keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type "SELECT * FROM family_members WHERE species = 'Human';"  Note that the quotes have to be around the word Human.  Can you run a query that returns all of the rows that refer to dogs? (Note: the species type is all lower-cased.)
 
 Greater than
 
@@ -13,5 +16,9 @@ Greater than or equal
 IN
 
 Selecting particular columns
+
+    <strong>SELECT *</strong> grabs all fields (called columns) in a table. If WE only wanted to see the name and age columns, WE would type "SELECT name, age from family_members". 
+    <br/>
+    Can you run a query that returns just the name and species columns?
 
 joining
