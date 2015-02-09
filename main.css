@@ -1,15 +1,45 @@
 body {
+  margin: auto !important;
   padding: 20px;
+  width: 820px;
 }
 
 th, td {
-  padding-right: 5px !important;
+  padding-bottom: 5px !important;
+  padding-right: 10px !important;
 }
 
 #lesson-name {
   font-weight: bold;
 }
 
+/* TODO: use bootstrap columns instead of hard coding 400px columns with 20px in between. */
 #prompt {
+  float: left;
   width: 400px;
+}
+
+#answer-correctness {
+  float: left;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+#sql-header {
+  clear: left;
+  padding-top: 20px;
+}
+
+#sql-link {
+  margin-bottom: 24px;
+}
+
+.results-container {
+  float: left;
+  width: 400px;
+}
+
+.current-tables-container {
+  float: left;
+  padding-left: 20px;
 }

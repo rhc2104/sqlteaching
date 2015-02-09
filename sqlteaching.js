@@ -60,7 +60,7 @@ var levels = [{'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[1, 'Dave', 'Male', 'Human', 28],
                                      [2, 'Mary', 'Female', 'Human', 27],
                                      [3, 'Pickles', 'Male', 'Dog', 4]]},
-               'prompt': 'Let\'s start by grabbing all of the data.  We have a table called "family_members" that is shown below.  In order to grab all of that data, please run "SELECT * FROM family_members;".'},
+               'prompt': 'Let\'s start by grabbing all of the data.  We have a table called "family_members" that is shown below.  In order to grab all of that data, please run the following command: <br/><strong>SELECT * FROM family_members;</strong>'},
               {'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[3, 'Pickles', 'Male', 'Dog', 4]]},
                'prompt': 'In order to select particular rows from this table, we use the "WHERE" keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type "SELECT * FROM family_members WHERE species = \'Human\';"  Note that the quotes have to be around the word Human.  Can you run a query that returns all of the rows that refer to dogs?'}]
@@ -77,4 +77,4 @@ var res = db.exec("SELECT * FROM family_members;");
 $('#current-tables').html(table_from_results(res));
 
 $('#lesson-name').text("Lesson " + (current_level + 1));
-$('#prompt').text(levels[current_level]['prompt']);
+$('#prompt').html(levels[current_level]['prompt']);

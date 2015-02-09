@@ -17,15 +17,19 @@
     </div>
     <div id='answer-correctness'>
     </div>
-    SQL:
-    <textarea id='sql-input' rows=8 cols=40></textarea>
-    <a id='sql-link' href='#' class='btn btn-default'>Run SQL</a>
+    <div id='sql-header'>
+      <strong>SQL:</strong>
+    </div>
+    <div class='sql-input-container'>
+      <textarea id='sql-input' rows=8 cols=40></textarea>
+      <a id='sql-link' href='#' class='btn btn-default'>Run SQL</a>
+    </div>
     <div class='results-container'>
-      Result:
+      <strong>Result:</strong>
       <div id='results'></div>
     </div>
     <div class='current-tables-container'>
-      Current table:
+      <strong>Current table:</strong>
       <div id='current-tables'></div>
     </div>
     <script src="sqlteaching.js"></script>
