@@ -80,11 +80,33 @@ var levels = [{'name': 'SELECT *',
                 'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[1, 'Dave', 'male', 'human', 28]]},
                'prompt': 'If we want to only select family members based on a numerical field, we can also use the <code>WHERE</code> keyword.  For example, if we wanted to select family members older than 10, we would type <br/><code>SELECT * FROM family_members WHERE age > 10;</code><br/><br/>  Can you run return all rows of members with age greater than 27?'},
+              
               { 'name': 'WHERE ... greater than or equal to',
                 'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[2, 'Mary', 'female', 'human', 27],
                                      [3, 'Pickles', 'male', 'dog', 4]]},
-               'prompt': 'SQL accepts various inequality symbols, including <br/> >= "greater than or equal to" and <br/> <= "less than or equal to".<br/><br/> Can you return all rows of members with an age less than or equal to 27?'}];
+               'prompt': 'SQL accepts various inequality symbols, including <br/>= "equal to"<br/>> "greater than"<br/>< "less than"<br/>>= "greater than or equal to"<br/><= "less than or equal to"<br/><br/> Can you return all rows of members with an age less than or equal to 27?'},
+
+               { 'name': 'SELECT specific columns',
+                'answer': {'columns': ['name', 'species'],
+                          'values': [['Dave', 'human'],
+                                     ['Mary', 'human'],
+                                     ['Pickles', 'dog']]},
+               'prompt': '<code>SELECT *</code> grabs all fields (called columns) in a table. If we only wanted to see the name and age columns, we would type <code>SELECT name, age from family_members</code>.<br/><br/>Can you return just the name and species columns?'},
+
+               { 'name': 'LIMIT # of returned rows',
+                'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
+                          'values': [[1, 'Dave', 'male', 'human', 28]
+                                     ]},
+               'prompt': 'Often, tables contain millions of rows, and it can take a while to grab everything. If we just want to see a few examples of the data in a table, we can select only a few rows. If we want to select 2 rows, we would add <code>LIMIT 2</code> at the end of the query.<br/><br/> Can you return the first row (and all columns) of family_members?'},
+
+               { 'name': 'COUNT(*)',
+                'answer': {'columns': ['COUNT(*)'],
+                          'values': [[3],
+                                    ]},
+               'prompt': 'Another way to explore a table is to check the size. For example, if you are querying a table <i>states_of_us</i> you\'d expect 50 rows, or 500 rows in a table called <i>fortune_500_companies</i>.<br/><br/><code>SELECT COUNT(*) FROM family_members</code> returns the total number of rows in the table <i>family_members</i>. Try this yourself.'}
+
+               ];
 
 
 // Create the SQL table
