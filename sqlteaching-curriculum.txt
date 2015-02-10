@@ -3,46 +3,44 @@ Intro
     <br/><br/>
     Imagine we have a table that stores family members with each member's name, age, species, and gender.
 
-SELECT
+SELECT *
     Select * all
         Let's start by grabbing all of the data.  We have a table called "family_members" that is shown below.  In order to grab all of that data, please run the following command: <br/><strong>SELECT * FROM family_members;</strong>
 
-    Selecting particular columns
-        <strong>SELECT *</strong> grabs all fields (called columns) in a table. If WE only wanted to see the name and age columns, WE would type "SELECT name, age from family_members".
-        <br/>
-        Can you run a query that returns just the name and species columns?
-
-
-    LIMIT 2
-        Often, tables contain millions of rows, and it can take a while to grab everything. If we just want to get a sense of the data a table contains, we may want to select only a few rows. If we only want to select 2 rows, we would add "LIMIT 2" at the end of the query.
-        <br/> Can you return the first 5 rows (and all columns) of a table called menu_items?
-        <br/><br/>
-        Note: A SQL interface like SequelPro automatically limits the rows returned to the first 1000.
-
-    ORDER BY
-
-        You can order by any type of field (numbers, strings, dates).
-    
-    DISTINCT
-
 FILTERING
     Equality
-        In order to select particular rows from this table, we use the "WHERE" keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type "SELECT * FROM family_members WHERE species = 'human';"  Note that the quotes have to be around the word Human.  Can you run a query that returns all of the rows that refer to dogs? (Note: the species type is all lower-cased.)
+        In order to select particular rows from this table, we use the "WHERE" keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type "SELECT * FROM family_members WHERE species = 'human';"  Note that the quotes have to be around the word 'human'.  Can you run a query that returns all of the rows that refer to dogs?
      Greater than
         -- maybe make a really old grandma?
-        If we want to only select family members based on a numerical field, we can also use the "WHERE" keyword.  In SQL, > means "greater than", and < means "less than".  For example, if we wanted to select family members younger than 10, we would type "SELECT * FROM family_members WHERE age < 10;".
+        If we want to only select members based on a numerical field, we can also use the "WHERE" keyword.  In SQL, > means "greater than".  For example, if we wanted to select family members greater than 10, we would type "SELECT * FROM family_members WHERE age > 10;".
         <br/>
         Can you run a query that returns all rows of members with an age greater than 27?
     Greater than or equal
-        SQL also accepts >= to mean "greater than or equal to" and <= to mean "less than or equal to". Can you run a query that returns all rows of members with an age less than or equal to 27?
+        SQL accepts various inequality symbols, including <br/>= "equal to"<br/>> "greater than"<br/>< "less than"<br/>>= "greater than or equal to"<br/><= "less than or equal to"<br/><br/> Can you return all rows of members with an age less than or equal to 27?
+
+SELECT - limiting the results
+    Selecting particular columns
+        <code>SELECT *</code> grabs all fields (called columns) in a table. If WE only wanted to see the name and age columns, we would type <code>SELECT name, age from family_members</code>.<br/><br/>Can you return just the name and species columns?
+
+    LIMIT 2
+        Often, tables contain millions of rows, and it can take a while to grab everything. If we just want to get a few examples of the data in a table, we may want to select only a few rows. If we want to select 2 rows, we would add <code>LIMIT 2</code> at the end of the query.<br/><br/> Can you return the first row (and all columns) of a table called menu_items?<br/><br/> Note: A SQL interface like SequelPro automatically limits the rows returned to the first 1000.
 
 AGGREGATION
     COUNT(*)
+        Another way to explore a table is to check the size. For example, if you are querying a table <i>states_of_us</i> you\'d expect 50 rows, or 500 rows in a table called <i>fortune_500_companies</i>.<br/><br/><code>SELECT COUNT(*) FROM family_members</code> returns the total number of rows in the table <i>family_members</i>. Try this yourself.
+    COUNT(*) ... WHERE
     SUM
 
     AVG, MAX, MIN, 
 
     GROUP BY
+
+SELECT
+    ORDER BY
+        When we use <code>LIMIT 1</code>, we just select the first row in the table. If we want to select the first row 
+        You can order by any type of field (numbers, strings, dates).
+    
+    DISTINCT
 
 Advanced Filtering
     AND
