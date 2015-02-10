@@ -27,8 +27,9 @@ SELECT - limiting the results
 
 AGGREGATION
     COUNT(*)
-        Another way to explore a table is to check the size. For example, if you are querying a table <i>states_of_us</i> you\'d expect 50 rows, or 500 rows in a table called <i>fortune_500_companies</i>.<br/><br/><code>SELECT COUNT(*) FROM family_members</code> returns the total number of rows in the table <i>family_members</i>. Try this yourself.
+        Another way to explore a table is to check the number of rows in it. For example, if we are querying a table <i>states_of_us</i> we\'d expect 50 rows, or 500 rows in a table called <i>fortune_500_companies</i>.<br/><br/><code>SELECT COUNT(*) FROM family_members</code> returns the total number of rows in the table <i>family_members</i>. Try this for yourself.
     COUNT(*) ... WHERE
+        We can combine <code>COUNT(*)</code> with <code>WHERE</code>. For example, <code>SELECT COUNT(*) FROM family_members WHERE species = 'human'</code> returns 2.<br/><br/>Can you return the number of rows in family_members where the species is a dog?
     SUM
 
     AVG, MAX, MIN, 

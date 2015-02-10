@@ -85,7 +85,7 @@ var levels = [{'name': 'SELECT *',
                 'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[2, 'Mary', 'female', 'human', 27],
                                      [3, 'Pickles', 'male', 'dog', 4]]},
-               'prompt': 'SQL accepts various inequality symbols, including <br/>= "equal to"<br/>> "greater than"<br/>< "less than"<br/>>= "greater than or equal to"<br/><= "less than or equal to"<br/><br/> Can you return all rows of members with an age less than or equal to 27?'},
+               'prompt': 'SQL accepts various inequality symbols, including <br/>= "equal to"<br/>> "greater than"<br/>< "less than"<br/>>= "greater than or equal to"<br/><= "less than or equal to"<br/><br/> Can you return all rows in family_members with an age less than or equal to 27?'},
 
                { 'name': 'SELECT specific columns',
                 'answer': {'columns': ['name', 'species'],
@@ -98,13 +98,19 @@ var levels = [{'name': 'SELECT *',
                 'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[1, 'Dave', 'male', 'human', 28]
                                      ]},
-               'prompt': 'Often, tables contain millions of rows, and it can take a while to grab everything. If we just want to see a few examples of the data in a table, we can select only a few rows. If we want to select 2 rows, we would add <code>LIMIT 2</code> at the end of the query.<br/><br/> Can you return the first row (and all columns) of family_members?'},
+               'prompt': 'Often, tables contain millions of rows, and it can take a while to grab everything. If we just want to see a few examples of the data in a table, we can select only a few rows. If we want to select 2 rows, we would add <code>LIMIT 2</code> at the end of the query.<br/><br/> Can you return just the first row (and all columns) of family_members?'},
 
                { 'name': 'COUNT(*)',
                 'answer': {'columns': ['COUNT(*)'],
                           'values': [[3],
                                     ]},
-               'prompt': 'Another way to explore a table is to check the size. For example, if you are querying a table <i>states_of_us</i> you\'d expect 50 rows, or 500 rows in a table called <i>fortune_500_companies</i>.<br/><br/><code>SELECT COUNT(*) FROM family_members</code> returns the total number of rows in the table <i>family_members</i>. Try this yourself.'}
+               'prompt': 'Another way to explore a table is to check the number of rows in it. For example, if we are querying a table <i>states_of_us</i> we\'d expect 50 rows, or 500 rows in a table called <i>fortune_500_companies</i>.<br/><br/><code>SELECT COUNT(*) FROM family_members</code> returns the total number of rows in the table <i>family_members</i>. Try this for yourself.'},
+
+               { 'name': 'COUNT(*) ... WHERE',
+                'answer': {'columns': ['COUNT(*)'],
+                          'values': [[1],
+                                    ]},
+               'prompt': 'We can combine <code>COUNT(*)</code> with <code>WHERE</code>. For example, <code>SELECT COUNT(*) FROM family_members WHERE species = \'human\'</code> returns 2.<br/><br/>Can you return the number of rows in family_members where the species is a dog?'}
 
                ];
 
