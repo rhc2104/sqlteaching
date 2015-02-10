@@ -75,16 +75,16 @@ var levels = [{'name': 'SELECT *',
               { 'name': 'WHERE ... Equals',
                 'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[3, 'Pickles', 'male', 'dog', 4]]},
-               'prompt': 'In order to select particular rows from this table, we use the "WHERE" keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type <strong>"SELECT * FROM family_members WHERE species = \'human\';"</strong>  Note that the quotes have to be around the word human.  Can you run a query that returns all of the rows that refer to dogs?'},
+               'prompt': 'In order to select particular rows from this table, we use the "WHERE" keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type <strong><br/>SELECT * FROM family_members WHERE species = \'human\';</strong><br/>  Note that the quotes have to be around the word human.<br/><br/>Can you run a query that returns all of the rows that refer to dogs?'},
               { 'name': 'WHERE ... Greater Than',
                 'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[1, 'Dave', 'male', 'human', 28]]},
-               'prompt': 'If we want to only select family members based on a numerical field, we can also use the "WHERE" keyword.  In SQL, > means "greater than", and < means "less than".  For example, if we wanted to select family members younger than 10, we would type <strong>"SELECT * FROM family_members WHERE age < 10;".</strong><br/>  Can you run a query that returns all rows of members with age greater than 27?'},
+               'prompt': 'If we want to only select family members based on a numerical field, we can also use the "WHERE" keyword.  For example, if we wanted to select family members older than 10, we would type <br/><strong>SELECT * FROM family_members WHERE age > 10;</strong><br/><br/>  Can you run return all rows of members with age greater than 27?'},
               { 'name': 'WHERE ... greater than or equal to',
                 'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[2, 'Mary', 'female', 'human', 27],
                                      [3, 'Pickles', 'male', 'dog', 4]]},
-               'prompt': 'SQL also accepts >= to mean "greater than or equal to" and <= to mean "less than or equal to". Can you run a query that returns all rows of members with an age less than or equal to 27?'}];
+               'prompt': 'SQL accepts various inequality symbols, including <br/> >= "greater than or equal to" and <br/> <= "less than or equal to".<br/><br/> Can you return all rows of members with an age less than or equal to 27?'}];
 
 
 // Create the SQL table
