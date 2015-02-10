@@ -76,3 +76,9 @@ th, td {
   padding-bottom: 20px;
   width: 400px;
 }
+
+.social-plugins {
+  clear: left;
+  margin: auto;
+  width: 240px;
+}
