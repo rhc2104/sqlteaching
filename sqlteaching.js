@@ -80,7 +80,7 @@ var levels = [{'name': 'SELECT *',
                 'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[1, 'Dave', 'male', 'human', 28]]},
                'prompt': 'If we want to only select family members based on a numerical field, we can also use the <code>WHERE</code> keyword.  For example, if we wanted to select family members older than 10, we would type <br/><code>SELECT * FROM family_members WHERE age > 10;</code><br/><br/>  Can you run return all rows of members with age greater than 27?'},
-              
+
               { 'name': 'WHERE ... greater than or equal to',
                 'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[2, 'Mary', 'female', 'human', 27],
@@ -92,7 +92,7 @@ var levels = [{'name': 'SELECT *',
                           'values': [['Dave', 'human'],
                                      ['Mary', 'human'],
                                      ['Pickles', 'dog']]},
-               'prompt': '<code>SELECT *</code> grabs all fields (called columns) in a table. If we only wanted to see the name and age columns, we would type <code>SELECT name, age from family_members</code>.<br/><br/>Can you return just the name and species columns?'},
+               'prompt': '<code>SELECT *</code> grabs all fields (called columns) in a table. If we only wanted to see the name and age columns, we would type <code>SELECT name, age from family_members;</code>.<br/><br/>Can you return just the name and species columns?'},
 
                { 'name': 'LIMIT # of returned rows',
                 'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
@@ -104,13 +104,13 @@ var levels = [{'name': 'SELECT *',
                 'answer': {'columns': ['COUNT(*)'],
                           'values': [[3],
                                     ]},
-               'prompt': 'Another way to explore a table is to check the number of rows in it. For example, if we are querying a table <i>states_of_us</i> we\'d expect 50 rows, or 500 rows in a table called <i>fortune_500_companies</i>.<br/><br/><code>SELECT COUNT(*) FROM family_members</code> returns the total number of rows in the table <i>family_members</i>. Try this for yourself.'},
+               'prompt': 'Another way to explore a table is to check the number of rows in it. For example, if we are querying a table <i>states_of_us</i> we\'d expect 50 rows, or 500 rows in a table called <i>fortune_500_companies</i>.<br/><br/><code>SELECT COUNT(*) FROM family_members;</code> returns the total number of rows in the table <i>family_members</i>. Try this for yourself.'},
 
                { 'name': 'COUNT(*) ... WHERE',
                 'answer': {'columns': ['COUNT(*)'],
                           'values': [[1],
                                     ]},
-               'prompt': 'We can combine <code>COUNT(*)</code> with <code>WHERE</code>. For example, <code>SELECT COUNT(*) FROM family_members WHERE species = \'human\'</code> returns 2.<br/><br/>Can you return the number of rows in family_members where the species is a dog?'}
+               'prompt': 'We can combine <code>COUNT(*)</code> with <code>WHERE</code>. For example, <code>SELECT COUNT(*) FROM family_members WHERE species = \'human\';</code> returns 2.<br/><br/>Can you return the number of rows in family_members where the species is a dog?'}
 
                ];
 
