@@ -90,7 +90,7 @@ var levels = [{'name': 'SELECT *',
                'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[2, 'Mary', 'female', 'human', 27],
                                      [3, 'Pickles', 'male', 'dog', 4]]},
-               'prompt': 'SQL accepts various inequality symbols, including <br/>= "equal to"<br/>> "greater than"<br/>< "less than"<br/>>= "greater than or equal to"<br/><= "less than or equal to"<br/><br/> Can you return all rows in family_members with an age less than or equal to 27?'},
+               'prompt': 'SQL accepts various inequality symbols, including: <br/>= "equal to"<br/>> "greater than"<br/>< "less than"<br/>>= "greater than or equal to"<br/><= "less than or equal to"<br/><br/> Can you return all rows in family_members with an age less than or equal to 27?'},
 
               {'name': 'SELECT specific columns',
                'short_name': 'select_columns',
