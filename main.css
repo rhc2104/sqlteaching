@@ -1,7 +1,7 @@
 body {
   margin: auto !important;
   padding: 20px;
-  width: 1080px;
+  width: 1024px;
 }
 
 th, td {
@@ -12,7 +12,7 @@ th, td {
 .menu {
   float: left;
   padding-right: 10px;
-  width: 220px;
+  width: 184px;
 }
 
 .menu-link {
@@ -47,14 +47,14 @@ th, td {
 #prompt {
   float: left;
   padding-bottom: 20px;
-  width: 400px;
+  width: 390px;
 }
 
 #answer-correctness {
   float: left;
   font-weight: bold;
   padding-left: 20px;
-  width: 400px;
+  width: 390px;
 }
 
 #sql-header {
@@ -72,26 +72,26 @@ th, td {
 
 .sql-input-container {
   float: left;
-  width: 400px;
+  width: 390px;
 }
 
 .results-container {
   float: left;
   padding-left: 20px;
-  width: 400px;
+  width: 390px;
 }
 
 .expected-results-container {
   display: none;
   float: left;
   padding-left: 20px;
-  width: 400px;
+  width: 390px;
 }
 
 .current-tables-container {
   float: left;
   padding-bottom: 20px;
-  width: 400px;
+  width: 390px;
 }
 
 .social-plugins {

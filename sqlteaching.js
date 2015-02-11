@@ -162,6 +162,19 @@ var load_level = function() {
     $('#next-link').hide();
   }
 
+  // Add links to menu
+  var menu_html = '';
+  for (var index in levels) {
+    if (index == (current_level - 1)) {
+      menu_html += '<strong>';
+    }
+    menu_html += '<a class="menu-link" href="#!' + levels[index]['short_name'] + '">' + levels[index]['name'] + '</a>';
+    if (index == (current_level - 1)) {
+      menu_html += '</strong>';
+    }
+  }
+  $('.menu').html(menu_html);
+
   // Clear out old data
   $('#answer-correctness').hide();
   $('#sql-input').val('');
@@ -169,13 +182,6 @@ var load_level = function() {
   $('.expected-results-container').hide();
 };
 load_level();
-
-// Add links to menu
-var menu_html = '';
-for (var index in levels) {
-  menu_html += '<a class="menu-link" href="#!' + levels[index]['short_name'] + '">' + levels[index]['name'] + '</a>';
-}
-$('.menu').html(menu_html);
 
 // When the URL after the # changes, we load a new level,
 // and let Google Analytics know that the page has changed.
