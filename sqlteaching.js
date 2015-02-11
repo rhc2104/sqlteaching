@@ -79,7 +79,7 @@ var levels = [{'name': 'SELECT *',
                           'values': [[3, 'Pickles', 'male', 'dog', 4]]},
                'prompt': 'In order to select particular rows from this table, we use the <code>WHERE</code> keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type <br/><code>SELECT * FROM family_members WHERE species = \'human\';</code><br/>  Note that the quotes have to be around the word human.<br/><br/>Can you run a query that returns all of the rows that refer to dogs?'},
 
-              {'name': 'WHERE ... Greater Than',
+              {'name': 'WHERE ... Greater than',
                'short_name': 'where_greater_than',
                'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[1, 'Dave', 'male', 'human', 28]]},
