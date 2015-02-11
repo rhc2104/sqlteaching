@@ -1,12 +1,27 @@
 body {
   margin: auto !important;
   padding: 20px;
-  width: 840px;
+  width: 1080px;
 }
 
 th, td {
   padding-bottom: 5px !important;
   padding-right: 10px !important;
+}
+
+.menu {
+  float: left;
+  padding-right: 10px;
+  width: 220px;
+}
+
+.menu-link {
+  display: block;
+  padding-bottom: 10px;
+}
+
+.not-menu-container {
+  float: left;
 }
 
 #title-header {
@@ -15,11 +30,13 @@ th, td {
 }
 
 #links-subheader {
+  padding-bottom: 7px;
   text-align: center;
 }
 
 .pagination-link {
   display: none;
+  padding: 8px;
 }
 
 #lesson-name {

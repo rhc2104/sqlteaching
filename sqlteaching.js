@@ -24,7 +24,6 @@ var table_from_results = function(res) {
   return table_string;
 };
 
-
 var grade_results = function(results, correct_answer) {
   if (!res) {
     return false;
@@ -38,7 +37,7 @@ var show_is_correct = function(is_correct) {
   if (is_correct) {
     is_correct_html = 'Congrats!  That is correct!<br/>';
     if (current_level < levels.length) {
-      is_correct_html += '<a href="#!' + (current_level+1) + '">Next Lesson</a>';
+      is_correct_html += '<a href="#!' + levels[current_level]['short_name'] + '">Next Lesson</a>';
     } else {
       is_correct_html += 'That is currently the end of the tutorial.  Please check back later for more!';
     }
@@ -86,7 +85,7 @@ var levels = [{'name': 'SELECT *',
                           'values': [[1, 'Dave', 'male', 'human', 28]]},
                'prompt': 'If we want to only select family members based on a numerical field, we can also use the <code>WHERE</code> keyword.  For example, if we wanted to select family members older than 10, we would type <br/><code>SELECT * FROM family_members WHERE age > 10;</code><br/><br/>  Can you run return all rows of members with age greater than 27?'},
 
-              {'name': 'WHERE ... greater than or equal to',
+              {'name': 'WHERE ... Greater than or equal',
                'short_name': 'where_greater_than_or_equal',
                'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[2, 'Mary', 'female', 'human', 27],
@@ -138,7 +137,7 @@ var load_level = function() {
   var hash_code = window.location.hash.substr(2);
   // The current level is 1 by default, unless the hash code matches the short name for a level.
   current_level = 1;
-  for (index in levels) {
+  for (var index in levels) {
     if (hash_code == levels[index]['short_name']) {
       current_level = parseInt(index, 10) + 1;
       break;
@@ -171,6 +170,15 @@ var load_level = function() {
 };
 load_level();
 
+// Add links to menu
+var menu_html = '';
+for (var index in levels) {
+  menu_html += '<a class="menu-link" href="#!' + levels[index]['short_name'] + '">' + levels[index]['name'] + '</a>';
+}
+$('.menu').html(menu_html);
+
+// When the URL after the # changes, we load a new level,
+// and let Google Analytics know that the page has changed.
 $(window).bind('hashchange', function() {
   load_level();
   ga('send', 'pageview', {'page': location.pathname + location.search  + location.hash});
