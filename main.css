@@ -80,5 +80,6 @@ th, td {
 .social-plugins {
   clear: left;
   margin: auto;
-  width: 240px;
+  padding-left: 35px;
+  width: 345px;
 }
