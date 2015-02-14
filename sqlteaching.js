@@ -1,7 +1,6 @@
 var sql = window.SQL;
-
-// Create a database
-var db = new sql.Database();
+// The db variable gets set every time a level is loaded.
+var db;
 
 // Return an HTML table as a string, given SQL.js results
 var table_from_results = function(res) {
@@ -25,7 +24,7 @@ var table_from_results = function(res) {
 };
 
 var grade_results = function(results, correct_answer) {
-  if (!res) {
+  if (!results) {
     return false;
   }
 
@@ -120,20 +119,24 @@ var levels = [{'name': 'SELECT *',
               ];
 
 
-// Create the SQL table
-var sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, age int);";
-sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 28);"
-sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 27);"
-sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 4);"
-db.run(sqlstr);
-
-var res = db.exec("SELECT * FROM family_members;");
-$('#current-tables').html(table_from_results(res));
+// Create the SQL database
+var load_database = function() {
+  var database = new sql.Database();
+  var sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, age int);";
+  sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 28);"
+  sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 27);"
+  sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 4);"
+  database.run(sqlstr);
+  var res = database.exec("SELECT * FROM family_members;");
+  $('#current-tables').html(table_from_results(res));
+  return database;
+};
 
 var current_level;
 var current_level_name;
 
 var load_level = function() {
+  var database = load_database();
   var hash_code = window.location.hash.substr(2);
   // The current level is 1 by default, unless the hash code matches the short name for a level.
   current_level = 1;
@@ -180,12 +183,13 @@ var load_level = function() {
   $('#sql-input').val('');
   $('#results').html('');
   $('.expected-results-container').hide();
+  return database;
 };
-load_level();
+db = load_level();
 
 // When the URL after the # changes, we load a new level,
 // and let Google Analytics know that the page has changed.
 $(window).bind('hashchange', function() {
-  load_level();
+  db = load_level();
   ga('send', 'pageview', {'page': location.pathname + location.search  + location.hash});
 });
