@@ -7,14 +7,14 @@ var table_from_results = function(res) {
   var table_string = '<table>';
   if (res) {
     table_string += '<tr>';
-    for (index in res[0].columns) {
+    for (var index in res[0].columns) {
       table_string += '<th>' + res[0].columns[index] + '</th>';
     }
     table_string += '</tr>';
-    for (row_index in res[0].values) {
+    for (var row_index in res[0].values) {
       table_string += '<tr>';
-      for (index in res[0].values[row_index]) {
-        table_string += '<td>' + res[0].values[row_index][index] + '</td>';
+      for (var col_index in res[0].values[row_index]) {
+        table_string += '<td>' + res[0].values[row_index][col_index] + '</td>';
       }
       table_string += '</tr>';
     }
@@ -66,6 +66,7 @@ $('#sql-link').click(function() {
 // Stores the prompts and answers for each level number
 var levels = [{'name': 'SELECT *',
                'short_name': 'select',
+               'database_type': 'family',
                'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                            'values': [[1, 'Dave', 'male', 'human', 28],
                                       [2, 'Mary', 'female', 'human', 27],
@@ -74,18 +75,21 @@ var levels = [{'name': 'SELECT *',
 
               {'name': 'WHERE ... Equals',
                'short_name': 'where_equals',
+               'database_type': 'family',
                'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[3, 'Pickles', 'male', 'dog', 4]]},
                'prompt': 'In order to select particular rows from this table, we use the <code>WHERE</code> keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type <br/><code>SELECT * FROM family_members WHERE species = \'human\';</code><br/>  Note that the quotes have to be around the word human.<br/><br/>Can you run a query that returns all of the rows that refer to dogs?'},
 
               {'name': 'WHERE ... Greater than',
                'short_name': 'where_greater_than',
+               'database_type': 'family',
                'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[1, 'Dave', 'male', 'human', 28]]},
                'prompt': 'If we want to only select family members based on a numerical field, we can also use the <code>WHERE</code> keyword.  For example, if we wanted to select family members older than 10, we would type <br/><code>SELECT * FROM family_members WHERE age > 10;</code><br/><br/>  Can you run return all rows of members with age greater than 27?'},
 
               {'name': 'WHERE ... Greater than or equal',
                'short_name': 'where_greater_than_or_equal',
+               'database_type': 'family',
                'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[2, 'Mary', 'female', 'human', 27],
                                      [3, 'Pickles', 'male', 'dog', 4]]},
@@ -93,6 +97,7 @@ var levels = [{'name': 'SELECT *',
 
               {'name': 'SELECT specific columns',
                'short_name': 'select_columns',
+               'database_type': 'family',
                'answer': {'columns': ['name', 'species'],
                           'values': [['Dave', 'human'],
                                      ['Mary', 'human'],
@@ -101,18 +106,21 @@ var levels = [{'name': 'SELECT *',
 
               {'name': 'LIMIT # of returned rows',
                'short_name': 'limit',
+               'database_type': 'family',
                'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
                           'values': [[1, 'Dave', 'male', 'human', 28]]},
                'prompt': 'Often, tables contain millions of rows, and it can take a while to grab everything. If we just want to see a few examples of the data in a table, we can select only a few rows. If we want to select 2 rows, we would add <code>LIMIT 2</code> at the end of the query.<br/><br/> Can you return just the first row (and all columns) of family_members?'},
 
               {'name': 'COUNT(*)',
                'short_name': 'count',
+               'database_type': 'family',
                'answer': {'columns': ['COUNT(*)'],
                           'values': [[3]]},
                'prompt': 'Another way to explore a table is to check the number of rows in it. For example, if we are querying a table <i>states_of_us</i> we\'d expect 50 rows, or 500 rows in a table called <i>fortune_500_companies</i>.<br/><br/><code>SELECT COUNT(*) FROM family_members;</code> returns the total number of rows in the table <i>family_members</i>. Try this for yourself.'},
 
               {'name': 'COUNT(*) ... WHERE',
                'short_name': 'count_where',
+               'database_type': 'family',
                'answer': {'columns': ['COUNT(*)'],
                           'values': [[1]]},
                'prompt': 'We can combine <code>COUNT(*)</code> with <code>WHERE</code>. For example, <code>SELECT COUNT(*) FROM family_members WHERE species = \'human\';</code> returns 2.<br/><br/>Can you return the number of rows in family_members where the species is a dog?'}
@@ -120,23 +128,25 @@ var levels = [{'name': 'SELECT *',
 
 
 // Create the SQL database
-var load_database = function() {
-  var database = new sql.Database();
-  var sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, age int);";
-  sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 28);"
-  sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 27);"
-  sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 4);"
-  database.run(sqlstr);
-  var res = database.exec("SELECT * FROM family_members;");
-  $('#current-tables').html(table_from_results(res));
-  return database;
+var load_database = function(db_type) {
+  switch (db_type) {
+    case 'family':
+      var database = new sql.Database();
+      var sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, age int);";
+      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 28);"
+      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 27);"
+      sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 4);"
+      database.run(sqlstr);
+      var res = database.exec("SELECT * FROM family_members;");
+      $('#current-tables').html(table_from_results(res));
+      return database;
+  }
 };
 
 var current_level;
 var current_level_name;
 
 var load_level = function() {
-  var database = load_database();
   var hash_code = window.location.hash.substr(2);
   // The current level is 1 by default, unless the hash code matches the short name for a level.
   current_level = 1;
@@ -146,6 +156,7 @@ var load_level = function() {
       break;
     }
   }
+  var database = load_database(levels[current_level]['database_type']);
   // Set text for current level
   lesson_name = levels[current_level-1]['name'];
   $('#lesson-name').text("Lesson " + current_level + ": " + lesson_name);
