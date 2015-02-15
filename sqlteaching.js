@@ -123,22 +123,40 @@ var levels = [{'name': 'SELECT *',
                'database_type': 'family',
                'answer': {'columns': ['COUNT(*)'],
                           'values': [[1]]},
-               'prompt': 'We can combine <code>COUNT(*)</code> with <code>WHERE</code>. For example, <code>SELECT COUNT(*) FROM family_members WHERE species = \'human\';</code> returns 2.<br/><br/>Can you return the number of rows in family_members where the species is a dog?'}
+               'prompt': 'We can combine <code>COUNT(*)</code> with <code>WHERE</code>. For example, <code>SELECT COUNT(*) FROM family_members WHERE species = \'human\';</code> returns 2.<br/><br/>Can you return the number of rows in family_members where the species is a dog?'},
+              {'name': 'NULL',
+               'short_name': 'null',
+               'database_type': 'family_null',
+               'answer': {'columns': ['id', 'name', 'gender', 'species', 'age', 'favorite_book'],
+                           'values': [[1, 'Dave', 'male', 'human', 28, 'To Kill a Mockingbird'],
+                                      [2, 'Mary', 'female', 'human', 27, 'Gone with the Wind']]},
+               'prompt': 'Sometimes, in a given row, there is no value at all for a given column.  For example, a dog does not have a favorite book, so in that case there is no point in putting a value in the <i>favorite_book</i> column, and the value is <code>NULL</code>.  In order to find the rows where the value for a column is or is not <code>NULL</code>, you would use <code>IS NULL</code> or <code>IS NOT NULL</code>.<br/><br/>Can you return all of the rows of <i>family_members</i> where <i>favorite_book</i> is not null?'}
               ];
 
 
 // Create the SQL database
 var load_database = function(db_type) {
+  var database, sqlstr, results;
   switch (db_type) {
     case 'family':
-      var database = new sql.Database();
-      var sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, age int);";
+      database = new sql.Database();
+      sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, age int);";
       sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 28);"
       sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 27);"
       sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 4);"
       database.run(sqlstr);
-      var res = database.exec("SELECT * FROM family_members;");
-      $('#current-tables').html(table_from_results(res));
+      results = database.exec("SELECT * FROM family_members;");
+      $('#current-tables').html(table_from_results(results));
+      return database;
+    case 'family_null':
+      database = new sql.Database();
+      sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, age int, favorite_book char);";
+      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 28, 'To Kill a Mockingbird');"
+      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 27, 'Gone with the Wind');"
+      sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 4, NULL);"
+      database.run(sqlstr);
+      results = database.exec("SELECT * FROM family_members;");
+      $('#current-tables').html(table_from_results(results));
       return database;
   }
 };
@@ -156,7 +174,7 @@ var load_level = function() {
       break;
     }
   }
-  var database = load_database(levels[current_level]['database_type']);
+  var database = load_database(levels[current_level-1]['database_type']);
   // Set text for current level
   lesson_name = levels[current_level-1]['name'];
   $('#lesson-name').text("Lesson " + current_level + ": " + lesson_name);
