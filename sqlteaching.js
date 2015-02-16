@@ -128,9 +128,16 @@ var levels = [{'name': 'SELECT *',
                'short_name': 'null',
                'database_type': 'family_null',
                'answer': {'columns': ['id', 'name', 'gender', 'species', 'age', 'favorite_book'],
-                           'values': [[1, 'Dave', 'male', 'human', 28, 'To Kill a Mockingbird'],
-                                      [2, 'Mary', 'female', 'human', 27, 'Gone with the Wind']]},
-               'prompt': 'Sometimes, in a given row, there is no value at all for a given column.  For example, a dog does not have a favorite book, so in that case there is no point in putting a value in the <i>favorite_book</i> column, and the value is <code>NULL</code>.  In order to find the rows where the value for a column is or is not <code>NULL</code>, you would use <code>IS NULL</code> or <code>IS NOT NULL</code>.<br/><br/>Can you return all of the rows of <i>family_members</i> where <i>favorite_book</i> is not null?'}
+                          'values': [[1, 'Dave', 'male', 'human', 28, 'To Kill a Mockingbird'],
+                                     [2, 'Mary', 'female', 'human', 27, 'Gone with the Wind']]},
+               'prompt': 'Sometimes, in a given row, there is no value at all for a given column.  For example, a dog does not have a favorite book, so in that case there is no point in putting a value in the <i>favorite_book</i> column, and the value is <code>NULL</code>.  In order to find the rows where the value for a column is or is not <code>NULL</code>, you would use <code>IS NULL</code> or <code>IS NOT NULL</code>.<br/><br/>Can you return all of the rows of <i>family_members</i> where <i>favorite_book</i> is not null?'},
+              {'name': 'Date',
+               'short_name': 'date',
+               'database_type': 'celebs_born',
+               'answer': {'columns': ['id', 'name', 'birthdate'],
+                          'values': [[2, 'Justin Timberlake', '1981-01-31'],
+                                     [3, 'Taylor Swift', '1989-12-13']]},
+               'prompt': 'Sometimes, a column can contain a date value, which represents some specific time.  The first 4 digits represents the year, the next 2 digits represents the month, and the next 2 digits represents the day of the month.  For example, <code>1985-07-20</code> would mean July 20, 1985.<br/><br/>You can compare dates by using <code><</code> and <code>></code>.  For example, <code>SELECT * FROM celebs_born WHERE birthdate < \'1985-08-17\';</code> returns a list of celebrities that were born before August 17th, 1985.<br/><br/>Can you return a list of celebrities that were born after September 1st, 1980?'},
               ];
 
 
@@ -156,6 +163,16 @@ var load_database = function(db_type) {
       sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 4, NULL);"
       database.run(sqlstr);
       results = database.exec("SELECT * FROM family_members;");
+      $('#current-tables').html(table_from_results(results));
+      return database;
+    case 'celebs_born':
+      database = new sql.Database();
+      sqlstr = "CREATE TABLE celebs_born (id int, name char, birthdate date);";
+      sqlstr += "INSERT INTO celebs_born VALUES (1, 'Michael Jordan', '1963-02-17');"
+      sqlstr += "INSERT INTO celebs_born VALUES (2, 'Justin Timberlake', '1981-01-31');"
+      sqlstr += "INSERT INTO celebs_born VALUES (3, 'Taylor Swift', '1989-12-13');"
+      database.run(sqlstr);
+      results = database.exec("SELECT * FROM celebs_born;");
       $('#current-tables').html(table_from_results(results));
       return database;
   }
