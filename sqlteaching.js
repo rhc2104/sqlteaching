@@ -95,6 +95,14 @@ var levels = [{'name': 'SELECT *',
                                      [3, 'Pickles', 'male', 'dog', 4]]},
                'prompt': 'SQL accepts various inequality symbols, including: <br/>= "equal to"<br/>> "greater than"<br/>< "less than"<br/>>= "greater than or equal to"<br/><= "less than or equal to"<br/><br/> Can you return all rows in <strong>family_members</strong> with an age less than or equal to 27?'},
 
+              {'name': 'AND',
+               'short_name': 'and',
+               'database_type': 'friends_of_pickles',
+               'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
+                          'values': [[4, 'Jumpy', 'female', 'dog', 3],
+                                     [5, 'Sneakers', 'male', 'dog', 2]]},
+               'prompt': 'In the <code>WHERE</code> part of a query, you can search for multiple attributes by using the <code>AND</code> keyword.  For example, if you wanted to find the friends of Pickles that are over the age of 4 and are cats, you would run: <br/><code>SELECT * FROM friends_of_pickles WHERE age > 4 and species = \'cat\';</code><br/><br/>Can you find all of Pickles\' friends that are dogs and under the age of 4?'},
+
               {'name': 'SELECT specific columns',
                'short_name': 'select_columns',
                'database_type': 'family',
@@ -166,6 +174,20 @@ var load_database = function(db_type) {
       database.run(sqlstr);
       results = database.exec("SELECT * FROM family_members;");
       $('#current-tables').html('<div class="table-name">family_members</div>' + table_from_results(results));
+      return database;
+    case 'friends_of_pickles':
+      database = new sql.Database();
+      sqlstr = "CREATE TABLE friends_of_pickles (id int, name char, gender char, species char, age int);";
+      sqlstr += "INSERT INTO friends_of_pickles VALUES (1, 'Dave', 'male', 'human', 28);";
+      sqlstr += "INSERT INTO friends_of_pickles VALUES (2, 'Mary', 'female', 'human', 27);";
+      sqlstr += "INSERT INTO friends_of_pickles VALUES (3, 'Odie', 'male', 'dog', 5);";
+      sqlstr += "INSERT INTO friends_of_pickles VALUES (4, 'Jumpy', 'female', 'dog', 3);";
+      sqlstr += "INSERT INTO friends_of_pickles VALUES (5, 'Sneakers', 'male', 'dog', 2);";
+      sqlstr += "INSERT INTO friends_of_pickles VALUES (6, 'Fry', 'male', 'cat', 4);";
+      sqlstr += "INSERT INTO friends_of_pickles VALUES (7, 'Leela', 'female', 'cat', 6);";
+      database.run(sqlstr);
+      results = database.exec("SELECT * FROM friends_of_pickles;");
+      $('#current-tables').html('<div class="table-name">friends_of_pickles</div>' + table_from_results(results));
       return database;
     case 'family_null':
       database = new sql.Database();
