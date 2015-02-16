@@ -63,7 +63,7 @@ $('#sql-link').click(function() {
   return false;
 });
 
-// Stores the prompts and answers for each level number
+// Stores the prompts and answers for each level
 var levels = [{'name': 'SELECT *',
                'short_name': 'select',
                'database_type': 'family',
@@ -71,7 +71,7 @@ var levels = [{'name': 'SELECT *',
                            'values': [[1, 'Dave', 'male', 'human', 28],
                                       [2, 'Mary', 'female', 'human', 27],
                                       [3, 'Pickles', 'male', 'dog', 4]]},
-               'prompt': 'In SQL, data is usually organized in various tables. For example, a sports team database might have the tables <i>teams</i>, <i>players</i>, and <i>games</i>. A wedding database might have tables <i>guests</i>, <i>vendors</i>, and <i>music_playlist</i>.<br/><br/>Imagine we have a table that stores family members with each member\'s name, age, species, and gender.<br/><br/>Let\'s start by grabbing all of the data in one table.  We have a table called <i>family_members</i> that is shown below.  In order to grab all of that data, please run the following command: <br/><code>SELECT * FROM family_members;</code>'},
+               'prompt': 'In SQL, data is usually organized in various tables. For example, a sports team database might have the tables <i>teams</i>, <i>players</i>, and <i>games</i>. A wedding database might have tables <i>guests</i>, <i>vendors</i>, and <i>music_playlist</i>.<br/><br/>Imagine we have a table that stores family members with each member\'s name, age, species, and gender.<br/><br/>Let\'s start by grabbing all of the data in one table.  We have a table called <i>family_members</i> that is shown below.  In order to grab all of that data, please run the following command: <code>SELECT * FROM family_members;</code>'},
 
               {'name': 'WHERE ... Equals',
                'short_name': 'where_equals',
@@ -102,7 +102,7 @@ var levels = [{'name': 'SELECT *',
                           'values': [['Dave', 'human'],
                                      ['Mary', 'human'],
                                      ['Pickles', 'dog']]},
-               'prompt': '<code>SELECT *</code> grabs all fields (called columns) in a table. If we only wanted to see the name and age columns, we would type <code>SELECT name, age from family_members;</code>.<br/><br/>Can you return just the name and species columns?'},
+               'prompt': '<code>SELECT *</code> grabs all fields (called columns) in a table. If we only wanted to see the name and age columns, we would type<br/> <code>SELECT name, age from family_members;</code>.<br/><br/>Can you return just the name and species columns?'},
 
               {'name': 'LIMIT # of returned rows',
                'short_name': 'limit',
@@ -123,7 +123,8 @@ var levels = [{'name': 'SELECT *',
                'database_type': 'family',
                'answer': {'columns': ['COUNT(*)'],
                           'values': [[1]]},
-               'prompt': 'We can combine <code>COUNT(*)</code> with <code>WHERE</code>. For example, <code>SELECT COUNT(*) FROM family_members WHERE species = \'human\';</code> returns 2.<br/><br/>Can you return the number of rows in <i>family_members</i> where the species is a dog?'},
+               'prompt': 'We can combine <code>COUNT(*)</code> with <code>WHERE</code>.<br/><br/> For example, <code>SELECT COUNT(*) FROM family_members WHERE species = \'human\';</code> returns 2.<br/><br/>Can you return the number of rows in <i>family_members</i> where the species is a dog?'},
+
               {'name': 'NULL',
                'short_name': 'null',
                'database_type': 'family_null',
@@ -131,13 +132,24 @@ var levels = [{'name': 'SELECT *',
                           'values': [[1, 'Dave', 'male', 'human', 28, 'To Kill a Mockingbird'],
                                      [2, 'Mary', 'female', 'human', 27, 'Gone with the Wind']]},
                'prompt': 'Sometimes, in a given row, there is no value at all for a given column.  For example, a dog does not have a favorite book, so in that case there is no point in putting a value in the <i>favorite_book</i> column, and the value is <code>NULL</code>.  In order to find the rows where the value for a column is or is not <code>NULL</code>, you would use <code>IS NULL</code> or <code>IS NOT NULL</code>.<br/><br/>Can you return all of the rows of <i>family_members</i> where <i>favorite_book</i> is not null?'},
+
               {'name': 'Date',
                'short_name': 'date',
                'database_type': 'celebs_born',
                'answer': {'columns': ['id', 'name', 'birthdate'],
                           'values': [[2, 'Justin Timberlake', '1981-01-31'],
                                      [3, 'Taylor Swift', '1989-12-13']]},
-               'prompt': 'Sometimes, a column can contain a date value.  The first 4 digits represents the year, the next 2 digits represents the month, and the next 2 digits represents the day of the month.  For example, <code>1985-07-20</code> would mean July 20, 1985.<br/><br/>You can compare dates by using <code><</code> and <code>></code>.  For example, <code>SELECT * FROM celebs_born WHERE birthdate < \'1985-08-17\';</code> returns a list of celebrities that were born before August 17th, 1985.<br/><br/>Can you return a list of celebrities that were born after September 1st, 1980?'}
+               'prompt': 'Sometimes, a column can contain a date value.  The first 4 digits represents the year, the next 2 digits represents the month, and the next 2 digits represents the day of the month.  For example, <code>1985-07-20</code> would mean July 20, 1985.<br/><br/>You can compare dates by using <code><</code> and <code>></code>.  For example, <code>SELECT * FROM celebs_born WHERE birthdate < \'1985-08-17\';</code> returns a list of celebrities that were born before August 17th, 1985.<br/><br/>Can you return a list of celebrities that were born after September 1st, 1980?'},
+
+              {'name': 'Joins',
+               'short_name': 'joins',
+               'database_type': 'tv',
+               'answer': {'columns': ['id', 'name', 'id', 'character_id', 'actor_name'],
+                          'values': [[1, 'Doogie Howser', 4, 1, 'Neil Patrick Harris'],
+                                     [2, 'Barney Stinson', 3, 2, 'Neil Patrick Harris'],
+                                     [3, 'Lily Aldrin', 2, 3, 'Alyson Hannigan'],
+                                     [4, 'Willow Rosenberg', 1, 4, 'Alyson Hannigan']]},
+               'prompt': 'Previous lessons focused on single tables, but now we will look at querying multiple tables.<br/><br/>Different parts of information are stored in different databases, and in order to put them together, we use a <strong>join</strong>.<br/><br/>As you can see below, there are 3 tables: <i>character</i>, <i>character_tv_show</i>, and <i>character_actor</i>.  A join would take a row from multiple tables where some value is equal, and "join" them together.<br/><br/> The <i>character</i> table has a column called <i>id</i>, which creates an identifier that other tables can refer to.  Another table such as <i>character_tv_show</i> has a <i>character_id</i> column that refers to a particular row from the <i>character</i> table.<br/><br/>In order to pair each character with each TV show, you can write <br/><code>SELECT * FROM character JOIN character_tv_show ON character.id = character_tv_show.character_id;</code><br/><br/>Can you use a join in order to pair each television character with the actor that plays them?'}
               ];
 
 
@@ -148,32 +160,55 @@ var load_database = function(db_type) {
     case 'family':
       database = new sql.Database();
       sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, age int);";
-      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 28);"
-      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 27);"
-      sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 4);"
+      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 28);";
+      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 27);";
+      sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 4);";
       database.run(sqlstr);
       results = database.exec("SELECT * FROM family_members;");
-      $('#current-tables').html(table_from_results(results));
+      $('#current-tables').html('<div class="table-name">family_members</div>' + table_from_results(results));
       return database;
     case 'family_null':
       database = new sql.Database();
       sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, age int, favorite_book char);";
-      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 28, 'To Kill a Mockingbird');"
-      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 27, 'Gone with the Wind');"
-      sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 4, NULL);"
+      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 28, 'To Kill a Mockingbird');";
+      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 27, 'Gone with the Wind');";
+      sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 4, NULL);";
       database.run(sqlstr);
       results = database.exec("SELECT * FROM family_members;");
-      $('#current-tables').html(table_from_results(results));
+      $('#current-tables').html('<div class="table-name">family_members</div>' + table_from_results(results));
       return database;
     case 'celebs_born':
       database = new sql.Database();
       sqlstr = "CREATE TABLE celebs_born (id int, name char, birthdate date);";
-      sqlstr += "INSERT INTO celebs_born VALUES (1, 'Michael Jordan', '1963-02-17');"
-      sqlstr += "INSERT INTO celebs_born VALUES (2, 'Justin Timberlake', '1981-01-31');"
-      sqlstr += "INSERT INTO celebs_born VALUES (3, 'Taylor Swift', '1989-12-13');"
+      sqlstr += "INSERT INTO celebs_born VALUES (1, 'Michael Jordan', '1963-02-17');";
+      sqlstr += "INSERT INTO celebs_born VALUES (2, 'Justin Timberlake', '1981-01-31');";
+      sqlstr += "INSERT INTO celebs_born VALUES (3, 'Taylor Swift', '1989-12-13');";
       database.run(sqlstr);
       results = database.exec("SELECT * FROM celebs_born;");
-      $('#current-tables').html(table_from_results(results));
+      $('#current-tables').html('<div class="table-name">celebs_born</div>' + table_from_results(results));
+      return database;
+    case 'tv':
+      database = new sql.Database();
+      sqlstr = "CREATE TABLE character (id int, name char);";
+      sqlstr += "INSERT INTO character VALUES (1, 'Doogie Howser');";
+      sqlstr += "INSERT INTO character VALUES (2, 'Barney Stinson');";
+      sqlstr += "INSERT INTO character VALUES (3, 'Lily Aldrin');";
+      sqlstr += "INSERT INTO character VALUES (4, 'Willow Rosenberg');";
+      sqlstr += "CREATE TABLE character_tv_show (id int, character_id int, tv_show_name char);";
+      sqlstr += "INSERT INTO character_tv_show VALUES (1, 4, 'Buffy the Vampire Slayer');";
+      sqlstr += "INSERT INTO character_tv_show VALUES (2, 3, 'How I Met Your Mother');";
+      sqlstr += "INSERT INTO character_tv_show VALUES (3, 2, 'How I Met Your Mother');";
+      sqlstr += "INSERT INTO character_tv_show VALUES (4, 1, 'Doogie Howser, M.D.');";
+      sqlstr += "CREATE TABLE character_actor (id int, character_id int, actor_name char);";
+      sqlstr += "INSERT INTO character_actor VALUES (1, 4, 'Alyson Hannigan');";
+      sqlstr += "INSERT INTO character_actor VALUES (2, 3, 'Alyson Hannigan');";
+      sqlstr += "INSERT INTO character_actor VALUES (3, 2, 'Neil Patrick Harris');";
+      sqlstr += "INSERT INTO character_actor VALUES (4, 1, 'Neil Patrick Harris');";
+      database.run(sqlstr);
+      table_html = '<div class="table-name">character</div>' + table_from_results(database.exec("SELECT * FROM character;"));
+      table_html += '<div class="table-name">character_tv_show</div>' + table_from_results(database.exec("SELECT * FROM character_tv_show;"));
+      table_html += '<div class="table-name">character_actor</div>' + table_from_results(database.exec("SELECT * FROM character_actor;"));
+      $('#current-tables').html(table_html);
       return database;
   }
 };

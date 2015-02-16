@@ -44,17 +44,16 @@ th, td {
   font-weight: bold;
 }
 
-/* TODO: use bootstrap columns instead of hard coding 400px columns with 20px in between. */
 #prompt {
   float: left;
   padding-bottom: 20px;
-  width: 390px;
+  width: 490px;
 }
 
 #answer-correctness {
   float: left;
   font-weight: bold;
-  padding-left: 20px;
+  padding-bottom: 20px;
   width: 390px;
 }
 
@@ -80,6 +79,12 @@ th, td {
   float: left;
   padding-left: 20px;
   width: 390px;
+}
+
+.table-name {
+  font-style: italic;
+  font-weight: bold;
+  padding-top: 10px;
 }
 
 .expected-results-container {
