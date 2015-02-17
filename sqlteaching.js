@@ -163,20 +163,17 @@ var levels = [{'name': 'SELECT *',
 
 // Create the SQL database
 var load_database = function(db_type) {
-  var database, sqlstr, results;
+  var database, sqlstr, table_names;
+  database = new sql.Database();
   switch (db_type) {
     case 'family':
-      database = new sql.Database();
       sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, age int);";
       sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 28);";
       sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 27);";
       sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 4);";
-      database.run(sqlstr);
-      results = database.exec("SELECT * FROM family_members;");
-      $('#current-tables').html('<div class="table-name">family_members</div>' + table_from_results(results));
-      return database;
+      table_names = ['family_members'];
+      break;
     case 'friends_of_pickles':
-      database = new sql.Database();
       sqlstr = "CREATE TABLE friends_of_pickles (id int, name char, gender char, species char, age int);";
       sqlstr += "INSERT INTO friends_of_pickles VALUES (1, 'Dave', 'male', 'human', 28);";
       sqlstr += "INSERT INTO friends_of_pickles VALUES (2, 'Mary', 'female', 'human', 27);";
@@ -185,32 +182,23 @@ var load_database = function(db_type) {
       sqlstr += "INSERT INTO friends_of_pickles VALUES (5, 'Sneakers', 'male', 'dog', 2);";
       sqlstr += "INSERT INTO friends_of_pickles VALUES (6, 'Fry', 'male', 'cat', 4);";
       sqlstr += "INSERT INTO friends_of_pickles VALUES (7, 'Leela', 'female', 'cat', 6);";
-      database.run(sqlstr);
-      results = database.exec("SELECT * FROM friends_of_pickles;");
-      $('#current-tables').html('<div class="table-name">friends_of_pickles</div>' + table_from_results(results));
-      return database;
+      table_names = ['friends_of_pickles'];
+      break;
     case 'family_null':
-      database = new sql.Database();
       sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, age int, favorite_book char);";
       sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 28, 'To Kill a Mockingbird');";
       sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 27, 'Gone with the Wind');";
       sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 4, NULL);";
-      database.run(sqlstr);
-      results = database.exec("SELECT * FROM family_members;");
-      $('#current-tables').html('<div class="table-name">family_members</div>' + table_from_results(results));
-      return database;
+      table_names = ['family_members'];
+      break;
     case 'celebs_born':
-      database = new sql.Database();
       sqlstr = "CREATE TABLE celebs_born (id int, name char, birthdate date);";
       sqlstr += "INSERT INTO celebs_born VALUES (1, 'Michael Jordan', '1963-02-17');";
       sqlstr += "INSERT INTO celebs_born VALUES (2, 'Justin Timberlake', '1981-01-31');";
       sqlstr += "INSERT INTO celebs_born VALUES (3, 'Taylor Swift', '1989-12-13');";
-      database.run(sqlstr);
-      results = database.exec("SELECT * FROM celebs_born;");
-      $('#current-tables').html('<div class="table-name">celebs_born</div>' + table_from_results(results));
-      return database;
+      table_names = ['celebs_born'];
+      break;
     case 'tv':
-      database = new sql.Database();
       sqlstr = "CREATE TABLE character (id int, name char);";
       sqlstr += "INSERT INTO character VALUES (1, 'Doogie Howser');";
       sqlstr += "INSERT INTO character VALUES (2, 'Barney Stinson');";
@@ -226,13 +214,20 @@ var load_database = function(db_type) {
       sqlstr += "INSERT INTO character_actor VALUES (2, 3, 'Alyson Hannigan');";
       sqlstr += "INSERT INTO character_actor VALUES (3, 2, 'Neil Patrick Harris');";
       sqlstr += "INSERT INTO character_actor VALUES (4, 1, 'Neil Patrick Harris');";
-      database.run(sqlstr);
-      table_html = '<div class="table-name">character</div>' + table_from_results(database.exec("SELECT * FROM character;"));
-      table_html += '<div class="table-name">character_tv_show</div>' + table_from_results(database.exec("SELECT * FROM character_tv_show;"));
-      table_html += '<div class="table-name">character_actor</div>' + table_from_results(database.exec("SELECT * FROM character_actor;"));
-      $('#current-tables').html(table_html);
-      return database;
+      table_names = ['character', 'character_tv_show', 'character_actor'];
+      break;
   }
+
+  database.run(sqlstr);
+
+  var current_table_string = '';
+  for (var index in table_names) {
+    results = database.exec("SELECT * FROM " + table_names[index] + ";");
+    current_table_string += '<div class="table-name">' + table_names[index] + '</div>' + table_from_results(results);
+  }
+  $('#current-tables').html(current_table_string);
+
+  return database;
 };
 
 var current_level;
