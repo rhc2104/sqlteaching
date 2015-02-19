@@ -20,7 +20,7 @@ FILTERING
 
 SELECT - limiting the results
     Selecting particular columns
-        <code>SELECT *</code> grabs all fields (called columns) in a table. If WE only wanted to see the name and age columns, we would type <code>SELECT name, age from family_members</code>.<br/><br/>Can you return just the name and species columns?
+        <code>SELECT *</code> grabs all fields (called columns) in a table. If WE only wanted to see the name and age columns, we would type <code>SELECT name, age FROM family_members</code>.<br/><br/>Can you return just the name and species columns?
 
     LIMIT 2
         Often, tables contain millions of rows, and it can take a while to grab everything. If we just want to get a few examples of the data in a table, we may want to select only a few rows. If we want to select 2 rows, we would add <code>LIMIT 2</code> at the end of the query.<br/><br/> Can you return the first row (and all columns) of a table called menu_items?<br/><br/> Note: A SQL interface like SequelPro automatically limits the rows returned to the first 1000.
