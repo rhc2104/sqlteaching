@@ -63,45 +63,46 @@ $('#sql-link').click(function() {
   return false;
 });
 
-// Stores the prompts and answers for each level
+/**
+ * This variable has the prompts and answers for each level.
+ *
+ * It is an array of dictionaries.  In each dictionary, there are the following keys:
+ *  - name:          name shown on web page
+ *  - short_name:    identifier added to the URL
+ *  - database_type: is passed into the load_database function, in order to determine the tables loaded
+ *  - answer:        the query that the user writes must return data that matches this value
+ *  - prompt:        what is shown to the user in that web page
+ */
 var levels = [{'name': 'SELECT *',
                'short_name': 'select',
                'database_type': 'family',
-               'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
-                           'values': [[1, 'Dave', 'male', 'human', 28],
-                                      [2, 'Mary', 'female', 'human', 27],
-                                      [3, 'Pickles', 'male', 'dog', 4]]},
-               'prompt': 'In SQL, data is usually organized in various tables. For example, a sports team database might have the tables <i>teams</i>, <i>players</i>, and <i>games</i>. A wedding database might have tables <i>guests</i>, <i>vendors</i>, and <i>music_playlist</i>.<br/><br/>Imagine we have a table that stores family members with each member\'s name, age, species, and gender.<br/><br/>Let\'s start by grabbing all of the data in one table.  We have a table called <strong>family_members</strong> that is shown below.  In order to grab all of that data, please run the following command: <code>SELECT * FROM family_members;</code>'},
+               'answer': {'columns': ['id', 'name', 'gender', 'species', 'salary'],
+                          'values': [[1, 'Dave', 'male', 'human', 60000],
+                                     [2, 'Mary', 'female', 'human', 55000],
+                                     [3, 'Pickles', 'male', 'dog', 0]]},
+               'prompt': 'In SQL, data is usually organized in various tables. For example, a sports team database might have the tables <i>teams</i>, <i>players</i>, and <i>games</i>. A wedding database might have tables <i>guests</i>, <i>vendors</i>, and <i>music_playlist</i>.<br/><br/>Imagine we have a table that stores family members with each member\'s name, age, species, and gender.<br/><br/>Let\'s start by grabbing all of the data in one table.  We have a table called <strong>family_members</strong> that is shown below.  In order to grab all of that data, please run the following command: <code>SELECT * FROM family_members;</code><br/><br/>Note: This tutorial uses the <a href="http://en.wikipedia.org/wiki/SQLite" target="_blank">SQLite</a> database engine.  The different variants of SQL use slightly different syntax.'},
 
               {'name': 'WHERE ... Equals',
                'short_name': 'where_equals',
                'database_type': 'family',
-               'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
-                          'values': [[3, 'Pickles', 'male', 'dog', 4]]},
+               'answer': {'columns': ['id', 'name', 'gender', 'species', 'salary'],
+                          'values': [[3, 'Pickles', 'male', 'dog', 0]]},
                'prompt': 'In order to select particular rows from this table, we use the <code>WHERE</code> keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type <br/><code>SELECT * FROM family_members WHERE species = \'human\';</code><br/>  Note that the quotes have to be around the word human.<br/><br/>Can you run a query that returns all of the rows that refer to dogs?'},
 
               {'name': 'WHERE ... Greater than',
                'short_name': 'where_greater_than',
                'database_type': 'family',
-               'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
-                          'values': [[1, 'Dave', 'male', 'human', 28]]},
-               'prompt': 'If we want to only select family members based on a numerical field, we can also use the <code>WHERE</code> keyword.  For example, if we wanted to select family members older than 10, we would type <br/><code>SELECT * FROM family_members WHERE age > 10;</code><br/><br/>  Can you run return all rows of members with age greater than 27?'},
+               'answer': {'columns': ['id', 'name', 'gender', 'species', 'salary'],
+                          'values': [[1, 'Dave', 'male', 'human', 60000]]},
+               'prompt': 'If we want to only select family members based on a numerical field, we can also use the <code>WHERE</code> keyword.  For example, if we wanted to select family members with a salary, we would type <br/><code>SELECT * FROM family_members WHERE salary > 0;</code><br/><br/>  Can you run return all rows of family members whose salary is greater than 56000?'},
 
               {'name': 'WHERE ... Greater than or equal',
                'short_name': 'where_greater_than_or_equal',
                'database_type': 'family',
-               'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
-                          'values': [[2, 'Mary', 'female', 'human', 27],
-                                     [3, 'Pickles', 'male', 'dog', 4]]},
-               'prompt': 'SQL accepts various inequality symbols, including: <br/>= "equal to"<br/>> "greater than"<br/>< "less than"<br/>>= "greater than or equal to"<br/><= "less than or equal to"<br/><br/> Can you return all rows in <strong>family_members</strong> with an age less than or equal to 27?'},
-
-              {'name': 'AND',
-               'short_name': 'and',
-               'database_type': 'friends_of_pickles',
-               'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
-                          'values': [[4, 'Jumpy', 'female', 'dog', 3],
-                                     [5, 'Sneakers', 'male', 'dog', 2]]},
-               'prompt': 'In the <code>WHERE</code> part of a query, you can search for multiple attributes by using the <code>AND</code> keyword.  For example, if you wanted to find the friends of Pickles that are over the age of 4 and are cats, you would run: <br/><code>SELECT * FROM friends_of_pickles WHERE age > 4 and species = \'cat\';</code><br/><br/>Can you find all of Pickles\' friends that are dogs and under the age of 4?'},
+               'answer': {'columns': ['id', 'name', 'gender', 'species', 'salary'],
+                          'values': [[1, 'Dave', 'male', 'human', 60000],
+                                     [2, 'Mary', 'female', 'human', 55000]]},
+               'prompt': 'SQL accepts various inequality symbols, including: <br/>= "equal to"<br/>> "greater than"<br/>< "less than"<br/>>= "greater than or equal to"<br/><= "less than or equal to"<br/><br/> Can you return all rows in <strong>family_members</strong> with a salary that is greater or equal to 55000?'},
 
               {'name': 'SELECT specific columns',
                'short_name': 'select_columns',
@@ -112,33 +113,54 @@ var levels = [{'name': 'SELECT *',
                                      ['Pickles', 'dog']]},
                'prompt': '<code>SELECT *</code> grabs all fields (called columns) in a table. If we only wanted to see the name and age columns, we would type<br/> <code>SELECT name, age from family_members;</code>.<br/><br/>Can you return just the name and species columns?'},
 
+              {'name': 'AND',
+               'short_name': 'and',
+               'database_type': 'friends_of_pickles',
+               'answer': {'columns': ['id', 'name', 'gender', 'species', 'height_cm'],
+                          'values': [[6, 'Jumpy', 'female', 'dog', 3],
+                                     [7, 'Sneakers', 'male', 'dog', 2]]},
+               'prompt': 'In the <code>WHERE</code> part of a query, you can search for multiple attributes by using the <code>AND</code> keyword.  For example, if you wanted to find the friends of Pickles that are over 25cm in height and are cats, you would run: <br/><code>SELECT * FROM friends_of_pickles WHERE height_cm > 25 and species = \'cat\';</code><br/><br/>Can you find all of Pickles\' friends that are dogs and under the height of 45cm?'},
+
+              {'name': 'ORDER BY',
+               'short_name': 'order_by',
+               'database_type': 'friends_of_pickles',
+               'answer': {'columns': ['id', 'name', 'gender', 'species', 'height_cm'],
+                          'values': [[1, 'Dave', 'male', 'human', 180],
+                                     [2, 'Mary', 'female', 'human', 160],
+                                     [7, 'Sneakers', 'male', 'dog', 55],
+                                     [5, 'Odie', 'male', 'dog', 40],
+                                     [6, 'Jumpy', 'female', 'dog', 35],
+                                     [3, 'Fry', 'male', 'cat', 30],
+                                     [4, 'Leela', 'female', 'cat', 25]]},
+               'prompt': 'If you want to sort the rows by some kind of attribute, you can use the <code>ORDER BY</code> keyword.  For example, if you want to sort the <strong>friends_of_pickles</strong> by name, you would run: <code>SELECT * FROM friends_of_pickles ORDER by name;</code>.  That returns the names in ascending alphabetical order.<br/><br/> In order to put the names in descending order, you would add a <code>DESC</code> at the end of the query.<br/><br/> Can you run a query that sorts the <strong>friends_of_pickles</strong> by <i>height_cm</i> in descending order?'},
+
               {'name': 'LIMIT # of returned rows',
                'short_name': 'limit',
-               'database_type': 'family',
-               'answer': {'columns': ['id', 'name', 'gender', 'species', 'age'],
-                          'values': [[1, 'Dave', 'male', 'human', 28]]},
-               'prompt': 'Often, tables contain millions of rows, and it can take a while to grab everything. If we just want to see a few examples of the data in a table, we can select only a few rows. If we want to select 2 rows, we would add <code>LIMIT 2</code> at the end of the query.<br/><br/> Can you return just the first row (and all columns) of <strong>family_members</strong>?'},
+               'database_type': 'friends_of_pickles',
+               'answer': {'columns': ['id', 'name', 'gender', 'species', 'height_cm'],
+                          'values': [[1, 'Dave', 'male', 'human', 180]]},
+               'prompt': 'Often, tables contain millions of rows, and it can take a while to grab everything. If we just want to see a few examples of the data in a table, we can select the first few rows with the <code>LIMIT</code> keyword. If you use <code>ORDER BY</code>, you would get the first rows for that order. <br/><br/>If you wanted to see the two shortest <strong>friends_of_pickles</strong>, you would run: <code>SELECT * FROM friends_of_pickles ORDER BY height_cm LIMIT 2;</code><br/><br/> Can you return the row (and all columns) of the tallest <strong>friends_of_pickles</strong>?<br/><br/>Note: Some variants of SQL do not use the <code>LIMIT</code> keyword.'},
 
               {'name': 'COUNT(*)',
                'short_name': 'count',
-               'database_type': 'family',
+               'database_type': 'friends_of_pickles',
                'answer': {'columns': ['COUNT(*)'],
-                          'values': [[3]]},
-               'prompt': 'Another way to explore a table is to check the number of rows in it. For example, if we are querying a table <i>states_of_us</i> we\'d expect 50 rows, or 500 rows in a table called <i>fortune_500_companies</i>.<br/><br/><code>SELECT COUNT(*) FROM family_members;</code> returns the total number of rows in the table <strong>family_members</strong>. Try this for yourself.'},
+                          'values': [[7]]},
+               'prompt': 'Another way to explore a table is to check the number of rows in it. For example, if we are querying a table <i>states_of_us</i> we\'d expect 50 rows, or 500 rows in a table called <i>fortune_500_companies</i>.<br/><br/><code>SELECT COUNT(*) FROM friends_of_pickles;</code> returns the total number of rows in the table <strong>friends_of_pickles</strong>. Try this for yourself.'},
 
               {'name': 'COUNT(*) ... WHERE',
                'short_name': 'count_where',
-               'database_type': 'family',
+               'database_type': 'friends_of_pickles',
                'answer': {'columns': ['COUNT(*)'],
-                          'values': [[1]]},
-               'prompt': 'We can combine <code>COUNT(*)</code> with <code>WHERE</code>.<br/><br/> For example, <code>SELECT COUNT(*) FROM family_members WHERE species = \'human\';</code> returns 2.<br/><br/>Can you return the number of rows in <strong>family_members</strong> where the species is a dog?'},
+                          'values': [[3]]},
+               'prompt': 'We can combine <code>COUNT(*)</code> with <code>WHERE</code>.<br/><br/> For example, <code>SELECT COUNT(*) FROM friends_of_pickles WHERE species = \'human\';</code> returns 2.<br/><br/>Can you return the number of rows in <strong>friends_of_pickles</strong> where the species is a dog?'},
 
               {'name': 'NULL',
                'short_name': 'null',
                'database_type': 'family_null',
-               'answer': {'columns': ['id', 'name', 'gender', 'species', 'age', 'favorite_book'],
-                          'values': [[1, 'Dave', 'male', 'human', 28, 'To Kill a Mockingbird'],
-                                     [2, 'Mary', 'female', 'human', 27, 'Gone with the Wind']]},
+               'answer': {'columns': ['id', 'name', 'gender', 'species', 'salary', 'favorite_book'],
+                          'values': [[1, 'Dave', 'male', 'human', 60000, 'To Kill a Mockingbird'],
+                                     [2, 'Mary', 'female', 'human', 55000, 'Gone with the Wind']]},
                'prompt': 'Sometimes, in a given row, there is no value at all for a given column.  For example, a dog does not have a favorite book, so in that case there is no point in putting a value in the <i>favorite_book</i> column, and the value is <code>NULL</code>.  In order to find the rows where the value for a column is or is not <code>NULL</code>, you would use <code>IS NULL</code> or <code>IS NOT NULL</code>.<br/><br/>Can you return all of the rows of <strong>family_members</strong> where <i>favorite_book</i> is not null?'},
 
               {'name': 'Date',
@@ -167,28 +189,28 @@ var load_database = function(db_type) {
   database = new sql.Database();
   switch (db_type) {
     case 'family':
-      sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, age int);";
-      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 28);";
-      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 27);";
-      sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 4);";
+      sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, salary int);";
+      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 60000);";
+      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 55000);";
+      sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 0);";
       table_names = ['family_members'];
       break;
     case 'friends_of_pickles':
-      sqlstr = "CREATE TABLE friends_of_pickles (id int, name char, gender char, species char, age int);";
-      sqlstr += "INSERT INTO friends_of_pickles VALUES (1, 'Dave', 'male', 'human', 28);";
-      sqlstr += "INSERT INTO friends_of_pickles VALUES (2, 'Mary', 'female', 'human', 27);";
-      sqlstr += "INSERT INTO friends_of_pickles VALUES (3, 'Odie', 'male', 'dog', 5);";
-      sqlstr += "INSERT INTO friends_of_pickles VALUES (4, 'Jumpy', 'female', 'dog', 3);";
-      sqlstr += "INSERT INTO friends_of_pickles VALUES (5, 'Sneakers', 'male', 'dog', 2);";
-      sqlstr += "INSERT INTO friends_of_pickles VALUES (6, 'Fry', 'male', 'cat', 4);";
-      sqlstr += "INSERT INTO friends_of_pickles VALUES (7, 'Leela', 'female', 'cat', 6);";
+      sqlstr = "CREATE TABLE friends_of_pickles (id int, name char, gender char, species char, height_cm int);";
+      sqlstr += "INSERT INTO friends_of_pickles VALUES (1, 'Dave', 'male', 'human', 180);";
+      sqlstr += "INSERT INTO friends_of_pickles VALUES (2, 'Mary', 'female', 'human', 160);";
+      sqlstr += "INSERT INTO friends_of_pickles VALUES (3, 'Fry', 'male', 'cat', 30);";
+      sqlstr += "INSERT INTO friends_of_pickles VALUES (4, 'Leela', 'female', 'cat', 25);";
+      sqlstr += "INSERT INTO friends_of_pickles VALUES (5, 'Odie', 'male', 'dog', 40);";
+      sqlstr += "INSERT INTO friends_of_pickles VALUES (6, 'Jumpy', 'female', 'dog', 35);";
+      sqlstr += "INSERT INTO friends_of_pickles VALUES (7, 'Sneakers', 'male', 'dog', 55);";
       table_names = ['friends_of_pickles'];
       break;
     case 'family_null':
-      sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, age int, favorite_book char);";
-      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 28, 'To Kill a Mockingbird');";
-      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 27, 'Gone with the Wind');";
-      sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 4, NULL);";
+      sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, salary int, favorite_book char);";
+      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 60000, 'To Kill a Mockingbird');";
+      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 55000, 'Gone with the Wind');";
+      sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 0, NULL);";
       table_names = ['family_members'];
       break;
     case 'celebs_born':
