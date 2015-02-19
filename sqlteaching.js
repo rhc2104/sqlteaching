@@ -132,7 +132,7 @@ var levels = [{'name': 'SELECT *',
                                      [6, 'Jumpy', 'female', 'dog', 35],
                                      [3, 'Fry', 'male', 'cat', 30],
                                      [4, 'Leela', 'female', 'cat', 25]]},
-               'prompt': 'If you want to sort the rows by some kind of attribute, you can use the <code>ORDER BY</code> keyword.  For example, if you want to sort the <strong>friends_of_pickles</strong> by name, you would run: <code>SELECT * FROM friends_of_pickles ORDER by name;</code>.  That returns the names in ascending alphabetical order.<br/><br/> In order to put the names in descending order, you would add a <code>DESC</code> at the end of the query.<br/><br/> Can you run a query that sorts the <strong>friends_of_pickles</strong> by <i>height_cm</i> in descending order?'},
+               'prompt': 'If you want to sort the rows by some kind of attribute, you can use the <code>ORDER BY</code> keyword.  For example, if you want to sort the <strong>friends_of_pickles</strong> by name, you would run: <code>SELECT * FROM friends_of_pickles ORDER BY name;</code>.  That returns the names in ascending alphabetical order.<br/><br/> In order to put the names in descending order, you would add a <code>DESC</code> at the end of the query.<br/><br/> Can you run a query that sorts the <strong>friends_of_pickles</strong> by <i>height_cm</i> in descending order?'},
 
               {'name': 'LIMIT # of returned rows',
                'short_name': 'limit',
