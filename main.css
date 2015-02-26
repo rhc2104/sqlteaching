@@ -62,7 +62,8 @@ th, td {
 }
 
 #sql-link {
-  margin-bottom: 24px;
+  margin-bottom: 34px;
+  margin-top: 10px;
 }
 
 /* I'm sure there is a better Bootstrap way of doing this */
