@@ -127,7 +127,7 @@ var levels = [{'name': 'SELECT *',
                'answer': {'columns': ['id', 'name', 'gender', 'species', 'height_cm'],
                           'values': [[1, 'Dave', 'male', 'human', 180],
                                      [2, 'Mary', 'female', 'human', 160]]},
-               'prompt': 'Using the <code>WHERE</code> clause, we can find rows where a value is in a list of several possible values. <br/><br/><code>SELECT * FROM friends_of_pickles WHERE species IN (\'cat\', \'human\');</code> would return the <strong>friends_of_pickles</strong> that are either a cat or a human. <br/><br/>Can you find the rows that would return the rows that are <strong>not</strong> cats or dogs? <br/><br/>To find rows that are not in a list, you use <code>NOT IN</code> instead of <code>IN</code>.'},
+               'prompt': 'Using the <code>WHERE</code> clause, we can find rows where a value is in a list of several possible values. <br/><br/><code>SELECT * FROM friends_of_pickles WHERE species IN (\'cat\', \'human\');</code> would return the <strong>friends_of_pickles</strong> that are either a cat or a human. <br/><br/>Can you run a query that would return the rows that are <strong>not</strong> cats or dogs? <br/><br/>To find rows that are not in a list, you use <code>NOT IN</code> instead of <code>IN</code>.'},
 
               {'name': 'ORDER BY',
                'short_name': 'order_by',
