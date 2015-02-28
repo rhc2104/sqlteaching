@@ -65,8 +65,7 @@ th, td {
 }
 
 #sql-link {
-  margin-bottom: 34px;
-  margin-top: 10px;
+  margin: 10px 0 34px 5px;
 }
 
 /* I'm sure there is a better Bootstrap way of doing this */
@@ -77,6 +76,10 @@ th, td {
 .sql-input-container {
   float: left;
   width: 390px;
+}
+
+#sql-input {
+  width: 290px;
 }
 
 .results-container {
