@@ -187,7 +187,17 @@ var levels = [{'name': 'SELECT *',
                                      ['Barney Stinson', 'Neil Patrick Harris'],
                                      ['Lily Aldrin', 'Alyson Hannigan'],
                                      ['Willow Rosenberg', 'Alyson Hannigan']]},
-               'prompt': 'Different parts of information can be stored in different tables, and in order to put them together, we use <code>JOIN ... ON</code>. Joining tables gets to the core of SQL functionality, but it can get very complicated. We will start with a simple example.<br/><br/>As you can see below, there are 3 tables:<br/><strong>character</strong>: Each character is a row and is represented by a unique identifier (<i>id</i>), e.g. 1 is Doogie Howser<br/><strong>character_tv_show:</strong> For each character, which show is he/she in?<br/><strong>character_actor</strong>: For each character, who is the actor?<br/><br/>See that in <strong>character_tv_show</strong>, instead of storing both the character and TV show names (e.g. Willow Rosenberg and Buffy the Vampire Slayer), it stores the <i>character_id</i> as a substitute for the character name. This <i>character_id</i> refers to the matching <i>id</i> row from the <strong>character</strong> table. <br/><br/>This is done so data is not duplicated.  For example, if the name of a character were to change, you would only have to change the name of the character in one row. <br/><br/>This allows us to "join" the tables together "on" that reference/common column. <br/><br/>To get each character name with his/her TV show name, we can write <br/><code>SELECT character.name, character_tv_show.tv_show_name<br/> FROM character <br/>JOIN character_tv_show<br/> ON character.id = character_tv_show.character_id;</code><br/>This puts together every row in <strong>character</strong> with the corresponding row in <strong>character_tv_show</strong>, or vice versa.<br/><br/>Note:<br/>- We use the syntax <strong>table_name</strong>.<i>column_name</i>. If we only used <i>column_name</i>, SQL might incorrectly assume which table it is coming from.<br/> - The example query above is written over multiple lines for readability, but that does not affect the query. <br/><br/>Can you use a join to pair each  character name with the actor who plays them?  Select the columns: <strong>character</strong>.<i>name</i>, <strong>character_actor</strong>.<i>actor_name</i>'}
+               'prompt': 'Different parts of information can be stored in different tables, and in order to put them together, we use <code>JOIN ... ON</code>. Joining tables gets to the core of SQL functionality, but it can get very complicated. We will start with a simple example.<br/><br/>As you can see below, there are 3 tables:<br/><strong>character</strong>: Each character is a row and is represented by a unique identifier (<i>id</i>), e.g. 1 is Doogie Howser<br/><strong>character_tv_show:</strong> For each character, which show is he/she in?<br/><strong>character_actor</strong>: For each character, who is the actor?<br/><br/>See that in <strong>character_tv_show</strong>, instead of storing both the character and TV show names (e.g. Willow Rosenberg and Buffy the Vampire Slayer), it stores the <i>character_id</i> as a substitute for the character name. This <i>character_id</i> refers to the matching <i>id</i> row from the <strong>character</strong> table. <br/><br/>This is done so data is not duplicated.  For example, if the name of a character were to change, you would only have to change the name of the character in one row. <br/><br/>This allows us to "join" the tables together "on" that reference/common column. <br/><br/>To get each character name with his/her TV show name, we can write <br/><code>SELECT character.name, character_tv_show.tv_show_name<br/> FROM character <br/>JOIN character_tv_show<br/> ON character.id = character_tv_show.character_id;</code><br/>This puts together every row in <strong>character</strong> with the corresponding row in <strong>character_tv_show</strong>, or vice versa.<br/><br/>Note:<br/>- We use the syntax <strong>table_name</strong>.<i>column_name</i>. If we only used <i>column_name</i>, SQL might incorrectly assume which table it is coming from.<br/> - The example query above is written over multiple lines for readability, but that does not affect the query. <br/><br/>Can you use a join to pair each character name with the actor who plays them?  Select the columns: <strong>character</strong>.<i>name</i>, <strong>character_actor</strong>.<i>actor_name</i>'},
+
+              {'name': 'Multiple Joins',
+               'short_name': 'multiple_joins',
+               'database_type': 'tv_normalized',
+               'answer': {'columns': ['name', 'name'],
+                          'values': [['Doogie Howser', 'Neil Patrick Harris'],
+                                     ['Barney Stinson', 'Neil Patrick Harris'],
+                                     ['Lily Aldrin', 'Alyson Hannigan'],
+                                     ['Willow Rosenberg', 'Alyson Hannigan']]},
+               'prompt': 'In the previous exercise, we explained that TV show character names were not duplicated, so if the name of a character were to change, you would only have to change the name of the character in one row. <br/><br/>However, the previous example was a bit artificial because the TV show names and actor names were duplicated. <br/><br/>In order to not duplicate any names, we need to have more tables, and use multiple joins. <br/><br/>We have tables for characters, TV shows, and actors.  Those tables represent things (also known as entities). <br/><br/>In addition those tables, we have the relationship tables <strong>character_tv_show</strong> and <strong>character_actor</strong>, which capture the relationship between two entities. <br/><br/>This is a flexible way of capturing the relationship between different entities, as some TV show characters might be in multiple shows, and some actors are known for playing multiple characters. <br/><br/>To get each character name with his/her TV show name, we can write <br/><code>SELECT character.name, tv_show.name<br/> FROM character <br/>JOIN character_tv_show<br/> ON character.id = character_tv_show.character_id<br/> JOIN tv_show<br/> ON character_tv_show.tv_show_id = tv_show.id;</code><br/><br/>Can you use two joins to pair each character name with the actor who plays them?  Select the columns: <strong>character</strong>.<i>name</i>, <strong>actor</strong>.<i>name</i>'}
               ];
 
 
@@ -245,6 +255,31 @@ var load_database = function(db_type) {
       sqlstr += "INSERT INTO character_actor VALUES (3, 2, 'Neil Patrick Harris');";
       sqlstr += "INSERT INTO character_actor VALUES (4, 1, 'Neil Patrick Harris');";
       table_names = ['character', 'character_tv_show', 'character_actor'];
+      break;
+    case 'tv_normalized':
+      sqlstr = "CREATE TABLE character (id int, name char);";
+      sqlstr += "INSERT INTO character VALUES (1, 'Doogie Howser');";
+      sqlstr += "INSERT INTO character VALUES (2, 'Barney Stinson');";
+      sqlstr += "INSERT INTO character VALUES (3, 'Lily Aldrin');";
+      sqlstr += "INSERT INTO character VALUES (4, 'Willow Rosenberg');";
+      sqlstr += "CREATE TABLE tv_show (id int, name char);";
+      sqlstr += "INSERT INTO tv_show VALUES (1, 'Buffy the Vampire Slayer');";
+      sqlstr += "INSERT INTO tv_show VALUES (2, 'How I Met Your Mother');";
+      sqlstr += "INSERT INTO tv_show VALUES (3, 'Doogie Howser, M.D.');";
+      sqlstr += "CREATE TABLE character_tv_show (id int, character_id int, tv_show_id int);";
+      sqlstr += "INSERT INTO character_tv_show VALUES (1, 1, 3);";
+      sqlstr += "INSERT INTO character_tv_show VALUES (2, 2, 2);";
+      sqlstr += "INSERT INTO character_tv_show VALUES (3, 3, 2);";
+      sqlstr += "INSERT INTO character_tv_show VALUES (4, 4, 1);";
+      sqlstr += "CREATE TABLE actor (id int, name char);";
+      sqlstr += "INSERT INTO actor VALUES (1, 'Alyson Hannigan');";
+      sqlstr += "INSERT INTO actor VALUES (2, 'Neil Patrick Harris');";
+      sqlstr += "CREATE TABLE character_actor (id int, character_id int, actor_id int);";
+      sqlstr += "INSERT INTO character_actor VALUES (1, 1, 2);";
+      sqlstr += "INSERT INTO character_actor VALUES (2, 2, 2);";
+      sqlstr += "INSERT INTO character_actor VALUES (3, 3, 1);";
+      sqlstr += "INSERT INTO character_actor VALUES (4, 4, 1);";
+      table_names = ['character', 'tv_show', 'character_tv_show', 'actor', 'character_actor'];
       break;
   }
 
