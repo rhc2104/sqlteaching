@@ -49,11 +49,15 @@ var show_is_correct = function(is_correct) {
 
 // Onclick handler for when you click "Run SQL"
 $('#sql-link').click(function() {
-  var answer = levels[current_level - 1]['answer'];
+  var answer = levels[current_level-1]['answer'];
   try {
     var results = db.exec($('#sql-input').val());
     $('#results').html(table_from_results(results));
-    show_is_correct(grade_results(results, answer));
+    var is_correct = grade_results(results, answer);
+    show_is_correct(is_correct);
+    if (is_correct) {
+      localStorage.setItem('completed-' + levels[current_level-1]['short_name'], 'correct');
+    }
   } catch (err) {
     $('#results').html('');
     show_is_correct(false);
@@ -334,7 +338,12 @@ var load_level = function() {
     if (index == (current_level - 1)) {
       menu_html += '<strong>';
     }
-    menu_html += '<a class="menu-link" href="#!' + levels[index]['short_name'] + '">' + levels[index]['name'] + '</a>';
+    menu_html += '<div class="menu-item">';
+    if (localStorage.getItem('completed-' + levels[index]['short_name'])) {
+      menu_html += '<span class="glyphicon glyphicon-ok"></span>';
+    }
+    menu_html += '<a href="#!' + levels[index]['short_name'] + '">' + levels[index]['name'] + '</a>';
+    menu_html += '</div>';
     if (index == (current_level - 1)) {
       menu_html += '</strong>';
     }

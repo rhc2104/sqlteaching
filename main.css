@@ -16,9 +16,12 @@ th, td {
   width: 184px;
 }
 
-.menu-link {
-  display: block;
-  padding-bottom: 10px;
+.glyphicon {
+  padding-right: 5px;
+}
+
+.menu-item {
+  padding-bottom: 15px;
 }
 
 .not-menu-container {
