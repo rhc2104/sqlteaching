@@ -167,6 +167,13 @@ var levels = [{'name': 'SELECT *',
                           'values': [[3]]},
                'prompt': 'We can combine <code>COUNT(*)</code> with <code>WHERE</code>.<br/><br/> For example, <code>SELECT COUNT(*) FROM friends_of_pickles WHERE species = \'human\';</code> returns 2.<br/><br/>Can you return the number of rows in <strong>friends_of_pickles</strong> where the species is a dog?'},
 
+              {'name': 'SUM',
+               'short_name': 'sum',
+               'database_type': 'family_and_legs',
+               'answer': {'columns': ['SUM(salary)'],
+                          'values': [[115000]]},
+               'prompt': 'We can use the <code>SUM</code> keyword in order to find the sum of a given value. <br/><br/>For example, running <code>SELECT SUM(num_legs) FROM family_members;</code> returns the total number of legs in the family. <br/><br/>Can you find the total salary made by this family?'},
+
               {'name': 'NULL',
                'short_name': 'null',
                'database_type': 'family_null',
@@ -227,6 +234,13 @@ var load_database = function(db_type) {
       sqlstr += "INSERT INTO friends_of_pickles VALUES (6, 'Jumpy', 'female', 'dog', 35);";
       sqlstr += "INSERT INTO friends_of_pickles VALUES (7, 'Sneakers', 'male', 'dog', 55);";
       table_names = ['friends_of_pickles'];
+      break;
+    case 'family_and_legs':
+      sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, salary int, num_legs int);";
+      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 60000, 2);";
+      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 55000, 2);";
+      sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 0, 4);";
+      table_names = ['family_members'];
       break;
     case 'family_null':
       sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, salary int, favorite_book char);";
