@@ -179,7 +179,7 @@ var levels = [{'name': 'SELECT *',
                'database_type': 'family_and_legs',
                'answer': {'columns': ['AVG(salary)'],
                           'values': [[38333.333333333336]]},
-               'prompt': 'We can use the <code>AVG</code> keyword in order to find the average of a given value. <br/><br/>For example, running <code>SELECT AVG(num_legs) FROM family_members;</code> returns the average number of legs in the family. <br/><br/>Can you find the average salary made by this family? <br/><br/>Note: <br/>- Because of the way computers handle numbers, averages will not always be completely exact.<br/>- Besides <code>COUNT</code>, <code>SUM</code>, and <code>AVG</code>, there are also other aggregate functions such as <code>MIN</code> and <code>MAX</code>.  For more info on SQLite\'s aggregate functions, <a href="https://www.sqlite.org/lang_aggfunc.html" target="_blank">click here</a>.'},
+               'prompt': 'We can use the <code>AVG</code> keyword in order to find the average of a given value. <br/><br/>For example, running <code>SELECT AVG(num_legs) FROM family_members;</code> returns the average number of legs of each family member. <br/><br/>Can you find the average salary made by each family member? <br/><br/>Note: <br/>- Because of the way computers handle numbers, averages will not always be completely exact.<br/>- Besides <code>COUNT</code>, <code>SUM</code>, and <code>AVG</code>, there are also other aggregate functions such as <code>MIN</code> and <code>MAX</code>.  For more info on SQLite\'s aggregate functions, <a href="https://www.sqlite.org/lang_aggfunc.html" target="_blank">click here</a>.'},
 
               {'name': 'NULL',
                'short_name': 'null',
