@@ -174,6 +174,13 @@ var levels = [{'name': 'SELECT *',
                           'values': [[115000]]},
                'prompt': 'We can use the <code>SUM</code> keyword in order to find the sum of a given value. <br/><br/>For example, running <code>SELECT SUM(num_legs) FROM family_members;</code> returns the total number of legs in the family. <br/><br/>Can you find the total salary made by this family?'},
 
+              {'name': 'AVG',
+               'short_name': 'avg',
+               'database_type': 'family_and_legs',
+               'answer': {'columns': ['AVG(salary)'],
+                          'values': [[38333.333333333336]]},
+               'prompt': 'We can use the <code>AVG</code> keyword in order to find the average of a given value. <br/><br/>For example, running <code>SELECT AVG(num_legs) FROM family_members;</code> returns the average number of legs in the family. <br/><br/>Can you find the average salary made by this family? <br/><br/>Note: <br/>- Because of the way computers handle numbers, averages will not always be completely exact.<br/>- Besides <code>COUNT</code>, <code>SUM</code>, and <code>AVG</code>, there are also other aggregate functions such as <code>MIN</code> and <code>MAX</code>.  For more info on SQLite\'s aggregate functions, <a href="https://www.sqlite.org/lang_aggfunc.html" target="_blank">click here</a>.'},
+
               {'name': 'NULL',
                'short_name': 'null',
                'database_type': 'family_null',
