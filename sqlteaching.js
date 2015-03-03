@@ -188,12 +188,13 @@ var levels = [{'name': 'SELECT *',
                           'values': [[60000]]},
                'prompt': 'We can use the <code>MAX</code> and <code>MIN</code> to find the maximum or minimum value of a table. <br/><br/>To find the least number of legs in a family member, you can run <br/><code>SELECT MIN(num_legs) FROM family_members;</code> <br/><br/>Can you find the highest salary that a family member makes?'},
 
+              // TODO: Ensure that a nested query is actually used
               {'name': 'Nested queries',
                'short_name': 'nested',
                'database_type': 'family_and_legs',
                'answer': {'columns': ['id', 'name', 'gender', 'species', 'salary', 'num_legs'],
                           'values': [[1, 'Dave', 'male', 'human', 60000, 2]]},
-               'prompt': 'In SQL, you can put a SQL query inside another SQL query. <br/><br/>For example, to find the family members with the least number of legs, <br/> you can run: <br/><code>SELECT * FROM family_members WHERE num_legs = (SELECT MIN(num_legs) FROM family_members);</code> <br/><br/> The <code>SELECT</code> query inside the parentheses is executed first, and returns the minimum number of legs.  Then, that value (2) is used in the outside query, to find all family members that have 2 legs. <br/><br/> Can you return the family members that have the maximum salary?'},
+               'prompt': 'In SQL, you can put a SQL query inside another SQL query. <br/><br/>For example, to find the family members with the least number of legs, <br/> you can run: <br/><code>SELECT * FROM family_members WHERE num_legs = (SELECT MIN(num_legs) FROM family_members);</code> <br/><br/> The <code>SELECT</code> query inside the parentheses is executed first, and returns the minimum number of legs.  Then, that value (2) is used in the outside query, to find all family members that have 2 legs. <br/><br/> Can you return the family members that have the highest salary?'},
 
               {'name': 'NULL',
                'short_name': 'null',
