@@ -188,6 +188,15 @@ var levels = [{'name': 'SELECT *',
                           'values': [[60000]]},
                'prompt': 'We can use the <code>MAX</code> and <code>MIN</code> to find the maximum or minimum value of a table. <br/><br/>To find the least number of legs in a family member, you can run <br/><code>SELECT MIN(num_legs) FROM family_members;</code> <br/><br/>Can you find the highest salary that a family member makes?'},
 
+              {'name': 'GROUP BY',
+               'short_name': 'group_by',
+               'database_type': 'friends_of_pickles',
+               'answer': {'columns': ['MAX(height_cm)', 'species'],
+                          'values': [[30, 'cat'],
+                                     [55, 'dog'],
+                                     [180, 'human']]},
+               'prompt': 'You can use aggregate functions such as <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MAX</code>, and <code>MIN</code> with the <code>GROUP BY</code> clause. <br/><br/> When you <code>GROUP BY</code> something, you split the table into different piles based on the value of each row. <br/><br/>For example, <br/><code>SELECT COUNT(*), species FROM friends_of_pickles GROUP BY species;</code> would return the number of rows for each species. <br/><br/> Can you return the tallest height for each species?'},
+
               // TODO: Ensure that a nested query is actually used
               {'name': 'Nested queries',
                'short_name': 'nested',
