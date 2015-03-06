@@ -55,22 +55,27 @@ $('#sql-link').click(function() {
   var correct_answer = cur_level['answer'];
   try {
     var results = db.exec($('#sql-input').val());
-    $('#results').html(table_from_results(results));
-    var is_correct = grade_results(results, correct_answer);
-    if (is_correct) {
-      // The validation function is optional, but if it exists and fails, we show a custom error message.
-      if (!cur_level['validation'] || cur_level['validation']()) {
-        show_is_correct(true, null);
-        localStorage.setItem('completed-' + cur_level['short_name'], 'correct');
-      } else {
-        show_is_correct(false, cur_level['custom_error_message']);
-      }
+    if (results.length == 0) {
+      $('#results').html('');
+      show_is_correct(false, 'The query you have entered did not return any results.  Please try again.');
     } else {
-      show_is_correct(false, null);
+      $('#results').html(table_from_results(results));
+      var is_correct = grade_results(results, correct_answer);
+      if (is_correct) {
+        // The validation function is optional, but if it exists and fails, we show a custom error message.
+        if (!cur_level['validation'] || cur_level['validation']()) {
+          show_is_correct(true, null);
+          localStorage.setItem('completed-' + cur_level['short_name'], 'correct');
+        } else {
+          show_is_correct(false, cur_level['custom_error_message']);
+        }
+      } else {
+        show_is_correct(false, 'The query you have entered did not return the proper results.  Please try again.');
+      }
     }
   } catch (err) {
     $('#results').html('');
-    show_is_correct(false, null);
+    show_is_correct(false, 'The query you have entered is not valid.  Please try again.');
   }
   $('.expected-results-container').show();
   $('#expected-results').html(table_from_results([correct_answer]));
