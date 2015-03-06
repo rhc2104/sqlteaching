@@ -32,7 +32,7 @@ var grade_results = function(results, correct_answer) {
     JSON.stringify(results[0].values) == JSON.stringify(correct_answer.values);
 }
 
-var show_is_correct = function(is_correct) {
+var show_is_correct = function(is_correct, custom_error_message) {
   if (is_correct) {
     is_correct_html = 'Congrats!  That is correct!<br/>';
     if (current_level < levels.length) {
@@ -41,6 +41,8 @@ var show_is_correct = function(is_correct) {
       is_correct_html += 'That is currently the end of the tutorial.  Please check back later for more!';
     }
     $('#answer-correctness').html(is_correct_html);
+  } else if (custom_error_message) {
+    $('#answer-correctness').text(custom_error_message);
   } else {
     $('#answer-correctness').text('That was incorrect.  Please try again.');
   }
@@ -49,21 +51,29 @@ var show_is_correct = function(is_correct) {
 
 // Onclick handler for when you click "Run SQL"
 $('#sql-link').click(function() {
-  var answer = levels[current_level-1]['answer'];
+  var cur_level = levels[current_level-1];
+  var correct_answer = cur_level['answer'];
   try {
     var results = db.exec($('#sql-input').val());
     $('#results').html(table_from_results(results));
-    var is_correct = grade_results(results, answer);
-    show_is_correct(is_correct);
+    var is_correct = grade_results(results, correct_answer);
     if (is_correct) {
-      localStorage.setItem('completed-' + levels[current_level-1]['short_name'], 'correct');
+      // The validation function is optional, but if it exists and fails, we show a custom error message.
+      if (!cur_level['validation'] || cur_level['validation']()) {
+        show_is_correct(true, null);
+        localStorage.setItem('completed-' + cur_level['short_name'], 'correct');
+      } else {
+        show_is_correct(false, cur_level['custom_error_message']);
+      }
+    } else {
+      show_is_correct(false, null);
     }
   } catch (err) {
     $('#results').html('');
-    show_is_correct(false);
+    show_is_correct(false, null);
   }
   $('.expected-results-container').show();
-  $('#expected-results').html(table_from_results([answer]));
+  $('#expected-results').html(table_from_results([correct_answer]));
   return false;
 });
 
@@ -76,6 +86,10 @@ $('#sql-link').click(function() {
  *  - database_type: is passed into the load_database function, in order to determine the tables loaded
  *  - answer:        the query that the user writes must return data that matches this value
  *  - prompt:        what is shown to the user in that web page
+ *
+ * And the following keys are optional:
+ *  - validation:           Extra validation on top of the data returned being correct
+ *  - custom_error_message: If the validation fails, show this error message to the user
  */
 var levels = [{'name': 'SELECT *',
                'short_name': 'select',
@@ -197,10 +211,11 @@ var levels = [{'name': 'SELECT *',
                                      [180, 'human']]},
                'prompt': 'You can use aggregate functions such as <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MAX</code>, and <code>MIN</code> with the <code>GROUP BY</code> clause. <br/><br/> When you <code>GROUP BY</code> something, you split the table into different piles based on the value of each row. <br/><br/>For example, <br/><code>SELECT COUNT(*), species FROM friends_of_pickles GROUP BY species;</code> would return the number of rows for each species. <br/><br/> Can you return the tallest height for each species?'},
 
-              // TODO: Ensure that a nested query is actually used
               {'name': 'Nested queries',
                'short_name': 'nested',
                'database_type': 'family_and_legs',
+               'validation': function() {var ans = $('#sql-input').val(); return ans.indexOf('(') > -1 && ans.indexOf(')') > -1;},
+               'custom_error_message': 'You must use a nested query in your answer.',
                'answer': {'columns': ['id', 'name', 'gender', 'species', 'salary', 'num_legs'],
                           'values': [[1, 'Dave', 'male', 'human', 60000, 2]]},
                'prompt': 'In SQL, you can put a SQL query inside another SQL query. <br/><br/>For example, to find the family members with the least number of legs, <br/> you can run: <br/><code>SELECT * FROM family_members WHERE num_legs = (SELECT MIN(num_legs) FROM family_members);</code> <br/><br/> The <code>SELECT</code> query inside the parentheses is executed first, and returns the minimum number of legs.  Then, that value (2) is used in the outside query, to find all family members that have 2 legs. <br/><br/> Can you return the family members that have the highest salary?'},

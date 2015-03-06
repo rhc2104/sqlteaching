@@ -17,3 +17,7 @@ It is an array of dictionaries (the order of the levels).  In each dictionary, t
  - database_type: is passed into the load_database function, in order to determine the tables loaded
  - answer:        the query that the user writes must return data that matches this value
  - prompt:        what is shown to the user in that web page
+
+And the following keys are optional:
+ - validation:           Extra validation on top of the data returned being correct
+ - custom_error_message: If the validation fails, show this error message to the user
