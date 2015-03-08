@@ -141,7 +141,7 @@ var levels = [{'name': 'SELECT *',
                'database_type': 'friends_of_pickles',
                'answer': {'columns': ['id', 'name', 'gender', 'species', 'height_cm'],
                           'values': [[5, 'Odie', 'male', 'dog', 40],
-                                     [6, 'Jumpy', 'female', 'dog', 35]]},
+                                     [6, 'Jumpy', 'male', 'dog', 35]]},
                'prompt': 'In the <code>WHERE</code> part of a query, you can search for multiple attributes by using the <code>AND</code> keyword.  For example, if you wanted to find the friends of Pickles that are over 25cm in height and are cats, you would run: <br/><code>SELECT * FROM friends_of_pickles WHERE height_cm > 25 AND species = \'cat\';</code><br/><br/>Can you find all of Pickles\' friends that are dogs and under the height of 45cm?'},
 
               {'name': 'IN',
@@ -152,6 +152,13 @@ var levels = [{'name': 'SELECT *',
                                      [2, 'Mary', 'female', 'human', 160]]},
                'prompt': 'Using the <code>WHERE</code> clause, we can find rows where a value is in a list of several possible values. <br/><br/><code>SELECT * FROM friends_of_pickles WHERE species IN (\'cat\', \'human\');</code> would return the <strong>friends_of_pickles</strong> that are either a cat or a human. <br/><br/>Can you run a query that would return the rows that are <strong>not</strong> cats or dogs? <br/><br/>To find rows that are not in a list, you use <code>NOT IN</code> instead of <code>IN</code>.'},
 
+              {'name': 'DISTINCT',
+               'short_name': 'distinct',
+               'database_type': 'friends_of_pickles',
+               'answer': {'columns': ['species'],
+                          'values': [['human'], ['dog']]},
+               'prompt': 'By putting <code>DISTINCT</code> after <code>SELECT</code>, you do not return duplicates. <br/><br/>For example, if you run <br/> <code>SELECT DISTINCT gender, species FROM friends_of_pickles WHERE height_cm < 100;</code>, you will get the gender/species combinations of the animals less than 100cm in height. <br/><br/>Note that even though there are multiple male dogs under that height, we only see one row that returns "male" and "dog".<br/><br/> Can you return a list of the distinct species of animals greater than 50cm in height?'},
+
               {'name': 'ORDER BY',
                'short_name': 'order_by',
                'database_type': 'friends_of_pickles',
@@ -160,7 +167,7 @@ var levels = [{'name': 'SELECT *',
                                      [2, 'Mary', 'female', 'human', 160],
                                      [7, 'Sneakers', 'male', 'dog', 55],
                                      [5, 'Odie', 'male', 'dog', 40],
-                                     [6, 'Jumpy', 'female', 'dog', 35],
+                                     [6, 'Jumpy', 'male', 'dog', 35],
                                      [3, 'Fry', 'male', 'cat', 30],
                                      [4, 'Leela', 'female', 'cat', 25]]},
                'prompt': 'If you want to sort the rows by some kind of attribute, you can use the <code>ORDER BY</code> keyword.  For example, if you want to sort the <strong>friends_of_pickles</strong> by name, you would run: <code>SELECT * FROM friends_of_pickles ORDER BY name;</code>.  That returns the names in ascending alphabetical order.<br/><br/> In order to put the names in descending order, you would add a <code>DESC</code> at the end of the query.<br/><br/> Can you run a query that sorts the <strong>friends_of_pickles</strong> by <i>height_cm</i> in descending order?'},
@@ -282,7 +289,7 @@ var load_database = function(db_type) {
       sqlstr += "INSERT INTO friends_of_pickles VALUES (3, 'Fry', 'male', 'cat', 30);";
       sqlstr += "INSERT INTO friends_of_pickles VALUES (4, 'Leela', 'female', 'cat', 25);";
       sqlstr += "INSERT INTO friends_of_pickles VALUES (5, 'Odie', 'male', 'dog', 40);";
-      sqlstr += "INSERT INTO friends_of_pickles VALUES (6, 'Jumpy', 'female', 'dog', 35);";
+      sqlstr += "INSERT INTO friends_of_pickles VALUES (6, 'Jumpy', 'male', 'dog', 35);";
       sqlstr += "INSERT INTO friends_of_pickles VALUES (7, 'Sneakers', 'male', 'dog', 55);";
       table_names = ['friends_of_pickles'];
       break;
