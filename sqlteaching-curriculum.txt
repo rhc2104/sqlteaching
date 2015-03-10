@@ -1,5 +1,5 @@
 Intro
-    In SQL, data is usually organized in various tables. For example, a sports team database might have tables <i>teams</i>, <i>players</i>, and <i>games</i>. A wedding database might have tables guests, vendors, and music_playlist.
+    In SQL, data is usually organized in various tables. For example, a sports team database might have tables <em>teams</em>, <em>players</em>, and <em>games</em>. A wedding database might have tables guests, vendors, and music_playlist.
     <br/><br/>
     Imagine we have a table that stores family members with each member's name, age, species, and gender.
 
@@ -27,20 +27,20 @@ SELECT - limiting the results
 
 AGGREGATION
     COUNT(*)
-        Another way to explore a table is to check the number of rows in it. For example, if we are querying a table <i>states_of_us</i> we\'d expect 50 rows, or 500 rows in a table called <i>fortune_500_companies</i>.<br/><br/><code>SELECT COUNT(*) FROM family_members</code> returns the total number of rows in the table <i>family_members</i>. Try this for yourself.
+        Another way to explore a table is to check the number of rows in it. For example, if we are querying a table <em>states_of_us</em> we\'d expect 50 rows, or 500 rows in a table called <em>fortune_500_companies</em>.<br/><br/><code>SELECT COUNT(*) FROM family_members</code> returns the total number of rows in the table <em>family_members</em>. Try this for yourself.
     COUNT(*) ... WHERE
         We can combine <code>COUNT(*)</code> with <code>WHERE</code>. For example, <code>SELECT COUNT(*) FROM family_members WHERE species = 'human'</code> returns 2.<br/><br/>Can you return the number of rows in family_members where the species is a dog?
     SUM
 
-    AVG, MAX, MIN, 
+    AVG, MAX, MIN,
 
     GROUP BY
 
 SELECT
     ORDER BY
-        When we use <code>LIMIT 1</code>, we just select the first row in the table. If we want to select the first row 
+        When we use <code>LIMIT 1</code>, we just select the first row in the table. If we want to select the first row
         You can order by any type of field (numbers, strings, dates).
-    
+
     DISTINCT
 
 Advanced Filtering
@@ -57,7 +57,7 @@ joining
 
 Looking for what you need
 
-STRING Functions: 
+STRING Functions:
     LIKE using %
     lcase, ucase
     LEFT, RIGHT
