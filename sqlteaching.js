@@ -267,6 +267,7 @@ var levels = [{'name': 'SELECT *',
                                      ['Lily Aldrin', 'Alyson Hannigan'],
                                      ['Willow Rosenberg', 'Alyson Hannigan']]},
                'prompt': 'In the previous exercise, we explained that TV show character names were not duplicated, so if the name of a character were to change, you would only have to change the name of the character in one row. <br/><br/>However, the previous example was a bit artificial because the TV show names and actor names were duplicated. <br/><br/>In order to not duplicate any names, we need to have more tables, and use multiple joins. <br/><br/>We have tables for characters, TV shows, and actors.  Those tables represent things (also known as entities). <br/><br/>In addition those tables, we have the relationship tables <strong>character_tv_show</strong> and <strong>character_actor</strong>, which capture the relationship between two entities. <br/><br/>This is a flexible way of capturing the relationship between different entities, as some TV show characters might be in multiple shows, and some actors are known for playing multiple characters. <br/><br/>To get each character name with his/her TV show name, we can write <br/><code>SELECT character.name, tv_show.name<br/> FROM character <br/>INNER JOIN character_tv_show<br/> ON character.id = character_tv_show.character_id<br/>INNER JOIN tv_show<br/> ON character_tv_show.tv_show_id = tv_show.id;</code><br/><br/>Can you use two joins to pair each character name with the actor who plays them?  Select the columns: <strong>character</strong>.<i>name</i>, <strong>actor</strong>.<i>name</i>'},
+
               {'name': 'Left joins',
                'short_name': 'left_joins',
                'database_type': 'tv_extra',
@@ -277,7 +278,18 @@ var levels = [{'name': 'SELECT *',
                                      ['Willow Rosenberg', 'Alyson Hannigan'],
                                      ['Steve Urkel', null],
                                      ['Homer Simpson', null]]},
-               'prompt': 'In the previous exercise, we used joins to match up TV character names with their actors.  When you use <code>INNER JOIN</code>, that is called an "inner join" because it only returns rows where there is data for both the character name and the actor. <br/><br/> However, perhaps you want to get all of the character names, even if there isn\'t corresponding data for the name of the actor.  A <code>LEFT JOIN</code> returns all of the data from the first (or "left") table, and if there isn\'t corresponding data for the second table, it returns <code>NULL</code> for those columns. <br/><br/> Using left joins between character names and TV shows would look like this: <br/><code>SELECT character.name, tv_show.name<br/> FROM character <br/>LEFT JOIN character_tv_show<br/> ON character.id = character_tv_show.character_id<br/> LEFT JOIN tv_show<br/> ON character_tv_show.tv_show_id = tv_show.id;</code> <br/><br/> Can you use left joins to match character names with the actors that play them?  Select the columns: <strong>character</strong>.<i>name</i>, <strong>actor</strong>.<i>name</i> <br/><br/>Note: Other variants of SQL have <code>RIGHT JOIN</code> and <code>OUTER JOIN</code>, but those features are not present in SQLite.'}
+               'prompt': 'In the previous exercise, we used joins to match up TV character names with their actors.  When you use <code>INNER JOIN</code>, that is called an "inner join" because it only returns rows where there is data for both the character name and the actor. <br/><br/> However, perhaps you want to get all of the character names, even if there isn\'t corresponding data for the name of the actor.  A <code>LEFT JOIN</code> returns all of the data from the first (or "left") table, and if there isn\'t corresponding data for the second table, it returns <code>NULL</code> for those columns. <br/><br/> Using left joins between character names and TV shows would look like this: <br/><code>SELECT character.name, tv_show.name<br/> FROM character <br/>LEFT JOIN character_tv_show<br/> ON character.id = character_tv_show.character_id<br/> LEFT JOIN tv_show<br/> ON character_tv_show.tv_show_id = tv_show.id;</code> <br/><br/> Can you use left joins to match character names with the actors that play them?  Select the columns: <strong>character</strong>.<i>name</i>, <strong>actor</strong>.<i>name</i> <br/><br/>Note: Other variants of SQL have <code>RIGHT JOIN</code> and <code>OUTER JOIN</code>, but those features are not present in SQLite.'},
+
+              {'name': 'LIKE',
+               'short_name': 'like',
+               'database_type': 'robot',
+               'answer': {'columns': ['id', 'name'],
+                          'values': [[1, 'Robot 2000'],
+                                     [2, 'Champion Robot 2001'],
+                                     [4, 'Turbo Robot 2002'],
+                                     [5, 'Super Robot 2003'],
+                                     [6, 'Super Turbo Robot 2004']]},
+               'prompt': 'In SQL, you can use the <code>LIKE</code> command in order to search through text-based values.  With <code>LIKE</code>, there are two special characters: <code>%</code> and <code>_</code>. <br/><br/> <code>%</code> corresponds to 0 or more arbitrary characters, and <code>_</code> corresponds to 1 arbitrary character. <br/><br/> For example, <code>LIKE \'SUPER _\'</code> would match values such as "SUPER 1", "SUPER A", and "SUPER Z". <br/><br/> <code>LIKE \'SUPER %\'</code> would match any value where <code>SUPER</code> is at the beginning, such as "SUPER CAT", "SUPER 123", or even "SUPER" by itself. <br/><br/> <code>SELECT * FROM robots WHERE name LIKE "%Robot%";</code> would yield all values that contain "Robot" in the name.  Can you run a query that returns "Robot" followed by a year between 2000 and 2099? (So 2015 is a valid value at the end, but 2123 is not.) <br/><br/> Note: <code>LIKE</code> queries are <strong>not</strong> case sensitive.'}
               ];
 
 
@@ -397,6 +409,18 @@ var load_database = function(db_type) {
       sqlstr += "INSERT INTO character_actor VALUES (3, 3, 1);";
       sqlstr += "INSERT INTO character_actor VALUES (4, 4, 1);";
       table_names = ['character', 'tv_show', 'character_tv_show', 'actor', 'character_actor'];
+      break;
+    case 'robot':
+      sqlstr = "CREATE TABLE robots (id int, name char);";
+      sqlstr += "INSERT INTO robots VALUES (1, 'Robot 2000');";
+      sqlstr += "INSERT INTO robots VALUES (2, 'Champion Robot 2001');";
+      sqlstr += "INSERT INTO robots VALUES (3, 'Dragon');";
+      sqlstr += "INSERT INTO robots VALUES (4, 'Turbo Robot 2002');";
+      sqlstr += "INSERT INTO robots VALUES (5, 'Super Robot 2003');";
+      sqlstr += "INSERT INTO robots VALUES (6, 'Super Turbo Robot 2004');";
+      sqlstr += "INSERT INTO robots VALUES (7, 'Not A Robot');";
+      sqlstr += "INSERT INTO robots VALUES (8, 'Unreleased Turbo Robot 2111');";
+      table_names = ['robots'];
       break;
   }
 
