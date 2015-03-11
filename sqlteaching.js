@@ -306,6 +306,15 @@ var levels = [{'name': 'SELECT *',
                                      ['Homer Simpson', null]]},
                'prompt': 'In addition to making aliases for tables, you can also make them for columns. <br/><br/>  This clears up confusion on which column is which.  In the previous exercise, both columns in the result are simply called "name", and that can be confusing. <br/><br/> If you want to use an alias for a column, you add <code>AS *alias_name*</code> after the column name. <br/><br/>  If we wanted to use left joins between character names and TV shows and clearly denote which column has character names, and which has TV show names, it would look like this: <br/><code>SELECT character.name AS character, tv_show.name AS name<br/> FROM character <br/>LEFT JOIN character_tv_show<br/> ON character.id = character_tv_show.character_id<br/> LEFT JOIN tv_show<br/> ON character_tv_show.tv_show_id = tv_show.id;</code> <br/><br/>Can you use left joins to match character names with the actors that play them, and use aliases to the two columns returned <em>character</em> and <em>actor</em>?'},
 
+              {'name': 'Self joins',
+               'short_name': 'self_join',
+               'database_type': 'self_join',
+               'answer': {'columns': ['employee_name', 'boss_name'],
+                        'values': [['Patrick Smith', 'Abigail Johnson'],
+                                   ['Abigail Johnson', 'Bob Carey'],
+                                   ['Bob Carey', 'Maxine Tang']]},
+               'prompt': 'Sometimes, you it may make sense to do a self join.  In that case, you need to use table aliases to determine which data is from the "first"/"left" table. <br/><br/>For example, to get a list of Rock Paper Scissors objects and the objects they beat, you can run the following: <br/><code>SELECT r1.name AS \'object\', r2.name AS \'beats\' <br/>FROM rps AS r1 <br/>INNER JOIN rps AS r2 <br/>ON r1.defeats_id = r2.id;</code><br/><br/> Can you run a query that returns the name of an employee and the name of their boss?  Use column aliases to make the columns <em>employee_name</em> and <em>boss_name</em>.'},
+
               {'name': 'LIKE',
                'short_name': 'like',
                'database_type': 'robot',
@@ -435,6 +444,18 @@ var load_database = function(db_type) {
       sqlstr += "INSERT INTO character_actor VALUES (3, 3, 1);";
       sqlstr += "INSERT INTO character_actor VALUES (4, 4, 1);";
       table_names = ['character', 'tv_show', 'character_tv_show', 'actor', 'character_actor'];
+      break;
+    case 'self_join':
+      sqlstr = "CREATE TABLE rps (id int, name char, defeats_id int);";
+      sqlstr += "INSERT INTO rps VALUES (1, 'Rock', 3);";
+      sqlstr += "INSERT INTO rps VALUES (2, 'Paper', 1);";
+      sqlstr += "INSERT INTO rps VALUES (3, 'Scissors', 2);";
+      sqlstr += "CREATE TABLE employees (id int, name char, title char, boss_id int);";
+      sqlstr += "INSERT INTO employees VALUES (1, 'Patrick Smith', 'Software Engineer', 2);";
+      sqlstr += "INSERT INTO employees VALUES (2, 'Abigail Johnson', 'Engineering Manager', 3);";
+      sqlstr += "INSERT INTO employees VALUES (3, 'Bob Carey', 'Director of Engineering', 4);";
+      sqlstr += "INSERT INTO employees VALUES (4, 'Maxine Tang', 'CEO', null);";
+      table_names = ['rps', 'employees'];
       break;
     case 'robot':
       sqlstr = "CREATE TABLE robots (id int, name char);";
