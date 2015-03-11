@@ -310,10 +310,10 @@ var levels = [{'name': 'SELECT *',
                'short_name': 'self_join',
                'database_type': 'self_join',
                'answer': {'columns': ['employee_name', 'boss_name'],
-                        'values': [['Patrick Smith', 'Abigail Johnson'],
-                                   ['Abigail Johnson', 'Bob Carey'],
+                        'values': [['Patrick Smith', 'Abigail Reed'],
+                                   ['Abigail Reed', 'Bob Carey'],
                                    ['Bob Carey', 'Maxine Tang']]},
-               'prompt': 'Sometimes, you it may make sense to do a self join.  In that case, you need to use table aliases to determine which data is from the "first"/"left" table. <br/><br/>For example, to get a list of Rock Paper Scissors objects and the objects they beat, you can run the following: <br/><code>SELECT r1.name AS \'object\', r2.name AS \'beats\' <br/>FROM rps AS r1 <br/>INNER JOIN rps AS r2 <br/>ON r1.defeats_id = r2.id;</code><br/><br/> Can you run a query that returns the name of an employee and the name of their boss?  Use column aliases to make the columns <em>employee_name</em> and <em>boss_name</em>.'},
+               'prompt': 'Sometimes, you it may make sense to do a self join.  In that case, you need to use table aliases to determine which data is from the "first"/"left" table. <br/><br/>For example, to get a list of Rock Paper Scissors objects and the objects they beat, you can run the following: <br/><code>SELECT r1.name AS object, r2.name AS beats <br/>FROM rps AS r1 <br/>INNER JOIN rps AS r2 <br/>ON r1.defeats_id = r2.id;</code><br/><br/> Can you run a query that returns the name of an employee and the name of their boss?  Use column aliases to make the columns <em>employee_name</em> and <em>boss_name</em>.'},
 
               {'name': 'LIKE',
                'short_name': 'like',
@@ -452,7 +452,7 @@ var load_database = function(db_type) {
       sqlstr += "INSERT INTO rps VALUES (3, 'Scissors', 2);";
       sqlstr += "CREATE TABLE employees (id int, name char, title char, boss_id int);";
       sqlstr += "INSERT INTO employees VALUES (1, 'Patrick Smith', 'Software Engineer', 2);";
-      sqlstr += "INSERT INTO employees VALUES (2, 'Abigail Johnson', 'Engineering Manager', 3);";
+      sqlstr += "INSERT INTO employees VALUES (2, 'Abigail Reed', 'Engineering Manager', 3);";
       sqlstr += "INSERT INTO employees VALUES (3, 'Bob Carey', 'Director of Engineering', 4);";
       sqlstr += "INSERT INTO employees VALUES (4, 'Maxine Tang', 'CEO', null);";
       table_names = ['rps', 'employees'];
