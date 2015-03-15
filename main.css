@@ -53,11 +53,10 @@ th, td {
   width: 490px;
 }
 
-#answer-correctness {
+#answer-correct, #answer-wrong {
   float: left;
   font-weight: bold;
-  padding-bottom: 20px;
-  width: 390px;
+  width: 420px;
 }
 
 #sql-header {

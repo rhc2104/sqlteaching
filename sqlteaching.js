@@ -40,13 +40,18 @@ var show_is_correct = function(is_correct, custom_error_message) {
     } else {
       is_correct_html += 'That is currently the end of the tutorial.  Please check back later for more!';
     }
-    $('#answer-correctness').html(is_correct_html);
+    $('#answer-correct').html(is_correct_html);
+    $('#answer-correct').show();
+    $('#answer-wrong').hide();
   } else if (custom_error_message) {
-    $('#answer-correctness').text(custom_error_message);
+    $('#answer-wrong').text(custom_error_message);
+    $('#answer-wrong').show();
+    $('#answer-correct').hide();
   } else {
-    $('#answer-correctness').text('That was incorrect.  Please try again.');
+    $('#answer-wrong').text('That was incorrect.  Please try again.');
+    $('#answer-wrong').show();
+    $('#answer-correct').hide();
   }
-  $('#answer-correctness').show();
 };
 
 // Onclick handler for when you click "Run SQL"
@@ -544,7 +549,8 @@ var load_level = function() {
   $('.menu').html(menu_html);
 
   // Clear out old data
-  $('#answer-correctness').hide();
+  $('#answer-correct').hide();
+  $('#answer-wrong').hide();
   $('#sql-input').val('');
   $('#results').html('');
   $('.expected-results-container').hide();
