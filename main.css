@@ -65,6 +65,7 @@ td {
 }
 
 #answer-correct, #answer-wrong {
+  display: none;
   float: left;
   font-weight: bold;
   width: 420px;

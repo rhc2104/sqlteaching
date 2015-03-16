@@ -359,7 +359,17 @@ var levels = [{'name': 'SELECT *',
                                      [4, 'R2002 - Turbo Robot 2002', 'Spring Valley, NY'],
                                      [5, 'R2003 - Super Robot 2003', 'Nyack, NY'],
                                      [8, 'U2111 - Unreleased Turbo Robot 2111', 'Buffalo, NY']]},
-               'prompt': 'In SQL, you can search for the substring of a given value.  Perhaps a location is stored in the format "city, state" and you just want to grab the state. <br/><br/> SUBSTR is used in this format: <code>SUBSTR(<em>column_name</em>, <em>index</em>, <em>number_of_characters</em>)</code> <br/><br/> <em>index</em> is a number that denotes where you would start the substring.  1 would indicate the first character, 2 would indicated the second character, etc.  The index could also be negative, which means you would count from the end of the string.  -1 would denote the last character, -2 would denote the 2nd to last character, etc. <br/><br/> <em>number_of_characters</em> is optional; if it is not included, the substring contains the "rest of the string". <br/><br/>Here are some examples:<br/> <code>SUBSTR(name, 1, 5)</code> is the first 5 characters of the name. <br/> <code>SUBSTR(name, -4)</code> is the last 4 characters of the name. <br/><br/><code>SELECT *, SUBSTR(name, -4) AS year FROM robots WHERE year LIKE \'20__\';</code> is another way of returning all of the robots that have been released between 2000 and 2099. <br/><br/> Can you return all of the robots that are located in NY?'}
+               'prompt': 'In SQL, you can search for the substring of a given value.  Perhaps a location is stored in the format "city, state" and you just want to grab the state. <br/><br/> SUBSTR is used in this format: <code>SUBSTR(<em>column_name</em>, <em>index</em>, <em>number_of_characters</em>)</code> <br/><br/> <em>index</em> is a number that denotes where you would start the substring.  1 would indicate the first character, 2 would indicated the second character, etc.  The index could also be negative, which means you would count from the end of the string.  -1 would denote the last character, -2 would denote the 2nd to last character, etc. <br/><br/> <em>number_of_characters</em> is optional; if it is not included, the substring contains the "rest of the string". <br/><br/>Here are some examples:<br/> <code>SUBSTR(name, 1, 5)</code> is the first 5 characters of the name. <br/> <code>SUBSTR(name, -4)</code> is the last 4 characters of the name. <br/><br/><code>SELECT *, SUBSTR(name, -4) AS year FROM robots WHERE year LIKE \'20__\';</code> is another way of returning all of the robots that have been released between 2000 and 2099. <br/><br/> Can you return all of the robots that are located in NY?'},
+
+              {'name': 'COALESCE',
+               'short_name': 'coalesce',
+               'database_type': 'fighting',
+               'answer': {'columns': ['name', 'weapon'],
+                          'values': [['US Marine', 'M1A1 Abrams Tank'],
+                                     ['John Wilkes Booth', '.44 caliber derringer'],
+                                     ['Zorro', 'Sword of Zorro'],
+                                     ['Innocent Bystander', null]]},
+               'prompt': '<code>COALESCE</code> takes a list of columns, and returns the value of the first column that is not null. <br/><br/>Suppose we wanted to find the most powerful weapon that a combatant has on hand.  If value of <em>gun</em> is not null, that is the value returned.  Otherwise, the value of <em>sword</em> is returned.  Then you would run: <br/> <code>SELECT name, COALESCE(gun, sword) as weapon FROM fighters;</code> <br/><br/> Suppose that a fighter\'s tank could count as a weapon, and it would take precedence over the gun and the sword.  Could you find each fighter\'s weapon in that scenario?'}
               ];
 
 
@@ -515,6 +525,14 @@ var load_database = function(db_type) {
       sqlstr += "INSERT INTO robots VALUES (7, 'N0001 - Not A Robot', 'Seattle, WA');";
       sqlstr += "INSERT INTO robots VALUES (8, 'U2111 - Unreleased Turbo Robot 2111', 'Buffalo, NY');";
       table_names = ['robots'];
+      break;
+    case 'fighting':
+      sqlstr = "CREATE TABLE fighters (id int, name char, gun char, sword char, tank char);";
+      sqlstr += "INSERT INTO fighters VALUES (1, 'US Marine', 'Colt 9mm SMG', 'Swiss Army Knife', 'M1A1 Abrams Tank');";
+      sqlstr += "INSERT INTO fighters VALUES (2, 'John Wilkes Booth', '.44 caliber derringer', null, null);";
+      sqlstr += "INSERT INTO fighters VALUES (3, 'Zorro', null, 'Sword of Zorro', null);";
+      sqlstr += "INSERT INTO fighters VALUES (4, 'Innocent Bystander', null, null, null);";
+      table_names = ['fighters'];
       break;
   }
 
