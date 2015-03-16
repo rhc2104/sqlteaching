@@ -19,5 +19,5 @@ It is an array of dictionaries (the order of the levels).  In each dictionary, t
  - prompt:        what is shown to the user in that web page
 
 And the following keys are optional:
- - validation:           Extra validation on top of the data returned being correct
+ - required:             Extra validation in the form of case-insensitive required strings
  - custom_error_message: If the validation fails, show this error message to the user

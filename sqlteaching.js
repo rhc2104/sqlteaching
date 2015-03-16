@@ -54,6 +54,16 @@ var show_is_correct = function(is_correct, custom_error_message) {
   }
 };
 
+var strings_present = function(strings) {
+  var ans = $('#sql-input').val().toLowerCase();
+  for (var index in strings) {
+    if (ans.indexOf(strings[index].toLowerCase()) < 0) {
+      return false;
+    }
+  }
+  return true;
+};
+
 // Onclick handler for when you click "Run SQL"
 $('#sql-link').click(function() {
   var cur_level = levels[current_level-1];
@@ -67,8 +77,8 @@ $('#sql-link').click(function() {
       $('#results').html(table_from_results(results));
       var is_correct = grade_results(results, correct_answer);
       if (is_correct) {
-        // The validation function is optional, but if it exists and fails, we show a custom error message.
-        if (!cur_level['validation'] || cur_level['validation']()) {
+        // The required strings are optional, but if they exist and it fails, we show a custom error message.
+        if (!cur_level['required'] || strings_present(cur_level['required'])) {
           show_is_correct(true, null);
           localStorage.setItem('completed-' + cur_level['short_name'], 'correct');
         } else {
@@ -98,7 +108,7 @@ $('#sql-link').click(function() {
  *  - prompt:        what is shown to the user in that web page
  *
  * And the following keys are optional:
- *  - validation:           Extra validation on top of the data returned being correct
+ *  - required:             Extra validation in the form of case-insensitive required strings
  *  - custom_error_message: If the validation fails, show this error message to the user
  */
 var levels = [{'name': 'SELECT *',
@@ -231,7 +241,7 @@ var levels = [{'name': 'SELECT *',
               {'name': 'Nested queries',
                'short_name': 'nested',
                'database_type': 'family_and_legs',
-               'validation': function() {var ans = $('#sql-input').val(); return ans.indexOf('(') > -1 && ans.indexOf(')') > -1;},
+               'required': ['(', ')'],
                'custom_error_message': 'You must use a nested query in your answer.',
                'answer': {'columns': ['id', 'name', 'gender', 'species', 'salary', 'num_legs'],
                           'values': [[1, 'Dave', 'male', 'human', 60000, 2]]},
@@ -275,7 +285,7 @@ var levels = [{'name': 'SELECT *',
 
               {'name': 'Joins with WHERE',
                'short_name': 'joins_with_where',
-               'validation': function() {var ans = $('#sql-input').val(); return ans.indexOf('Willow Rosenberg') > -1 && ans.indexOf('How I Met Your Mother') > -1;},
+               'required': ['Willow Rosenberg', 'How I Met Your Mother'],
                'custom_error_message': 'You must check that the characters are not named "Willow Rosenberg" or in the show "How I Met Your Mother".',
                'database_type': 'tv_normalized',
                'answer': {'columns': ['name', 'name'],
@@ -296,7 +306,7 @@ var levels = [{'name': 'SELECT *',
 
               {'name': 'Table alias',
                'short_name': 'table_alias',
-               'validation': function() {var ans = $('#sql-input').val(); return ans.indexOf('AS') > -1 && ans.indexOf('c.name') > -1 && ans.indexOf('a.name') > -1;},
+               'required': ['AS', 'c.name', 'a.name'],
                'custom_error_message': 'You must use table aliases as described above.',
                'database_type': 'tv_extra',
                'answer': {'columns': ['name', 'name'],
