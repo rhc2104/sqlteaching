@@ -6,8 +6,19 @@ body {
 }
 
 th, td {
-  padding-bottom: 5px !important;
-  padding-right: 10px !important;
+  padding: 5px !important;
+}
+
+table, th, td {
+   border: 1px solid black !important;
+}
+
+th {
+  background-color: #c9d6c2 !important;
+}
+
+td {
+  background-color: #ffffff !important;
 }
 
 .menu {
