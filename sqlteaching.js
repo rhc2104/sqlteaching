@@ -338,7 +338,18 @@ var levels = [{'name': 'SELECT *',
                                      [4, 'Turbo Robot 2002'],
                                      [5, 'Super Robot 2003'],
                                      [6, 'Super Turbo Robot 2004']]},
-               'prompt': 'In SQL, you can use the <code>LIKE</code> command in order to search through text-based values.  With <code>LIKE</code>, there are two special characters: <code>%</code> and <code>_</code>. <br/><br/> <code>%</code> corresponds to 0 or more arbitrary characters, and <code>_</code> corresponds to 1 arbitrary character. <br/><br/> For example, <code>LIKE "SUPER _"</code> would match values such as "SUPER 1", "SUPER A", and "SUPER Z". <br/><br/> <code>LIKE "SUPER %"</code> would match any value where <code>SUPER</code> is at the beginning, such as "SUPER CAT", "SUPER 123", or even "SUPER" by itself. <br/><br/> <code>SELECT * FROM robots WHERE name LIKE "%Robot%";</code> would yield all values that contain "Robot" in the name.  Can you run a query that returns "Robot" followed by a year between 2000 and 2099? (So 2015 is a valid value at the end, but 2123 is not.) <br/><br/> Note: <code>LIKE</code> queries are <strong>not</strong> case sensitive.'}
+               'prompt': 'In SQL, you can use the <code>LIKE</code> command in order to search through text-based values.  With <code>LIKE</code>, there are two special characters: <code>%</code> and <code>_</code>. <br/><br/> <code>%</code> corresponds to 0 or more arbitrary characters, and <code>_</code> corresponds to 1 arbitrary character. <br/><br/> For example, <code>LIKE "SUPER _"</code> would match values such as "SUPER 1", "SUPER A", and "SUPER Z". <br/><br/> <code>LIKE "SUPER %"</code> would match any value where <code>SUPER</code> is at the beginning, such as "SUPER CAT", "SUPER 123", or even "SUPER" by itself. <br/><br/> <code>SELECT * FROM robots WHERE name LIKE "%Robot%";</code> would yield all values that contain "Robot" in the name.  Can you run a query that returns "Robot" followed by a year between 2000 and 2099? (So 2015 is a valid value at the end, but 2123 is not.) <br/><br/> Note: <code>LIKE</code> queries are <strong>not</strong> case sensitive.'},
+
+              {'name': 'SUBSTR',
+               'short_name': 'substr',
+               'database_type': 'robot_code',
+               'answer': {'columns': ['id', 'name', 'location'],
+                          'values': [[1, 'R2000 - Robot 2000', 'New City, NY'],
+                                     [3, 'D0001 - Dragon', 'New York City, NY'],
+                                     [4, 'R2002 - Turbo Robot 2002', 'Spring Valley, NY'],
+                                     [5, 'R2003 - Super Robot 2003', 'Nyack, NY'],
+                                     [8, 'U2111 - Unreleased Turbo Robot 2111', 'Buffalo, NY']]},
+               'prompt': 'In SQL, you can search for the substring of a given value.  Perhaps a location is stored in the format "city, state" and you just want to grab the state. <br/><br/> SUBSTR is used in this format: <code>SUBSTR(<em>column_name</em>, <em>index</em>, <em>number_of_characters</em>)</code> <br/><br/> <em>index</em> is a number that denotes where you would start the substring.  1 would indicate the first character, 2 would indicated the second character, etc.  The index could also be negative, which means you would count from the end of the string.  -1 would denote the last character, -2 would denote the 2nd to last character, etc. <br/><br/> <em>number_of_characters</em> is optional; if it is not included, the substring contains the "rest of the string". <br/><br/>Here are some examples:<br/> <code>SUBSTR(name, 1, 5)</code> is the first 5 characters of the name. <br/> <code>SUBSTR(name, -4)</code> is the last 4 characters of the name. <br/><br/><code>SELECT *, SUBSTR(name, -4) AS year FROM robots WHERE year LIKE \'20__\';</code> is another way of returning all of the robots that have been released between 2000 and 2099. <br/><br/> Can you return all of the robots that are located in NY?'}
               ];
 
 
@@ -481,6 +492,18 @@ var load_database = function(db_type) {
       sqlstr += "INSERT INTO robots VALUES (6, 'Super Turbo Robot 2004');";
       sqlstr += "INSERT INTO robots VALUES (7, 'Not A Robot');";
       sqlstr += "INSERT INTO robots VALUES (8, 'Unreleased Turbo Robot 2111');";
+      table_names = ['robots'];
+      break;
+    case 'robot_code':
+      sqlstr = "CREATE TABLE robots (id int, name char, location char);";
+      sqlstr += "INSERT INTO robots VALUES (1, 'R2000 - Robot 2000', 'New City, NY');";
+      sqlstr += "INSERT INTO robots VALUES (2, 'R2001 - Champion Robot 2001', 'Palo Alto, CA');";
+      sqlstr += "INSERT INTO robots VALUES (3, 'D0001 - Dragon', 'New York City, NY');";
+      sqlstr += "INSERT INTO robots VALUES (4, 'R2002 - Turbo Robot 2002', 'Spring Valley, NY');";
+      sqlstr += "INSERT INTO robots VALUES (5, 'R2003 - Super Robot 2003', 'Nyack, NY');";
+      sqlstr += "INSERT INTO robots VALUES (6, 'R2004 - Super Turbo Robot 2004', 'Tampa, FL');";
+      sqlstr += "INSERT INTO robots VALUES (7, 'N0001 - Not A Robot', 'Seattle, WA');";
+      sqlstr += "INSERT INTO robots VALUES (8, 'U2111 - Unreleased Turbo Robot 2111', 'Buffalo, NY');";
       table_names = ['robots'];
       break;
   }

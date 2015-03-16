@@ -98,6 +98,10 @@ td {
   width: 390px;
 }
 
+#results {
+  padding-bottom: 20px;
+}
+
 .table-name {
   font-style: italic;
   font-weight: bold;
