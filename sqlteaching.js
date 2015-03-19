@@ -28,7 +28,8 @@ var grade_results = function(results, correct_answer) {
     return false;
   }
 
-  return JSON.stringify(results[0].columns) == JSON.stringify(correct_answer.columns) &&
+  // Check to make sure the results are equal, but remove whitespace from column names.
+  return JSON.stringify(results[0].columns.map(function(x){return x.replace(/\s/g, "")})) == JSON.stringify(correct_answer.columns.map(function(x){return x.replace(/\s/g, "")})) &&
     JSON.stringify(results[0].values) == JSON.stringify(correct_answer.values);
 }
 
