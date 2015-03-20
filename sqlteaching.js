@@ -264,7 +264,7 @@ var levels = [{'name': 'SELECT *',
                                      [3, 'Taylor Swift', '1989-12-13']]},
                'prompt': 'Sometimes, a column can contain a date value.  The first 4 digits represents the year, the next 2 digits represents the month, and the next 2 digits represents the day of the month.  For example, <code>1985-07-20</code> would mean July 20, 1985.<br/><br/>You can compare dates by using <code><</code> and <code>></code>.  For example, <code>SELECT * FROM celebs_born WHERE birthdate < \'1985-08-17\';</code> returns a list of celebrities that were born before August 17th, 1985.<br/><br/>Can you return a list of celebrities that were born after September 1st, 1980?'},
 
-              {'name': 'Inner Joins',
+              {'name': 'Inner joins',
                'short_name': 'joins',
                'database_type': 'tv',
                'answer': {'columns': ['name', 'actor_name'],
