@@ -141,7 +141,7 @@ var levels = [{'name': 'SELECT *',
                'answer': {'columns': ['id', 'name', 'gender', 'species', 'salary'],
                           'values': [[1, 'Dave', 'male', 'human', 60000],
                                      [2, 'Mary', 'female', 'human', 55000]]},
-               'prompt': 'SQL accepts various inequality symbols, including: <br/>= "equal to"<br/>> "greater than"<br/>< "less than"<br/>>= "greater than or equal to"<br/><= "less than or equal to"<br/><br/> Can you return all rows in <strong>family_members</strong> with a salary that is greater or equal to 55000?'},
+               'prompt': 'SQL accepts various inequality symbols, including: <br/><code>=</code> "equal to"<br/><code>></code> "greater than"<br/><code><</code> "less than"<br/><code>>=</code> "greater than or equal to"<br/><code><=</code> "less than or equal to"<br/><br/> Can you return all rows in <strong>family_members</strong> with a salary that is greater or equal to 55000?'},
 
               {'name': 'SELECT specific columns',
                'short_name': 'select_columns',
