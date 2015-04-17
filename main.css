@@ -149,4 +149,9 @@ td {
     padding-bottom: 20px;
     padding-top: 20px;
   }
+
+  #prompt {
+    font-size: 18px;
+    width: 590px;
+  }
 }
