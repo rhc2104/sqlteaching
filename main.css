@@ -128,3 +128,25 @@ td {
   padding-left: 35px;
   width: 345px;
 }
+
+/* For mobile */
+@media (max-width: 650px) {
+  body {
+    padding-bottom: 0;
+    padding-right: 0;
+    width: 620px;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  .results-container, .expected-results-container {
+    padding: 0;
+  }
+
+  .social-plugins {
+    padding-bottom: 20px;
+    padding-top: 20px;
+  }
+}
