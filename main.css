@@ -129,15 +129,22 @@ td {
   width: 345px;
 }
 
+/* For desktop */
+@media (min-width: 650px) {
+  #menu-link {
+    display: none;
+  }
+}
+
 /* For mobile */
-@media (max-width: 650px) {
+@media (max-width: 649px) {
   body {
     padding-bottom: 0;
     padding-right: 0;
     width: 620px;
   }
 
-  .menu {
+  .menu-hidden-for-mobile {
     display: none;
   }
 

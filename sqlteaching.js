@@ -565,8 +565,38 @@ var load_database = function(db_type) {
 var current_level;
 var current_level_name;
 
+var render_menu = function() {
+  // Add links to menu
+  var menu_html = '';
+  for (var index in levels) {
+    if (index == (current_level - 1)) {
+      menu_html += '<strong>';
+    }
+    menu_html += '<div class="menu-item">';
+    if (localStorage.getItem('completed-' + levels[index]['short_name'])) {
+      menu_html += '<span class="glyphicon glyphicon-ok"></span>';
+    }
+    menu_html += '<a href="#!' + levels[index]['short_name'] + '">' + levels[index]['name'] + '</a>';
+    menu_html += '</div>';
+    if (index == (current_level - 1)) {
+      menu_html += '</strong>';
+    }
+  }
+  $('.menu').html(menu_html);
+}
+
 var load_level = function() {
   var hash_code = window.location.hash.substr(2);
+
+  if (hash_code == 'menu') {
+    render_menu();
+    $('.menu').removeClass('menu-hidden-for-mobile');
+    $('.not-menu-container').hide();
+    return;
+  }
+  $('.menu').addClass('menu-hidden-for-mobile');
+  $('.not-menu-container').show();
+
   // The current level is 1 by default, unless the hash code matches the short name for a level.
   current_level = 1;
   for (var index in levels) {
@@ -596,22 +626,7 @@ var load_level = function() {
   }
 
   // Add links to menu
-  var menu_html = '';
-  for (var index in levels) {
-    if (index == (current_level - 1)) {
-      menu_html += '<strong>';
-    }
-    menu_html += '<div class="menu-item">';
-    if (localStorage.getItem('completed-' + levels[index]['short_name'])) {
-      menu_html += '<span class="glyphicon glyphicon-ok"></span>';
-    }
-    menu_html += '<a href="#!' + levels[index]['short_name'] + '">' + levels[index]['name'] + '</a>';
-    menu_html += '</div>';
-    if (index == (current_level - 1)) {
-      menu_html += '</strong>';
-    }
-  }
-  $('.menu').html(menu_html);
+  render_menu();
 
   // Clear out old data
   $('#answer-correct').hide();
