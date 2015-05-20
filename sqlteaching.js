@@ -83,6 +83,8 @@ $('#sql-link').click(function() {
         if (!cur_level['required'] || strings_present(cur_level['required'])) {
           show_is_correct(true, null);
           localStorage.setItem('completed-' + cur_level['short_name'], 'correct');
+          // By calling render_menu, the completed level gets a checkmark added
+          render_menu();
         } else {
           show_is_correct(false, cur_level['custom_error_message']);
         }
