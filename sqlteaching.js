@@ -28,9 +28,9 @@ var grade_results = function(results, correct_answer) {
     return false;
   }
 
-  // Check to make sure the results are equal, but remove whitespace from column names.
-  var noWhitespace = function(x){return x.replace(/\s/g, "")};
-  return JSON.stringify(results[0].columns.map(noWhitespace)) == JSON.stringify(correct_answer.columns.map(noWhitespace)) &&
+  // Check to make sure the results are equal, but normalize case and remove whitespace from column names.
+  var normalize = function(x){return x.toUpperCase().replace(/\s/g, "")};
+  return JSON.stringify(results[0].columns.map(normalize)) == JSON.stringify(correct_answer.columns.map(normalize)) &&
     JSON.stringify(results[0].values) == JSON.stringify(correct_answer.values);
 }
 
