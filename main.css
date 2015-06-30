@@ -129,6 +129,10 @@ td {
   width: 345px;
 }
 
+.email-info {
+  padding-top: 12px;
+}
+
 /* For desktop */
 @media (min-width: 650px) {
   #menu-link {
