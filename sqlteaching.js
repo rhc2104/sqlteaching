@@ -38,7 +38,7 @@ var show_is_correct = function(is_correct, custom_error_message) {
   if (is_correct) {
     is_correct_html = 'Congrats!  That is correct!<br/>';
     if (current_level < levels.length) {
-      is_correct_html += '<a href="#!' + levels[current_level]['short_name'] + '">Next Lesson</a>';
+      is_correct_html += '<a href="#!' + levels[current_level]['short_name'] + '" tabindex="3">Next Lesson</a>';
     } else {
       is_correct_html += 'That is currently the end of the tutorial.  Please check back later for more!';
     }
