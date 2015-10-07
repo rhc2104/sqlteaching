@@ -32,7 +32,7 @@ var grade_results = function(results, correct_answer) {
   var normalize = function(x){return x.toUpperCase().replace(/\s/g, "")};
   return JSON.stringify(results[0].columns.map(normalize)) == JSON.stringify(correct_answer.columns.map(normalize)) &&
     JSON.stringify(results[0].values) == JSON.stringify(correct_answer.values);
-}
+};
 
 var show_is_correct = function(is_correct, custom_error_message) {
   if (is_correct) {
@@ -66,8 +66,7 @@ var strings_present = function(strings) {
   return true;
 };
 
-// Onclick handler for when you click "Run SQL"
-$('#sql-link').click(function() {
+var execute_query = function() {
   var cur_level = levels[current_level-1];
   var correct_answer = cur_level['answer'];
   try {
@@ -99,6 +98,19 @@ $('#sql-link').click(function() {
   $('.expected-results-container').show();
   $('#expected-results').html(table_from_results([correct_answer]));
   return false;
+};
+
+// Onclick handler for when you click "Run SQL"
+$('#sql-link').click(execute_query);
+
+// Keypress handler for ctrl + enter to "Run SQL"
+$('#sql-input').keypress(function(event) {
+  var keyCode = (event.which ? event.which : event.keyCode);
+
+  if (keyCode === 10 || keyCode == 13 && event.ctrlKey) {
+    execute_query();
+    return false;
+  }
 });
 
 /**
