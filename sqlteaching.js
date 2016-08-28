@@ -143,7 +143,7 @@ var levels = [{'name': 'SELECT *',
                           'values': [['Dave', 'human'],
                                      ['Mary', 'human'],
                                      ['Pickles', 'dog']]},
-               'prompt': '<code>SELECT *</code> grabs all fields (called columns) in a table. If we only wanted to see the name and age columns, we would type<br/> <code>SELECT name, age FROM family_members;</code>.<br/><br/>Can you return just the name and species columns?'},
+               'prompt': '<code>SELECT *</code> grabs all fields (called columns) in a table. If we only wanted to see the name and salary columns, we would type<br/> <code>SELECT name, salary FROM family_members;</code>.<br/><br/>Can you return just the name and species columns?'},
 
               {'name': 'WHERE ... Equals',
                'short_name': 'where_equals',
