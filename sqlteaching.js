@@ -437,10 +437,10 @@ var load_database = function(db_type) {
       table_names = ['friends_of_pickles'];
       break;
     case 'family_and_legs':
-      sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, num_books_read int, num_legs int);";
-      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 200, 2);";
-      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 180, 2);";
-      sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 0, 4);";
+      sqlstr = "CREATE TABLE family_members (id int, name char, species char, num_books_read int, num_legs int);";
+      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'human', 200, 2);";
+      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'human', 180, 2);";
+      sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'dog', 0, 4);";
       table_names = ['family_members'];
       break;
     case 'family_null':
