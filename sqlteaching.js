@@ -130,11 +130,11 @@ $('#sql-input').keypress(function(event) {
 var levels = [{'name': 'SELECT *',
                'short_name': 'select',
                'database_type': 'family',
-               'answer': {'columns': ['id', 'name', 'gender', 'species', 'salary'],
-                          'values': [[1, 'Dave', 'male', 'human', 60000],
-                                     [2, 'Mary', 'female', 'human', 55000],
+               'answer': {'columns': ['id', 'name', 'gender', 'species', 'num_books_read'],
+                          'values': [[1, 'Dave', 'male', 'human', 200],
+                                     [2, 'Mary', 'female', 'human', 180],
                                      [3, 'Pickles', 'male', 'dog', 0]]},
-               'prompt': 'In SQL, data is usually organized in various tables. For example, a sports team database might have the tables <em>teams</em>, <em>players</em>, and <em>games</em>. A wedding database might have tables <em>guests</em>, <em>vendors</em>, and <em>music_playlist</em>.<br/><br/>Imagine we have a table that stores family members with each member\'s name, age, species, and gender.<br/><br/>Let\'s start by grabbing all of the data in one table.  We have a table called <strong>family_members</strong> that is shown below.  In order to grab all of that data, please run the following command: <code>SELECT * FROM family_members;</code><br/><br/>The <code>*</code> above means that all of the columns will be returned, which in this case are <em>id</em>, <em>name</em>, <em>gender</em>, <em>species</em>, and <em>salary</em>. <br/><br/>Note: This tutorial uses the <a href="http://en.wikipedia.org/wiki/SQLite" target="_blank">SQLite</a> database engine.  The different variants of SQL use slightly different syntax.'},
+               'prompt': 'In SQL, data is usually organized in various tables. For example, a sports team database might have the tables <em>teams</em>, <em>players</em>, and <em>games</em>. A wedding database might have tables <em>guests</em>, <em>vendors</em>, and <em>music_playlist</em>.<br/><br/>Imagine we have a table that stores family members with each member\'s name, age, species, and gender.<br/><br/>Let\'s start by grabbing all of the data in one table.  We have a table called <strong>family_members</strong> that is shown below.  In order to grab all of that data, please run the following command: <code>SELECT * FROM family_members;</code><br/><br/>The <code>*</code> above means that all of the columns will be returned, which in this case are <em>id</em>, <em>name</em>, <em>gender</em>, <em>species</em>, and <em>num_books_read</em>. <br/><br/>Note: This tutorial uses the <a href="http://en.wikipedia.org/wiki/SQLite" target="_blank">SQLite</a> database engine.  The different variants of SQL use slightly different syntax.'},
 
               {'name': 'SELECT specific columns',
                'short_name': 'select_columns',
@@ -143,29 +143,29 @@ var levels = [{'name': 'SELECT *',
                           'values': [['Dave', 'human'],
                                      ['Mary', 'human'],
                                      ['Pickles', 'dog']]},
-               'prompt': '<code>SELECT *</code> grabs all fields (called columns) in a table. If we only wanted to see the name and salary columns, we would type<br/> <code>SELECT name, salary FROM family_members;</code>.<br/><br/>Can you return just the name and species columns?'},
+               'prompt': '<code>SELECT *</code> grabs all fields (called columns) in a table. If we only wanted to see the name and num_books_read columns, we would type<br/> <code>SELECT name, num_books_read FROM family_members;</code>.<br/><br/>Can you return just the name and species columns?'},
 
               {'name': 'WHERE ... Equals',
                'short_name': 'where_equals',
                'database_type': 'family',
-               'answer': {'columns': ['id', 'name', 'gender', 'species', 'salary'],
+               'answer': {'columns': ['id', 'name', 'gender', 'species', 'num_books_read'],
                           'values': [[3, 'Pickles', 'male', 'dog', 0]]},
                'prompt': 'In order to select particular rows from this table, we use the <code>WHERE</code> keyword.  So for example, if we wanted to grab all of the rows that correspond to humans, we would type <br/><code>SELECT * FROM family_members WHERE species = \'human\';</code><br/>  Note that the quotes have to be around the word human, as it is an explicit value, unlike a keyword such as <code>WHERE</code>.<br/><br/>Can you run a query that returns all of the rows that refer to dogs?'},
 
               {'name': 'WHERE ... Greater than',
                'short_name': 'where_greater_than',
                'database_type': 'family',
-               'answer': {'columns': ['id', 'name', 'gender', 'species', 'salary'],
-                          'values': [[1, 'Dave', 'male', 'human', 60000]]},
-               'prompt': 'If we want to only select family members based on a numerical field, we can also use the <code>WHERE</code> keyword.  For example, if we wanted to select family members with a salary, we would type <br/><code>SELECT * FROM family_members WHERE salary > 0;</code><br/><br/>  Can you run return all rows of family members whose salary is greater than 56000?'},
+               'answer': {'columns': ['id', 'name', 'gender', 'species', 'num_books_read'],
+                          'values': [[1, 'Dave', 'male', 'human', 200]]},
+               'prompt': 'If we want to only select family members based on a numerical field, we can also use the <code>WHERE</code> keyword.  For example, if we wanted to select family members with a num_books_read, we would type <br/><code>SELECT * FROM family_members WHERE num_books_read > 0;</code><br/><br/>  Can you run return all rows of family members whose num_books_read is greater than 190?'},
 
               {'name': 'WHERE ... Greater than or equal',
                'short_name': 'where_greater_than_or_equal',
                'database_type': 'family',
-               'answer': {'columns': ['id', 'name', 'gender', 'species', 'salary'],
-                          'values': [[1, 'Dave', 'male', 'human', 60000],
-                                     [2, 'Mary', 'female', 'human', 55000]]},
-               'prompt': 'SQL accepts various inequality symbols, including: <br/><code>=</code> "equal to"<br/><code>></code> "greater than"<br/><code><</code> "less than"<br/><code>>=</code> "greater than or equal to"<br/><code><=</code> "less than or equal to"<br/><br/> Can you return all rows in <strong>family_members</strong> with a salary that is greater or equal to 55000?'},
+               'answer': {'columns': ['id', 'name', 'gender', 'species', 'num_books_read'],
+                          'values': [[1, 'Dave', 'male', 'human', 200],
+                                     [2, 'Mary', 'female', 'human', 180]]},
+               'prompt': 'SQL accepts various inequality symbols, including: <br/><code>=</code> "equal to"<br/><code>></code> "greater than"<br/><code><</code> "less than"<br/><code>>=</code> "greater than or equal to"<br/><code><=</code> "less than or equal to"<br/><br/> Can you return all rows in <strong>family_members</strong> where num_books_read is a value greater or equal to 180?'},
 
               {'name': 'AND',
                'short_name': 'and',
@@ -238,23 +238,23 @@ var levels = [{'name': 'SELECT *',
               {'name': 'SUM',
                'short_name': 'sum',
                'database_type': 'family_and_legs',
-               'answer': {'columns': ['SUM(salary)'],
+               'answer': {'columns': ['SUM(num_books_read)'],
                           'values': [[115000]]},
-               'prompt': 'We can use the <code>SUM</code> keyword in order to find the sum of a given value. <br/><br/>For example, running <code>SELECT SUM(num_legs) FROM family_members;</code> returns the total number of legs in the family. <br/><br/>Can you find the total salary made by this family?'},
+               'prompt': 'We can use the <code>SUM</code> keyword in order to find the sum of a given value. <br/><br/>For example, running <code>SELECT SUM(num_legs) FROM family_members;</code> returns the total number of legs in the family. <br/><br/>Can you find the total num_books_read made by this family?'},
 
               {'name': 'AVG',
                'short_name': 'avg',
                'database_type': 'family_and_legs',
-               'answer': {'columns': ['AVG(salary)'],
+               'answer': {'columns': ['AVG(num_books_read)'],
                           'values': [[38333.333333333336]]},
-               'prompt': 'We can use the <code>AVG</code> keyword in order to find the average of a given value. <br/><br/>For example, running <code>SELECT AVG(num_legs) FROM family_members;</code> returns the average number of legs of each family member. <br/><br/>Can you find the average salary made by each family member? <br/><br/>Note: <br/>- Because of the way computers handle numbers, averages will not always be completely exact.'},
+               'prompt': 'We can use the <code>AVG</code> keyword in order to find the average of a given value. <br/><br/>For example, running <code>SELECT AVG(num_legs) FROM family_members;</code> returns the average number of legs of each family member. <br/><br/>Can you find the average num_books_read made by each family member? <br/><br/>Note: <br/>- Because of the way computers handle numbers, averages will not always be completely exact.'},
 
               {'name': 'MAX and MIN',
                'short_name': 'max_min',
                'database_type': 'family_and_legs',
-               'answer': {'columns': ['MAX(salary)'],
-                          'values': [[60000]]},
-               'prompt': 'We can use the <code>MAX</code> and <code>MIN</code> to find the maximum or minimum value of a table. <br/><br/>To find the least number of legs in a family member (<em>2</em>), you can run <br/><code>SELECT MIN(num_legs) FROM family_members;</code> <br/><br/>Can you find the highest salary that a family member makes?'},
+               'answer': {'columns': ['MAX(num_books_read)'],
+                          'values': [[200]]},
+               'prompt': 'We can use the <code>MAX</code> and <code>MIN</code> to find the maximum or minimum value of a table. <br/><br/>To find the least number of legs in a family member (<em>2</em>), you can run <br/><code>SELECT MIN(num_legs) FROM family_members;</code> <br/><br/>Can you find the highest num_books_read that a family member makes?'},
 
               {'name': 'GROUP BY',
                'short_name': 'group_by',
@@ -270,16 +270,16 @@ var levels = [{'name': 'SELECT *',
                'database_type': 'family_and_legs',
                'required': ['(', ')'],
                'custom_error_message': 'You must use a nested query in your answer.',
-               'answer': {'columns': ['id', 'name', 'gender', 'species', 'salary', 'num_legs'],
-                          'values': [[1, 'Dave', 'male', 'human', 60000, 2]]},
-               'prompt': 'In SQL, you can put a SQL query inside another SQL query. <br/><br/>For example, to find the family members with the least number of legs, <br/> you can run: <br/><code>SELECT * FROM family_members WHERE num_legs = (SELECT MIN(num_legs) FROM family_members);</code> <br/><br/> The <code>SELECT</code> query inside the parentheses is executed first, and returns the minimum number of legs.  Then, that value (2) is used in the outside query, to find all family members that have 2 legs. <br/><br/> Can you return the family members that have the highest salary?'},
+               'answer': {'columns': ['id', 'name', 'gender', 'species', 'num_books_read', 'num_legs'],
+                          'values': [[1, 'Dave', 'male', 'human', 200, 2]]},
+               'prompt': 'In SQL, you can put a SQL query inside another SQL query. <br/><br/>For example, to find the family members with the least number of legs, <br/> you can run: <br/><code>SELECT * FROM family_members WHERE num_legs = (SELECT MIN(num_legs) FROM family_members);</code> <br/><br/> The <code>SELECT</code> query inside the parentheses is executed first, and returns the minimum number of legs.  Then, that value (2) is used in the outside query, to find all family members that have 2 legs. <br/><br/> Can you return the family members that have the highest num_books_read?'},
 
               {'name': 'NULL',
                'short_name': 'null',
                'database_type': 'family_null',
-               'answer': {'columns': ['id', 'name', 'gender', 'species', 'salary', 'favorite_book'],
-                          'values': [[1, 'Dave', 'male', 'human', 60000, 'To Kill a Mockingbird'],
-                                     [2, 'Mary', 'female', 'human', 55000, 'Gone with the Wind']]},
+               'answer': {'columns': ['id', 'name', 'gender', 'species', 'num_books_read', 'favorite_book'],
+                          'values': [[1, 'Dave', 'male', 'human', 200, 'To Kill a Mockingbird'],
+                                     [2, 'Mary', 'female', 'human', 180, 'Gone with the Wind']]},
                'prompt': 'Sometimes, in a given row, there is no value at all for a given column.  For example, a dog does not have a favorite book, so in that case there is no point in putting a value in the <em>favorite_book</em> column, and the value is <code>NULL</code>.  In order to find the rows where the value for a column is or is not <code>NULL</code>, you would use <code>IS NULL</code> or <code>IS NOT NULL</code>.<br/><br/>Can you return all of the rows of <strong>family_members</strong> where <em>favorite_book</em> is not null?'},
 
               {'name': 'Date',
@@ -419,9 +419,9 @@ var load_database = function(db_type) {
   database = new sql.Database();
   switch (db_type) {
     case 'family':
-      sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, salary int);";
-      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 60000);";
-      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 55000);";
+      sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, num_books_read int);";
+      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 200);";
+      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 180);";
       sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 0);";
       table_names = ['family_members'];
       break;
@@ -437,16 +437,16 @@ var load_database = function(db_type) {
       table_names = ['friends_of_pickles'];
       break;
     case 'family_and_legs':
-      sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, salary int, num_legs int);";
-      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 60000, 2);";
-      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 55000, 2);";
+      sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, num_books_read int, num_legs int);";
+      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 200, 2);";
+      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 180, 2);";
       sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 0, 4);";
       table_names = ['family_members'];
       break;
     case 'family_null':
-      sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, salary int, favorite_book char);";
-      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 60000, 'To Kill a Mockingbird');";
-      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 55000, 'Gone with the Wind');";
+      sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, num_books_read int, favorite_book char);";
+      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 200, 'To Kill a Mockingbird');";
+      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 180, 'Gone with the Wind');";
       sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 0, NULL);";
       table_names = ['family_members'];
       break;
