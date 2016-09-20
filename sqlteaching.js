@@ -270,16 +270,16 @@ var levels = [{'name': 'SELECT *',
                'database_type': 'family_and_legs',
                'required': ['(', ')'],
                'custom_error_message': 'You must use a nested query in your answer.',
-               'answer': {'columns': ['id', 'name', 'gender', 'species', 'num_books_read', 'num_legs'],
-                          'values': [[1, 'Dave', 'male', 'human', 200, 2]]},
+               'answer': {'columns': ['id', 'name', 'species', 'num_books_read', 'num_legs'],
+                          'values': [[1, 'Dave', 'human', 200, 2]]},
                'prompt': 'In SQL, you can put a SQL query inside another SQL query. <br/><br/>For example, to find the family members with the least number of legs, <br/> you can run: <br/><code>SELECT * FROM family_members WHERE num_legs = (SELECT MIN(num_legs) FROM family_members);</code> <br/><br/> The <code>SELECT</code> query inside the parentheses is executed first, and returns the minimum number of legs.  Then, that value (2) is used in the outside query, to find all family members that have 2 legs. <br/><br/> Can you return the family members that have the highest num_books_read?'},
 
               {'name': 'NULL',
                'short_name': 'null',
                'database_type': 'family_null',
-               'answer': {'columns': ['id', 'name', 'gender', 'species', 'num_books_read', 'favorite_book'],
-                          'values': [[1, 'Dave', 'male', 'human', 200, 'To Kill a Mockingbird'],
-                                     [2, 'Mary', 'female', 'human', 180, 'Gone with the Wind']]},
+               'answer': {'columns': ['id', 'name', 'gender', 'species', 'favorite_book'],
+                          'values': [[1, 'Dave', 'male', 'human', 'To Kill a Mockingbird'],
+                                     [2, 'Mary', 'female', 'human', 'Gone with the Wind']]},
                'prompt': 'Sometimes, in a given row, there is no value at all for a given column.  For example, a dog does not have a favorite book, so in that case there is no point in putting a value in the <em>favorite_book</em> column, and the value is <code>NULL</code>.  In order to find the rows where the value for a column is or is not <code>NULL</code>, you would use <code>IS NULL</code> or <code>IS NOT NULL</code>.<br/><br/>Can you return all of the rows of <strong>family_members</strong> where <em>favorite_book</em> is not null?'},
 
               {'name': 'Date',
@@ -444,10 +444,10 @@ var load_database = function(db_type) {
       table_names = ['family_members'];
       break;
     case 'family_null':
-      sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, num_books_read int, favorite_book char);";
-      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 200, 'To Kill a Mockingbird');";
-      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 180, 'Gone with the Wind');";
-      sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', 0, NULL);";
+      sqlstr = "CREATE TABLE family_members (id int, name char, gender char, species char, favorite_book char);";
+      sqlstr += "INSERT INTO family_members VALUES (1, 'Dave', 'male', 'human', 'To Kill a Mockingbird');";
+      sqlstr += "INSERT INTO family_members VALUES (2, 'Mary', 'female', 'human', 'Gone with the Wind');";
+      sqlstr += "INSERT INTO family_members VALUES (3, 'Pickles', 'male', 'dog', NULL);";
       table_names = ['family_members'];
       break;
     case 'celebs_born':
