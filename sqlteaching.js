@@ -317,7 +317,7 @@ var levels = [{'name': 'SELECT *',
                'database_type': 'tv_normalized',
                'answer': {'columns': ['name', 'name'],
                           'values': [['Doogie Howser', 'Doogie Howser, M.D.']]},
-               'prompt': 'You can also use joins with the <code>WHERE</code> clause. <br/><br/> To get a list of characters and TV shows that are not in "Buffy the Vampire Slayer" and are not Barney Stinson, you would run: <br/> <code>SELECT character.name, tv_show.name<br/> FROM character <br/>INNER JOIN character_tv_show<br/> ON character.id = character_tv_show.character_id<br/>INNER JOIN tv_show<br/> ON character_tv_show.tv_show_id = tv_show.id WHERE character.name != \'Barney Stinson\' AND tv_show.name != \'Buffy the Vampire Slayer\';</code> <br/><br/>Can you return a list of characters and TV shows that are not named "Willow Rosenberg" or in the show "How I Met Your Mother"?'},
+               'prompt': 'You can also use joins with the <code>WHERE</code> clause. <br/><br/> To get a list of characters and TV shows that are not in "Buffy the Vampire Slayer" and are not Barney Stinson, you would run: <br/> <code>SELECT character.name, tv_show.name<br/> FROM character <br/>INNER JOIN character_tv_show<br/> ON character.id = character_tv_show.character_id<br/>INNER JOIN tv_show<br/> ON character_tv_show.tv_show_id = tv_show.id WHERE character.name != \'Barney Stinson\' AND tv_show.name != \'Buffy the Vampire Slayer\';</code> <br/><br/>Can you return a list of characters and TV shows that are not named "Willow Rosenberg" and in the show "How I Met Your Mother"?'},
 
               {'name': 'Left joins',
                'short_name': 'left_joins',
