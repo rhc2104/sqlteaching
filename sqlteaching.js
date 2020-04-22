@@ -664,9 +664,7 @@ var load_level = function() {
 };
 db = load_level();
 
-// When the URL after the # changes, we load a new level,
-// and let Google Analytics know that the page has changed.
+// When the URL after the # changes, we load a new level.
 $(window).bind('hashchange', function() {
   db = load_level();
-  ga('send', 'pageview', {'page': location.pathname + location.search  + location.hash});
 });

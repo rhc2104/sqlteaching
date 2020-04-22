@@ -122,15 +122,11 @@ td {
   width: 390px;
 }
 
-.social-plugins {
+.email-info, .github-info {
   clear: left;
   margin: auto;
-  padding-left: 35px;
-  width: 345px;
-}
-
-.email-info {
   padding-top: 12px;
+  width: 420px;
 }
 
 /* For desktop */
