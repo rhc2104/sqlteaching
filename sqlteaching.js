@@ -409,7 +409,7 @@ var levels = [{'name': 'SELECT *',
                                      ['John Wilkes Booth', '.44 caliber Derringer'],
                                      ['Zorro', 'Sword of Zorro'],
                                      ['Innocent Bystander', null]]},
-               'prompt': '<code>COALESCE</code> takes a list of columns, and returns the value of the first column that is not null. <br/><br/>Suppose we wanted to find the most powerful weapon that a combatant has on hand.  If value of <em>gun</em> is not null, that is the value returned.  Otherwise, the value of <em>sword</em> is returned.  Then you would run: <br/> <code>SELECT name, COALESCE(gun, sword) as weapon FROM fighters;</code> <br/><br/> Suppose that a fighter\'s tank could count as a weapon, and it would take precedence over the gun and the sword.  Could you find each fighter\'s weapon in that scenario?'}
+               'prompt': '<code>COALESCE</code> takes a list of columns, and returns the value of the first column that is not null. <br/><br/>Suppose we wanted to find the most powerful weapon that a combatant has on hand.  If value of <em>gun</em> is not null, that is the value returned.  Otherwise, the value of <em>sword</em> is returned.  Then you would run: <br/> <code>SELECT name, COALESCE(gun, sword) AS weapon FROM fighters;</code> <br/><br/> Suppose that a fighter\'s tank could count as a weapon, and it would take precedence over the gun and the sword.  Could you find each fighter\'s weapon in that scenario?'}
               ];
 
 
