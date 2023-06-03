@@ -42,4 +42,16 @@ I then started a project to update the UI, redesign its structure, and add suppo
 <details> 
 <summary>Screenshots</summary>
 
+### Old version
+
+#### Desktop
+
+![Image of Old Version](https://github.com/JackGraymer/sqlteaching-redesigned/blob/master/Old-version.png?raw=true "Old version image")
+
+#### Phone
+
+![Image of Old Phone view](/Old-phone.png "Old Phone view  image")
+
+### New Version
+
 </details>
