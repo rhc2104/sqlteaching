@@ -2699,17 +2699,25 @@ body{
 .content{
   margin: 0;
   overflow: auto;
+  box-shadow: none;
+  background-color: var(--dropdown-background-color);
 }
 
 aside{
   overflow: auto;
   height: 100%;
+  background-color: var(--dropdown-background-color);
 }
 .menu-item{
-  background-color: var(--code-background-color);
+  sbackground-color: var(--code-background-color);
   padding: 0.3em;
   margin: 0.2em;
-  border-radius: 0.5em;
+  border-radius: 0.3em;
+}
+
+.menu-item:hover{
+  background-color: var(--code-background-color);
+  color: var(--code-color);
 }
 
 .footer{
