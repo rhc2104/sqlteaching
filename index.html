@@ -3,13 +3,10 @@
     <title>SQL Teaching - The easiest tutorial to learn SQL</title>
     <script src="sql.js"></script>
     <script src="jquery-2.1.3.min.js"></script>
-    <link rel="stylesheet" href="main.css">
-
-    <!-- MaxCDN's copy of Bootstrap 3.3.2 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
+<!--     <link rel="stylesheet" href="main.css">
+ -->    
+ <link rel="stylesheet" href="pico.css">
+  
     <meta property='og:site_name' content='SQL Teaching' />
     <meta property='og:title' content='SQL Teaching' />
     <meta property='og:url' content='http://www.sqlteaching.com' />
@@ -21,61 +18,79 @@
 
     <meta name="viewport" content="width=640" />
   </head>
-  <body>
-    <h2 id='title-header'>
-      SQL Teaching
-    </h2>
-    <div id='links-subheader'>
-      <a id='previous-link' class='pagination-link'>Previous</a>
-      <a id='next-link' class='pagination-link'>Next</a>
-      <br/>
-      <a id='menu-link' href='#!menu'>Menu</a>
+  <body class="container">
+    <div class="header">
+      <h1 id='title-header' >
+        SQL Teaching
+      </h1>
     </div>
-    <div class='menu menu-hidden-for-mobile'>
-    </div>
-    <div class='not-menu-container'>
-      <div id='lesson-name'>
-      </div>
-      <div class='layout-row'>
-        <div id='prompt'>
-        </div>
-      </div>
-      <div class='layout-row'>
-        <div id='answer-correct' class='alert alert-success'>
-        </div>
-        <div id='answer-wrong' class='alert alert-danger'>
-        </div>
-      </div>
-      <div class='layout-row'>
-        <div class='sql-input-container'>
-          <div id='sql-header'>
-            <strong>SQL:</strong>
+    <div class="main grid">
+      <aside >
+        <nav class="sidebar">
+          <ul>
+          </ul>
+        </nav>
+      </aside>
+      <article class="content">
+        <!-- <div class='menu menu-hidden-for-mobile'>
+        </div> -->
+        <div class='not-menu-container'>
+          <h3 id='lesson-name'>
+          </h3>
+          <div class='layout-row'>
+            <div id='prompt'>
+            </div>
           </div>
-          <textarea id='sql-input' rows=8 cols=40  tabindex='1'></textarea>
-          <a id='sql-link' href='#' class='btn btn-default' tabindex='2'>Run SQL</a>
+          <div class='layout-row'>
+            <article id='answer-correct' class='alert success'>
+            </article>
+            <article id='answer-wrong' class='alert danger'>
+            </article>
+          </div>
+          <div class='layout-row'>
+            <div class='sql-input-container'>
+              <h4 id="sql">SQL</h4>
+              <textarea id='sql-input' rows=8  tabindex='1' placeholder="Write your SQL here"></textarea>
+              <a id='sql-link' href='#' class='btn btn-default' tabindex='2' role="button">Run SQL</a>
+            </div>
+            <br/>
+            <div class='results-container'>
+              <strong>Result:</strong>
+              <div id='results'>
+                <article aria-busy="true"></article>
+              </div>
+            </div>
+          </div>
+          <div class='layout-row'>
+            <div class='current-tables-container'>
+              <strong>Current tables:</strong>
+              <div id='current-tables'></div>
+            </div>
+            <div class='expected-results-container'>
+              <strong>Expected Result:</strong>
+              <div id='expected-results'></div>
+            </div>
+          </div>
+          <div id='links-subheader'>
+            <div class="grid">
+              <a id='previous-link' class='pagination-link secondary' role='button'>Previous</a>
+              <a id='next-link' class='pagination-link' role="button"> Next</a>
+            </div>
+          </div>
         </div>
-        <div class='results-container'>
-          <strong>Result:</strong>
-          <div id='results'></div>
-        </div>
+        
       </div>
-      <div class='layout-row'>
-        <div class='current-tables-container'>
-          <strong>Current tables:</strong>
-          <div id='current-tables'></div>
-        </div>
-        <div class='expected-results-container'>
-          <strong>Expected Result:</strong>
-          <div id='expected-results'></div>
-        </div>
+      
+    </div>
+    <div class="footer container">
+      <div class='email-info'>
+        Stuck? <a href="mailto:sqlteaching@gmail.com" target="_top">Email us at sqlteaching@gmail.com</a> for help or feedback.
+      </div>
+      <div class="github-info">
+        <a href="https://github.com/rhc2104/sqlteaching" target="_blank">View on GitHub</a>
       </div>
     </div>
-    <div class='email-info'>
-      Stuck? <a href="mailto:sqlteaching@gmail.com" target="_top">Email us at sqlteaching@gmail.com</a> for help or feedback.
-    </div>
-    <div class="github-info">
-      <a href="https://github.com/rhc2104/sqlteaching" target="_blank">View on GitHub</a>
-    </div>
+    
     <script src="sqlteaching.js"></script>
   </body>
 </html>
