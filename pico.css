@@ -2678,7 +2678,7 @@ textarea,
 body{
   height: 100vh;
   display: grid;
-  grid-template-rows: 1fr 15fr 1fr;
+  grid-template-rows: 1fr 15fr;
 }
 
 .main{
@@ -2686,10 +2686,11 @@ body{
   display: grid;
   grid-template-columns: 1fr 3fr;
   overflow: auto;
+  padding-bottom: 1em;
 }
 
 .header{
-  padding: 1em;
+  padding: 0.5em;
 }
 .header>h1{
   margin: 0;
@@ -2713,7 +2714,7 @@ aside{
 
 .footer{
   text-align: center;
-  background-color: var(--card-background-color);
+  padding-bottom: 1em;
 }
 
 #title-header{
