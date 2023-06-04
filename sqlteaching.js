@@ -949,3 +949,11 @@ db = load_level();
 $(window).bind("hashchange", function () {
   db = load_level();
 });
+
+function changeTheme() {
+  let html = document.querySelector("html");
+  html.setAttribute(
+    "data-theme",
+    html.getAttribute("data-theme") === "dark" ? "light" : "dark"
+  );
+}
