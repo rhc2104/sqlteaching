@@ -2734,6 +2734,11 @@ aside{
   border: 0.1em solid rgba(0, 255, 0, 0.8);
 }
 
+.link-buttons{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 #sql{
   padding: 1em 0;
   margin: 0;
