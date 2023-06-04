@@ -887,6 +887,7 @@ var render_menu = function () {
   }
 
   document.querySelector(".sidebar").innerHTML = menu_html;
+  document.querySelector(".mobile-sidebar-links").innerHTML = menu_html;
 };
 
 var load_level = function () {

@@ -2738,3 +2738,45 @@ aside{
   padding: 1em 0;
   margin: 0;
 }
+
+#theme{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 1em;
+  text-align: center;
+  border-radius: 100%;
+  padding: 1em;
+  width: 1em;
+  height: 1em;
+  margin: 1em;
+}
+
+@media screen and (max-width: 800px) {
+  
+  .main{
+    sfont-size: 1.1em;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 5fr ;
+  }
+  
+  aside{
+    display: none;
+  }
+
+  details{
+    display: block;
+  }
+  ul, li{
+    list-style-type: none;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  details{
+    display: none;
+  }
+}
