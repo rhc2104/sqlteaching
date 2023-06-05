@@ -32,11 +32,11 @@
   --transition: 0.2s ease-in-out;
   --modal-overlay-backdrop-filter: blur(0.25rem);
 }
-@media (min-width: 576px) {
+/* @media (min-width: 576px) {
   :root {
     --font-size: 17px;
   }
-}
+} */
 @media (min-width: 768px) {
   :root {
     --font-size: 18px;
@@ -597,7 +597,7 @@ body > footer {
   padding-left: var(--spacing);
 }
 
-@media (min-width: 576px) {
+/* @media (min-width: 576px) {
   .container {
     max-width: 510px;
     padding-right: 0;
@@ -618,7 +618,7 @@ body > footer {
   .container {
     max-width: 1130px;
   }
-}
+} */
 
 /**
  * Section
@@ -2776,12 +2776,16 @@ aside{
     display: grid;
     height:max-content;
     grid-template-rows: auto ;
+    width: 100%;
+    padding: 1em;
+    margin: 0;
   }
 
   .main{
     font-size: 1.1em;
     grid-template-columns: 1fr;
     grid-template-rows: auto 5fr ;
+    padding: 0;
   }
   
   aside{
