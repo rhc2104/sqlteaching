@@ -2700,16 +2700,17 @@ body{
   margin: 0;
   overflow: auto;
   box-shadow: none;
-  background-color: var(--dropdown-background-color);
+  background-color: var(--card-background-color);
+
 }
 
 aside{
   overflow: auto;
   height: 100%;
-  background-color: var(--dropdown-background-color);
+  background-color: var(--card-background-color);
+  border-radius: var(--border-radius);
 }
 .menu-item{
-  sbackground-color: var(--code-background-color);
   padding: 0.3em;
   margin: 0.2em;
   border-radius: 0.3em;
@@ -2729,9 +2730,10 @@ aside{
   text-align: center;
 }
 
-.completed{
-  color: rgba(0, 128, 0, 0.5) ;
-  background-color: rgba(0, 128, 0, 0.5);
+.completed {
+  border-radius: 0.1em;
+  border-left: #43a047 solid 0.4em;
+  background-color: rgba(231, 231, 231, 0.1);
 }
 
 .danger{
