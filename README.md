@@ -46,12 +46,20 @@ I then started a project to update the UI, redesign its structure, and add suppo
 
 #### Desktop
 
-![Image of Old Version](https://github.com/JackGraymer/sqlteaching-redesigned/blob/master/Old-version.png?raw=true "Old version image")
+![Image of Old Version](/img/Old-version.png "Old version image")
 
 #### Phone
 
-![Image of Old Phone view](/Old-phone.png "Old Phone view  image")
+![Image of Old Phone view](/img/Old-phone.png "Old Phone view  image")
 
 ### New Version
+
+#### Desktop
+
+![Image of New Version](/img/New-version.png "New version view image")
+
+#### Phone
+
+![Image of New Phone view](/img/New-phone.png "New phone view image")
 
 </details>
