@@ -613,12 +613,12 @@ body > footer {
   .container {
     max-width: 920px;
   }
-}
+}*/
 @media (min-width: 1200px) {
   .container {
-    max-width: 1130px;
+    max-width: 1200px;
   }
-} */
+} 
 
 /**
  * Section
