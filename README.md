@@ -27,17 +27,17 @@ And the following keys are optional:
 
 ## Re-design
 
-I came across this site as part of an open source Full Stack Web Development course, [The Odin Project](https://www.theodinproject.com/dashboard).
+Alvaro Cervan came across this site as part of an open source Full Stack Web Development course, [The Odin Project](https://www.theodinproject.com/dashboard).
 
-I loved this SQL interactive tutorial; it is by far the best resource that I have found. It is totally interactive and provides query examples with live results.
+He loved this SQL interactive tutorial; it is by far the best resource that he has found. It is totally interactive and provides query examples with live results.
 
 However, the UI looked **very** dated. In fact, when checking the commits, some are from 9 years ago, which explains this issue.
 
-I then started a project to update the UI, redesign its structure, and add support for smaller devices.
+He then started a project to update the UI, redesign its structure, and add support for smaller devices.
 
 > Updated design using [Pico.css](https://picocss.com/)
 
-> Re-design done by [JackGraymer](https://github.com/JackGraymer)
+> Re-design done by [Alvaro Cervan](https://github.com/JackGraymer)
 
 <details> 
 <summary>Screenshots</summary>
