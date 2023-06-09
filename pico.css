@@ -618,7 +618,7 @@ body > footer {
   .container {
     max-width: 1200px;
   }
-} 
+}
 
 /**
  * Section
@@ -1695,7 +1695,8 @@ input:not([type=checkbox], [type=radio], [type=range], [type=file])[type=search]
 th,
 td {
   padding: calc(var(--spacing) / 2) var(--spacing);
-  border-bottom: var(--border-width) solid var(--table-border-color);
+  border: var(--border-width) solid var(--table-border-color);
+  border-width: medium;
   color: var(--color);
   font-weight: var(--font-weight);
   font-size: var(--font-size);
@@ -2771,7 +2772,7 @@ aside{
 }
 
 @media screen and (max-width: 800px) {
-  
+
   body{
     display: grid;
     height:max-content;
@@ -2787,7 +2788,7 @@ aside{
     grid-template-rows: auto 5fr ;
     padding: 0;
   }
-  
+
   aside{
     display: none;
     z-index: 100;
