@@ -50,25 +50,27 @@
           <div class='layout-row'>
             <div class='sql-input-container'>
               <h4 id="sql">SQL</h4>
+              <div class='results-container'>
+                <div class='layout-row'>
+                  <article id='answer-correct' class='alert success'>
+                  </article>
+                  <article id='answer-wrong' class='alert danger'>
+                  </article>
+                </div>
+                <strong>Result:</strong>
+                <div id='results'>
+                </div>
               <textarea id='sql-input' rows=8  tabindex='1' placeholder="Write your SQL here"></textarea>
               <a id='sql-link' href='#' class='btn btn-default' tabindex='2' role="button">Run SQL</a>
-            </div>
-            <br/>
-            <div class='results-container'>
-              <div class='layout-row'>
-                <article id='answer-correct' class='alert success'>
-                </article>
-                <article id='answer-wrong' class='alert danger'>
-                </article>
-              </div>
-              <strong>Result:</strong>
-              <div id='results'>
-              </div>
             </div>
             <div class='expected-results-container'>
               <strong>Expected Result:</strong>
               <div id='expected-results'></div>
             </div>
+            <br/>
+            
+            </div>
+            
           </div>
           <div class='layout-row'>
             <div class='current-tables-container'>

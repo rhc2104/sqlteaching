@@ -2686,7 +2686,8 @@ body{
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 3fr;
-  overflow: auto;
+  /* overflow: auto; */
+  /* On PC Overflow is a pain in the a** to read so please remove it */
   padding-bottom: 1em;
 }
 
@@ -2707,6 +2708,7 @@ body{
 
 aside{
   overflow: auto;
+  
   height: 100%;
   background-color: var(--card-background-color);
   border-radius: var(--border-radius);
