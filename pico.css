@@ -2708,6 +2708,7 @@ body{
 
 aside{
   overflow: auto;
+  
   height: 100%;
   background-color: var(--card-background-color);
   border-radius: var(--border-radius);
