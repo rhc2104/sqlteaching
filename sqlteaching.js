@@ -355,7 +355,7 @@ var levels = [
     database_type: "family_and_legs",
     answer: { columns: ["MAX(num_books_read)"], values: [[200]] },
     prompt:
-      "We can use the <code>MAX</code> and <code>MIN</code> to find the maximum or minimum value of a table. <br/><br/>To find the least number of legs in a family member (<em>2</em>), you can run <br/><code>SELECT MIN(num_legs) FROM family_members;</code> <br/><br/>Can you find the highest num_books_read that a family member makes?",
+      "We can use the <code>MAX</code> and <code>MIN</code> to find the maximum or minimum value of a column. <br/><br/>To find the least number of legs in a family member (<em>2</em>), you can run <br/><code>SELECT MIN(num_legs) FROM family_members;</code> <br/><br/>Can you find the highest num_books_read that a family member makes?",
   },
 
   {
