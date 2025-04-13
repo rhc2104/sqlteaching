@@ -203,7 +203,7 @@ var levels = [
       values: [[1, "Dave", "male", "human", 200]],
     },
     prompt:
-      "If we want to only select family members based on a numerical field, we can also use the <code>WHERE</code> keyword.  For example, if we wanted to select family members with a num_books_read, we would type <br/><code>SELECT * FROM family_members WHERE num_books_read > 0;</code><br/><br/>  Can you run return all rows of family members whose num_books_read is greater than 190?",
+      "If we want to only select family members based on a numerical field, we can also use the <code>WHERE</code> keyword.  For example, if we wanted to select family members with a num_books_read, we would type <br/><code>SELECT * FROM family_members WHERE num_books_read > 0;</code><br/><br/>  Can you return all rows of family members whose num_books_read is greater than 190?",
   },
 
   {
